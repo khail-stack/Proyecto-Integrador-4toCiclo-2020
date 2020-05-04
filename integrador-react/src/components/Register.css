@@ -1,0 +1,182 @@
+.fondo-register {
+  background-image: -webkit-linear-gradient(40deg, #5e2ced, #a485fd);
+  background-image: linear-gradient(40deg, #5e2ced, #a485fd);
+  padding: 200px 0 200px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.titulo-register {
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+
+  line-height: 50px;
+  font-size: 50px;
+}
+
+.no a {
+  background-image: none;
+}
+
+.subtitulo-register {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  line-height: 26px;
+}
+
+.espaciado-register {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.espacio {
+  margin-top: 160px;
+  margin-bottom: 160px;
+}
+
+.formulario-contenido {
+  border: 20px solid #fff;
+  background: #fbfbfd;
+  padding: 80px 50px;
+  box-shadow: 0 50px 100px 0 rgba(12, 2, 46, 0.15);
+}
+
+.titulo-izquierda {
+  margin-bottom: 40px !important;
+  color: #222d39;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+}
+
+.subtitulo-izquierda {
+  font-size: 30px;
+  color: #677294;
+  margin-bottom: 30px;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+}
+
+.boton-izquierda {
+  color: #6754e2 !important;
+  background-color: #ffffff !important;
+  padding-top: 15px !important;
+  padding-right: 30px !important;
+  padding-bottom: 15px !important;
+  padding-left: 30px !important;
+  font-family: "Poppins", sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  border: 2px solid #ccc5fa !important;
+}
+
+.titulo-derecha {
+  margin-bottom: 40px;
+  color: #222d39;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif !important;
+  font-size: 24px;
+}
+
+.subtitulo-formulario {
+  margin-bottom: 25px;
+}
+
+.texto-formulario {
+  color: #161341 !important;
+  font-size: 18px !important;
+  margin-bottom: 15px !important;
+  font-weight: 400 !important;
+  font-family: "Poppins", sans-serif !important;
+}
+
+.extra-formulario {
+  display: flex;
+  justify-content: space-between;
+  font-style: normal;
+  font-variant-ligatures: normal;
+  font-variant-caps: normal;
+  font-variant-numeric: normal;
+  font-variant-east-asian: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  font-size: 14px;
+  line-height: 30px;
+  font-family: "Poppins", sans-serif !important;
+  margin-top: 45px;
+}
+
+.olvidaste-contraseña a {
+  color: #161341;
+  font-weight: 400;
+}
+
+.marcado {
+  margin-bottom: 0 !important;
+  color: #161341 !important;
+}
+
+.boton-iniciar {
+  font-family: "Poppins", sans-serif !important;
+  color: #fff !important;
+  background: #7444fd !important;
+  border-radius: 3px !important;
+  padding: 15px 30px !important;
+  border: 1px solid #7444fd !important;
+  margin-top: 50px !important;
+  -webkit-transition: all 0.3s linear !important;
+  transition: all 0.3s linear !important;
+  cursor: pointer !important ;
+  display: inline-block !important;
+}
+
+.boton-izquierda:hover,
+.boton-izquierda:focus {
+  color: #ffffff !important;
+  background-color: #6754e2 !important;
+  padding-top: 15px !important;
+  padding-right: 30px !important;
+  padding-bottom: 15px !important;
+  padding-left: 30px !important;
+  font-family: "Poppins", sans-serif !important;
+  font-size: 15px !important;
+  border-color: transparent !important;
+}
+
+.olvido:hover {
+  color: #5e2ced !important;
+  outline: none !important;
+  text-decoration: none;
+}
+
+.diseño-entrada {
+  font-style: normal !important;
+  font-variant-ligatures: normal !important;
+  font-variant-caps: normal !important;
+  font-variant-numeric: normal !important;
+  font-variant-east-asian: normal !important;
+  font-weight: 400 !important;
+  font-stretch: normal !important;
+  font-size: 15px !important;
+  line-height: 60px !important;
+  font-family: "Poppins", sans-serif !important;
+  color: #222d39 !important;
+  height: 60px !important;
+  border-radius: 4px !important;
+  background-color: #fff !important;
+  box-shadow: 0 4px 8px 0 rgba(10, 10, 3, 0.1) !important;
+  width: 100% !important;
+  border: 1px solid #fff !important;
+  padding-left: 30px !important;
+}
+
+.diseño-entrada:focus {
+  border-color: #f2effc !important;
+  box-shadow: 0 10px 14px 0 rgba(12, 0, 46, 0.12) !important;
+  outline: none !important;
+}

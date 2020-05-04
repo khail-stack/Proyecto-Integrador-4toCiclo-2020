@@ -1,0 +1,104 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "Pablo",
+      "apellido": "Lopez",
+      "edad": 19,
+      "dni": 78979795,
+      "sexo": "Masculino",
+      "telefono": 7897465,
+      "password": "holasoypablo"
+    },
+    {
+      "id": 2,
+      "nombre": "Khail",
+      "apellido": "Mogollon",
+      "edad": 18,
+      "dni": 72376495,
+      "sexo": "Masculino",
+      "telefono": 7897465,
+      "password": "holasoykhail"
+    },
+    {
+      "id": 3,
+      "nombre": "Genaro",
+      "apellido": "Salas",
+      "edad": 20,
+      "dni": 78945612,
+      "sexo": "Masculino",
+      "telefono": 7897465,
+      "password": "holasoygenaro"
+    },
+    {
+      "id": 4,
+      "nombre": "Jadir",
+      "apellido": "Hervias",
+      "edad": 20,
+      "dni": 15963247,
+      "sexo": "Masculino",
+      "telefono": 7897465,
+      "password": "holasoyjadir"
+    },
+    {
+      "id": 5,
+      "nombre": "Marco",
+      "apellido": "Vizcarra",
+      "edad": 18,
+      "dni": 74158962,
+      "sexo": "Masculino",
+      "telefono": 7897465,
+      "password": "holasoymarco"
+    },
+    {
+      "nombre": "Ana",
+      "apellido": "Buitron",
+      "edad": 40,
+      "dni": "12345678",
+      "sexo": "Femenino",
+      "telefono": 951034880,
+      "password": "holasoyana",
+      "id": 6
+    },
+    {
+      "nombre": "Luis",
+      "apellido": "Fernandez",
+      "edad": 49,
+      "dni": "74123658",
+      "sexo": "Masculino",
+      "telefono": 971016440,
+      "password": "holasoyluis",
+      "id": 7
+    },
+    {
+      "nombre": "Alvaro",
+      "apellido": "Lopez",
+      "edad": 18,
+      "dni": "45612378",
+      "sexo": "Masculino",
+      "telefono": 789456123,
+      "password": "holasoyalvaro",
+      "id": 8
+    },
+    {
+      "nombre": "Regina",
+      "apellido": "Lopez",
+      "edad": 19,
+      "dni": "12345678",
+      "sexo": "Femenino",
+      "telefono": 987145263,
+      "password": "holasoyregina",
+      "id": 9
+    },
+    {
+      "nombre": "Jonathan",
+      "apellido": "Huarca",
+      "edad": 24,
+      "dni": "12345678",
+      "sexo": "Masculino",
+      "telefono": 435621143,
+      "password": "holasoyjonathan",
+      "id": 10
+    }
+  ]
+}
