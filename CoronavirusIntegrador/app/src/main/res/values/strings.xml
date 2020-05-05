@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">CoronavirusIntegrador</string>
+    <string name="nombres">Nombres</string>
+    <string name="registro">Registro</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="dni">DNI</string>
+    <string name="numero_de_telefono">Numero de Telefono</string>
+    <string name="masculino">masculino</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="login">Login</string>
+    <string name="recordar_contrasena">Recordar Contraseña</string>
+    <string name="ingresar">iNGRESAR</string>
+    <string name="registrate">REGISTRATE</string>
+    <string name="pagina_principal">Pagina Principal</string>
+    <string name="femenino">Femenino</string>
+</resources>
