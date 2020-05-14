@@ -73,11 +73,11 @@ export function dataGeneralPeru() {
   return async (dispatch) => {
     dispatch(graficaPeruCarga());
     try {
-      const respuesta = await axios.get(
+      const { data } = await axios.get(
         "https://covid19.mathdro.id/api/countries/peru"
       );
-      console.log(respuesta.data);
-      dispatch(graficaPeruExito(respuesta.data));
+
+      dispatch(graficaPeruExito(data));
     } catch (error) {
       console.log(error);
       dispatch(graficaPeruError());

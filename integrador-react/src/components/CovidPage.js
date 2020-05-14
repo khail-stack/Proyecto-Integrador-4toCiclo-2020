@@ -6,6 +6,7 @@ import { CardCovid } from "./CardCovid";
 import Spinner from "./Spinner";
 import LinealChartGlobal from "./LinealChartGlobal";
 import { dataGeneralPeru } from "./../actions/covidActions";
+import BarChartPeru from "./BarChartPeru";
 
 const CovidPage = () => {
   const dispatch = useDispatch();
@@ -95,6 +96,14 @@ const CovidPage = () => {
         <div className="row mt-5 mb-5 margentitulo">
           <div className="col margentitulo">
             <LinealChartGlobal></LinealChartGlobal>
+          </div>
+        </div>
+      </div>
+
+      <div className="container">
+        <div className="row mt-5 mb-5 margentitulo">
+          <div className="col margentitulo">
+            <BarChartPeru></BarChartPeru>
           </div>
         </div>
       </div>
