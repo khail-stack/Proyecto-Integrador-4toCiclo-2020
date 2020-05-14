@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Register from "./components/Register";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import CovidPage from "./components/CovidPage";
 
 // Redux
 import { Provider } from "react-redux";
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/" component={Home}></Route>
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/register" component={Register}></Route>
+          <Route exact path="/casos-mundo" component={CovidPage}></Route>
         </Switch>
         <Footer></Footer>
       </Provider>

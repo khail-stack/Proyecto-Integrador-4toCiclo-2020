@@ -3,7 +3,7 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 
 import { iniciarSesionAction } from "../actions/usuarioActions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const [dni, guardarDni] = useState("");
@@ -54,7 +54,7 @@ const Login = () => {
                   className="btn boton-izquierda"
                   to={"/register"}
                   role="button"
-                  tabindex="-1"
+                  tabIndex="-1"
                   aria-disabled="true"
                 >
                   Registrarse

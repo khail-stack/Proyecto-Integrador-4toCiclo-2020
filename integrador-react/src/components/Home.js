@@ -37,7 +37,7 @@ const Home = () => {
                       className="btn boton-home boton_home"
                       href="/"
                       role="button"
-                      tabindex="-1"
+                      tabIndex="-1"
                       aria-disabled="true"
                       id="botonNav"
                     >

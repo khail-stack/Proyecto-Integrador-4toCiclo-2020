@@ -55,9 +55,14 @@ const Header = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link cursor" href="/" id="letra2">
+                <Link
+                  to={"/casos-mundo"}
+                  className="nav-link cursor"
+                  href="/"
+                  id="letra2"
+                >
                   Casos en el mundo
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
                 <a className="nav-link cursor" href="/" id="letra3">
@@ -71,7 +76,7 @@ const Header = () => {
                   className="btn boton"
                   to={"/login"}
                   role="button"
-                  tabindex="-1"
+                  tabIndex="-1"
                   aria-disabled="true"
                   id="botonNav"
                 >
