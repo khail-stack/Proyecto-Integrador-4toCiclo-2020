@@ -89,7 +89,7 @@ const Register = ({ history }) => {
                   className="btn boton-izquierda"
                   to={"/login"}
                   role="button"
-                  tabindex="-1"
+                  tabIndex="-1"
                   aria-disabled="true"
                   id="botonNav"
                 >
@@ -114,6 +114,7 @@ const Register = ({ history }) => {
                       name="nombre"
                       value={nombre}
                       onChange={(e) => guardarNombre(e.target.value)}
+                      required
                     ></input>
                   </div>
 
@@ -126,6 +127,7 @@ const Register = ({ history }) => {
                       name="apellido"
                       value={apellido}
                       onChange={(e) => guardarApellido(e.target.value)}
+                      required
                     ></input>
                   </div>
 
@@ -138,6 +140,7 @@ const Register = ({ history }) => {
                       name="edad"
                       value={edad}
                       onChange={(e) => guardarEdad(Number(e.target.value))}
+                      required
                     ></input>
                   </div>
 
@@ -150,6 +153,7 @@ const Register = ({ history }) => {
                       name="dni"
                       value={dni}
                       onChange={(e) => guardarDni(e.target.value)}
+                      required
                     ></input>
                   </div>
 
@@ -162,11 +166,13 @@ const Register = ({ history }) => {
                       name="sexo"
                       value={sexo}
                       onChange={(e) => guardarSexo(e.target.value)}
+                      required
                     ></input>
                   </div>
 
                   <div className="form-group subtitulo-formulario">
                     <label className="texto-formulario">Celular</label>
+
                     <input
                       type="number"
                       placeholder="920096114"
@@ -174,6 +180,7 @@ const Register = ({ history }) => {
                       name="telefono"
                       value={telefono}
                       onChange={(e) => guardarTelefono(Number(e.target.value))}
+                      required
                     ></input>
                   </div>
 
@@ -186,6 +193,7 @@ const Register = ({ history }) => {
                       name="password"
                       value={password}
                       onChange={(e) => guardarPassword(e.target.value)}
+                      required
                     ></input>
                   </div>
 

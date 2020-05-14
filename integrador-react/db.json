@@ -99,6 +99,46 @@
       "telefono": 435621143,
       "password": "holasoyjonathan",
       "id": 10
+    },
+    {
+      "nombre": "Khail",
+      "apellido": "Mogollon",
+      "edad": 19,
+      "dni": "72376495",
+      "sexo": "Masculino",
+      "telefono": 920096114,
+      "password": "soykhail",
+      "id": 11
+    },
+    {
+      "nombre": "Khail",
+      "apellido": "Mogollon",
+      "edad": 18,
+      "dni": "78945612",
+      "sexo": "Masculino",
+      "telefono": 920096114,
+      "password": "soykhail",
+      "id": 12
+    },
+    {
+      "nombre": "Diego ",
+      "apellido": "Rodriguez",
+      "edad": 19,
+      "dni": "12345678",
+      "sexo": "Masculino",
+      "telefono": 123456789,
+      "password": "holasoydiego",
+      "id": 13
+    },
+    {
+      "nombre": "Khail",
+      "apellido": "Mogollon",
+      "edad": 36,
+      "dni": "72376495",
+      "sexo": "Masculino",
+      "telefono": 920096114,
+      "password": "fsdfdsfdsfdsfs",
+      "id": 14
     }
   ]
 }
