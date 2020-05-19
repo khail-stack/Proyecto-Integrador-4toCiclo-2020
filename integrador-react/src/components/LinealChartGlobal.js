@@ -1,19 +1,11 @@
-import React, { useEffect } from "react";
-import { graficoGlobal } from "../actions/covidActions";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import GraficoGlobal from "./GraficoGlobal";
 const LinealChartGlobal = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const cargarGrafica = () => dispatch(graficoGlobal());
-    cargarGrafica();
-  }, [dispatch]);
-
-  const global = useSelector((state) => state.datacovid.datoActivo2);
+  const filtrografico = useSelector((state) => state.datacovid.filtrografico);
   return (
     <div>
-      <GraficoGlobal contenido={global}></GraficoGlobal>
+      <GraficoGlobal contenido={filtrografico}></GraficoGlobal>
     </div>
   );
 };

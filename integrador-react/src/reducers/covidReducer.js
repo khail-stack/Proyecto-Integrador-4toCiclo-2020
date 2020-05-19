@@ -1,25 +1,27 @@
 import {
   CONFIRMADOS_GLOBALES,
-  CONFIRMADOS_GLOBALES_EXITO,
   CONFIRMADOS_GLOBALES_ERROR,
   GRAFICA_GLOBAL_CARGA,
-  GRAFICA_GLOBAL_EXITO,
   GRAFICA_GLOBAL_ERROR,
   GRAFICA_PERU_CARGA,
-  GRAFICA_PERU_EXITO,
   GRAFICA_PERU_ERROR,
-  GRAFICA_ACTUAL_EXITO,
-  GRAFICA_ACTUAL_EXITO2,
+  P_DATA_PERU,
+  P_DATA_CARTA_GLOBAL,
+  P_DATA_GRAFICO_GLOBAL,
+  FILTRO_CARTA_COVID,
+  FILTRO_GRAFICO_COVID,
 } from "./../types/index";
 
 const initialState = {
-  dataCartaGlobales: 0,
-  dataGeneralPeru: 0,
-  dataGraficaGlobal: "",
+  dataperu: null,
+  cartaglobal: "",
+  graficoglobal: 0,
+
+  filtrocarta: null,
+  filtrografico: 0,
+
   error: null,
   loading: false,
-  datoActivo: null,
-  datoActivo2: "",
 };
 
 export default function (state = initialState, action) {
@@ -41,45 +43,35 @@ export default function (state = initialState, action) {
         error: action.payload,
       };
 
-    case GRAFICA_PERU_EXITO:
+    case P_DATA_PERU:
       return {
         ...state,
-        loading: false,
-        dataGeneralPeru: action.payload,
+        dataperu: action.payload,
       };
 
-    case GRAFICA_GLOBAL_EXITO:
+    case P_DATA_CARTA_GLOBAL:
       return {
         ...state,
-        loading: false,
-        error: null,
-        dataGraficaGlobal: action.payload,
-        datoActivo2: action.payload,
+        cartaglobal: action.payload,
+        filtrocarta: action.payload,
       };
 
-    case CONFIRMADOS_GLOBALES_EXITO:
+    case P_DATA_GRAFICO_GLOBAL:
       return {
         ...state,
-        loading: false,
-        error: null,
-        dataCartaGlobales: action.payload,
-        datoActivo: action.payload,
+        graficoglobal: action.payload,
+        filtrografico: action.payload,
       };
 
-    case GRAFICA_ACTUAL_EXITO:
+    case FILTRO_CARTA_COVID:
       return {
         ...state,
-        loading: false,
-        error: null,
-        datoActivo: action.payload,
+        filtrocarta: action.payload,
       };
-
-    case GRAFICA_ACTUAL_EXITO2:
+    case FILTRO_GRAFICO_COVID:
       return {
         ...state,
-        loading: false,
-        error: null,
-        datoActivo2: action.payload,
+        filtrografico: action.payload,
       };
 
     default:

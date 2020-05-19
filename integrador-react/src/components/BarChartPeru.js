@@ -10,11 +10,11 @@ const BarChartPeru = () => {
     cargarGrafica2();
   }, [dispatch]);
 
-  const dataPeru = useSelector((state) => state.datacovid.dataGeneralPeru);
-  console.log(dataPeru);
+  const dataperu = useSelector((state) => state.datacovid.dataperu);
+
   return (
     <div>
-      <GraficoPeru contenido={dataPeru}></GraficoPeru>
+      <GraficoPeru contenido={dataperu}></GraficoPeru>
     </div>
   );
 };

@@ -8,13 +8,15 @@ import { registrarNuevoUsuarioAction } from "./../actions/usuarioActions";
 
 const Register = ({ history }) => {
   // State del componente
+  const [username, guardarUsername] = useState("");
+  const [password, guardarPassword] = useState("");
   const [nombre, guardarNombre] = useState("");
   const [apellido, guardarApellido] = useState("");
   const [edad, guardarEdad] = useState("");
   const [dni, guardarDni] = useState("");
   const [sexo, guardarSexo] = useState("");
   const [telefono, guardarTelefono] = useState("");
-  const [password, guardarPassword] = useState("");
+  const [tipo, guardarTipo] = useState("1");
   // Utilizar use dispatch y te crea una función
   const dispatch = useDispatch();
 
@@ -33,13 +35,15 @@ const Register = ({ history }) => {
     // Validamos formulario
 
     if (
+      username.trim() === "" ||
+      password.trim() === "" ||
       nombre.trim() === "" ||
       apellido.trim() === "" ||
-      edad <= 0 ||
+      edad.trim() === "" ||
       dni.trim() === "" ||
       sexo.trim() === "" ||
-      telefono <= 0 ||
-      password.trim() === ""
+      telefono.trim() === "" ||
+      tipo.trim() === ""
     ) {
       return;
     }
@@ -47,13 +51,15 @@ const Register = ({ history }) => {
 
     // Registrar el nuevo usuario
     registrarUsuario({
+      username,
+      password,
       nombre,
       apellido,
       edad,
       dni,
       sexo,
       telefono,
-      password,
+      tipo,
     });
 
     // Redireccionar al login
@@ -139,7 +145,7 @@ const Register = ({ history }) => {
                       className="form-control diseño-entrada"
                       name="edad"
                       value={edad}
-                      onChange={(e) => guardarEdad(Number(e.target.value))}
+                      onChange={(e) => guardarEdad(e.target.value)}
                       required
                     ></input>
                   </div>
@@ -179,7 +185,20 @@ const Register = ({ history }) => {
                       className="form-control diseño-entrada"
                       name="telefono"
                       value={telefono}
-                      onChange={(e) => guardarTelefono(Number(e.target.value))}
+                      onChange={(e) => guardarTelefono(e.target.value)}
+                      required
+                    ></input>
+                  </div>
+
+                  <div className="form-group subtitulo-formulario">
+                    <label className="texto-formulario">Usuario</label>
+                    <input
+                      type="text"
+                      placeholder="Usuario"
+                      className="form-control diseño-entrada"
+                      name="username"
+                      value={username}
+                      onChange={(e) => guardarUsername(e.target.value)}
                       required
                     ></input>
                   </div>
@@ -193,6 +212,17 @@ const Register = ({ history }) => {
                       name="password"
                       value={password}
                       onChange={(e) => guardarPassword(e.target.value)}
+                      required
+                    ></input>
+                  </div>
+
+                  <div className="form-group subtitulo-formulario">
+                    <input
+                      type="hidden"
+                      className="form-control diseño-entrada"
+                      name="tipo"
+                      value={tipo}
+                      onChange={(e) => guardarTipo(e.target.value)}
                       required
                     ></input>
                   </div>

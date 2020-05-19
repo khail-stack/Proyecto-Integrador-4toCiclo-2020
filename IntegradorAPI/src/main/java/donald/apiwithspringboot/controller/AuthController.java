@@ -21,7 +21,7 @@ import donald.apiwithspringboot.config.JwtToken;
 import org.springframework.security.authentication.AuthenticationManager;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @Tag(name = "Authentication", description = "API for authenticate")
 public class AuthController {
 
