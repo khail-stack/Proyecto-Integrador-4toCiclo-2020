@@ -4,6 +4,8 @@ import SusanaDistancia from "./../assets/doctor.png";
 import mantenDistancia from "./../assets/mantenDistancia.jpg";
 import quedateCasa from "./../assets/quedateCasa.jpg";
 import lavadoManos from "./../assets/lavadoManos.jpg";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const Home = () => {
   return (
@@ -92,6 +94,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </>
   );
 };

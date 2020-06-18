@@ -12,6 +12,7 @@ import Spinner from "./Spinner";
 import LinealChartGlobal from "./LinealChartGlobal";
 import { dataGeneralPeru } from "./../actions/covidActions";
 import BarChartPeru from "./BarChartPeru";
+import Footer from "./Footer";
 
 const CovidPage = () => {
   $(".btn").mouseup(function () {
@@ -152,12 +153,14 @@ const CovidPage = () => {
           </>
         )
       ) : (
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center mt-5">
           <div role="status">
             <Spinner></Spinner>
           </div>
         </div>
       )}
+
+      <Footer></Footer>
     </div>
   );
 };
