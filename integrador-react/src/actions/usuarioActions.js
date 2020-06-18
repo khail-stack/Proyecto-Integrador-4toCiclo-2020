@@ -6,8 +6,8 @@ import {
   LOGIN_USUARIO_EXITO,
   LOGIN_USUARIO_ERROR,
 } from "./../types/index";
-import clienteAxios from "../config/axios";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 // Registrar usuarios
 
@@ -17,7 +17,7 @@ export function registrarNuevoUsuarioAction(usuario) {
 
     try {
       //insertar en la Api
-      await clienteAxios.post("/usuarios", usuario);
+      await axios.post("http://localhost:8081/user", usuario);
       //si todo sale bien, actualizar el state
       dispatch(registrarUsuarioExito(usuario));
 

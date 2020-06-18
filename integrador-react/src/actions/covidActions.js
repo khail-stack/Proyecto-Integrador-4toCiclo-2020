@@ -1,15 +1,15 @@
 import {
   CONFIRMADOS_GLOBALES,
-  CONFIRMADOS_GLOBALES_EXITO,
   CONFIRMADOS_GLOBALES_ERROR,
   GRAFICA_GLOBAL_CARGA,
-  GRAFICA_GLOBAL_EXITO,
   GRAFICA_GLOBAL_ERROR,
   GRAFICA_PERU_CARGA,
-  GRAFICA_PERU_EXITO,
   GRAFICA_PERU_ERROR,
-  GRAFICA_ACTUAL_EXITO,
-  GRAFICA_ACTUAL_EXITO2,
+  P_DATA_PERU,
+  P_DATA_CARTA_GLOBAL,
+  P_DATA_GRAFICO_GLOBAL,
+  FILTRO_CARTA_COVID,
+  FILTRO_GRAFICO_COVID,
 } from "./../types/index";
 
 import axios from "axios";
@@ -33,7 +33,7 @@ const cargandoDataGlobal = () => ({
 });
 
 const getDataGlobal = (dataGlobal) => ({
-  type: CONFIRMADOS_GLOBALES_EXITO,
+  type: P_DATA_CARTA_GLOBAL,
   payload: dataGlobal,
 });
 
@@ -60,7 +60,7 @@ const graficaGlobalCarga = () => ({
 });
 
 const graficaGlobalExito = (datos) => ({
-  type: GRAFICA_GLOBAL_EXITO,
+  type: P_DATA_GRAFICO_GLOBAL,
   payload: datos,
 });
 
@@ -91,7 +91,7 @@ const graficaPeruCarga = () => ({
 });
 
 const graficaPeruExito = (dataPeru) => ({
-  type: GRAFICA_PERU_EXITO,
+  type: P_DATA_PERU,
   payload: dataPeru,
 });
 
@@ -100,19 +100,19 @@ const graficaPeruError = () => ({
   payload: true,
 });
 
-export function dataActivo(dataRequerido, dataRequerida2) {
+export function filtrarData(carta, grafico) {
   return (dispatch) => {
-    dispatch(enviarData(dataRequerido));
-    dispatch(enviarData2(dataRequerida2));
+    dispatch(filtrarCarta(carta));
+    dispatch(filtrarGrafico(grafico));
   };
 }
 
-const enviarData = (dataRequerido) => ({
-  type: GRAFICA_ACTUAL_EXITO,
-  payload: dataRequerido,
+const filtrarCarta = (carta) => ({
+  type: FILTRO_CARTA_COVID,
+  payload: carta,
 });
 
-const enviarData2 = (dataRequerida2) => ({
-  type: GRAFICA_ACTUAL_EXITO2,
-  payload: dataRequerida2,
+const filtrarGrafico = (grafico) => ({
+  type: FILTRO_GRAFICO_COVID,
+  payload: grafico,
 });
