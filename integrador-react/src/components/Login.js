@@ -1,31 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";
 
 import { iniciarSesionAction } from "../actions/usuarioActions";
-import { useDispatch } from "react-redux";
-import Header from "./Header";
-import Footer from "./Footer";
+import { useDispatch, useSelector } from "react-redux";
 
-const Login = () => {
-  const [dni, guardarDni] = useState("");
+const Login = ({ history }) => {
+  const [username, guardarUsername] = useState("");
   const [password, guardarPassword] = useState("");
 
-  const dipatch = useDispatch();
+  const dispatch = useDispatch();
 
+  const autenticado = useSelector((state) => state.usuarios.autenticado);
   const loginUsuario = (usuarioLogueado) => {
-    dipatch(iniciarSesionAction(usuarioLogueado));
+    dispatch(iniciarSesionAction(usuarioLogueado));
   };
 
   const submitIniciarSesion = (e) => {
     e.preventDefault();
 
-    if (dni.trim() === "" || password.trim() === "") {
+    if (username.trim() === "" || password.trim() === "") {
       return;
     }
 
-    loginUsuario({ dni, password });
+    loginUsuario({ username, password });
   };
+
+  useEffect(() => {
+    if (autenticado) {
+      history.push("/casos-mundo");
+    }
+  }, [autenticado]);
+
   return (
     <>
       <div>
@@ -73,14 +79,14 @@ const Login = () => {
                     onSubmit={submitIniciarSesion}
                   >
                     <div className="form-group subtitulo-formulario">
-                      <label className="texto-formulario">DNI</label>
+                      <label className="texto-formulario">Usuario</label>
                       <input
                         type="text"
-                        placeholder="tecsup@gmail.com"
+                        placeholder="Usuario"
                         className="form-control diseño-entrada"
-                        name="dni"
-                        value={dni}
-                        onChange={(e) => guardarDni(e.target.value)}
+                        name="username"
+                        value={username}
+                        onChange={(e) => guardarUsername(e.target.value)}
                       ></input>
                     </div>
                     <div className="form-group subtitulo-formulario">

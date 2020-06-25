@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./AdminStyle.css";
 
 const AdminHeader = () => {
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light fondo-header border-bottom">
+      <nav className="navbar navbar-expand-lg navbar-light fondo-header border-bottom sticky-top">
         <div className="container">
           <button
             className="navbar-toggler"
@@ -40,28 +41,31 @@ const AdminHeader = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item dropdown no">
-                <a
+                <Link
                   className="nav-link dropdown-toggle color-nombre"
-                  href="#"
                   id="navbarDropdown"
                   role="button"
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  Khail Mogollon
-                </a>
+                  {localStorage.getItem("email") ? (
+                    localStorage.getItem("email")
+                  ) : (
+                    <div></div>
+                  )}
+                </Link>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a className="dropdown-item" href="#">
+                  <Link className="dropdown-item" href="#">
                     Mi Perfil
-                  </a>
-                  <a className="dropdown-item" href="#">
+                  </Link>
+                  <Link className="dropdown-item" href="#">
                     Estadisticas
-                  </a>
+                  </Link>
                   <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="#">
+                  <Link className="dropdown-item" to={"/logout-admin"}>
                     Cerrar Sesión
-                  </a>
+                  </Link>
                 </div>
               </li>
             </ul>

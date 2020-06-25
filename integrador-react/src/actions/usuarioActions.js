@@ -5,9 +5,13 @@ import {
   LOGIN_USUARIO,
   LOGIN_USUARIO_EXITO,
   LOGIN_USUARIO_ERROR,
+  VALIDAR_TOKEN,
+  FILTRO_LOGIN_ADMIN,
+  FILTRO_ERROR,
 } from "./../types/index";
 import Swal from "sweetalert2";
-import axios from "axios";
+//import axios from "axios";
+import clienteAxios from "./../config/axios";
 
 // Registrar usuarios
 
@@ -17,13 +21,14 @@ export function registrarNuevoUsuarioAction(usuario) {
 
     try {
       //insertar en la Api
-      await axios.post("http://localhost:8081/user", usuario);
+      await clienteAxios.post("/users/register", usuario);
       //si todo sale bien, actualizar el state
       dispatch(registrarUsuarioExito(usuario));
 
       //Alerta de exito
       Swal.fire("Bien hecho!", "Te has registrado correctamente", "success");
     } catch (error) {
+      console.log(error.response);
       //Si hay un error cambiar el state
       dispatch(registrarUsuarioError(true));
 
@@ -61,13 +66,22 @@ const registrarUsuarioError = (estado) => ({
 // Funcion del login de usuarios
 
 export function iniciarSesionAction(usuarioLogueado) {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(loginUsuario());
 
     try {
-      dispatch(loginUsuarioExito(usuarioLogueado));
+      const usuariolog = await clienteAxios.post(
+        "/users/login",
+        usuarioLogueado
+      );
+      dispatch(loginUsuarioExito(usuariolog.data));
     } catch (error) {
       dispatch(loginUsuarioError(true));
+      Swal.fire({
+        icon: "error",
+        title: "Inicio de sesion fallido",
+        text: "Coloca bien tus datos, intenta de nuevo",
+      });
     }
   };
 }
@@ -85,4 +99,48 @@ const loginUsuarioExito = (usuarioLogueado) => ({
 const loginUsuarioError = (estado) => ({
   type: LOGIN_USUARIO_ERROR,
   payload: estado,
+});
+
+export function autenticadoToken(token) {
+  return async (dispatch) => {
+    await dispatch(validarToken(token));
+  };
+}
+
+const validarToken = (token) => ({
+  type: VALIDAR_TOKEN,
+  payload: token,
+});
+
+export function mostrarAdminLogin() {
+  if (localStorage.getItem("token")) {
+    return async (dispatch) => {
+      await dispatch(validarAdminLogin());
+    };
+  } else {
+    return async (dispatch) => {
+      await dispatch(validarAdminLoginFalse());
+    };
+  }
+}
+
+const validarAdminLogin = () => ({
+  type: FILTRO_LOGIN_ADMIN,
+  payload: false,
+});
+
+const validarAdminLoginFalse = () => ({
+  type: FILTRO_LOGIN_ADMIN,
+  payload: true,
+});
+
+export function mostrarPaginaError() {
+  return async (dispatch) => {
+    await dispatch(paginaError());
+  };
+}
+
+const paginaError = () => ({
+  type: FILTRO_ERROR,
+  payload: true,
 });

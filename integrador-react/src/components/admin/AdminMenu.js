@@ -16,9 +16,6 @@ const AdminMenu = () => {
   const preguntas = useSelector((state) => state.rutasadmin.preguntas);
   const usuarios = useSelector((state) => state.rutasadmin.usuariosAdmin);
   const perfil = useSelector((state) => state.rutasadmin.perfil);
-  const agregarPregunta = useSelector(
-    (state) => state.rutasadmin.agregarPregunta
-  );
 
   return (
     <>
