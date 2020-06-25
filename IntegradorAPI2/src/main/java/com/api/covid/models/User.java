@@ -48,7 +48,7 @@ public class User {
 	
 	private String distrito;
 	
-	private String direccion;
+	private String direccion; 
 	
 
 	@ManyToMany(fetch = FetchType.LAZY)

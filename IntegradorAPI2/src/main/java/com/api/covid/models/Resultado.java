@@ -13,7 +13,7 @@ public class Resultado {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	
 	private String resultado;
 
@@ -28,12 +28,11 @@ public class Resultado {
 		this.resultado = resultado;
 	}
 
-	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

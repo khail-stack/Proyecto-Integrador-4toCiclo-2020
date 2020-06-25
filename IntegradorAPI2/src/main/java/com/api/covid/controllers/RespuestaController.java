@@ -1,6 +1,5 @@
 package com.api.covid.controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,37 +11,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.covid.exception.CovidNotFoundException;
-import com.api.covid.models.Cuestionario;
-import com.api.covid.security.services.CuestionarioService;
-
+import com.api.covid.models.Respuesta;
+import com.api.covid.security.services.RespuestaService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/v1/resources")
-public class CuestionarioController {
+public class RespuestaController {
 
 	@Autowired
-	private CuestionarioService cuestionarioService;
+	private RespuestaService respuestaService;
 	
-	@GetMapping("/cuestionarios")
+	@GetMapping("/respuestas")
 	@PreAuthorize("hasRole('ADMIN')")
-	public Iterable<Cuestionario> getCuestionario(){
+	public Iterable<Respuesta> geRespuesta(){
 		
-		return cuestionarioService.findAll();
-		
+		return respuestaService.findAll();
 	}
-	
-	@GetMapping("/cuestionario/{idCuestionario}")
-	@PreAuthorize("hasRole('ADMIN')")
-	ResponseEntity<Cuestionario> findOne(@PathVariable Long idCuestionario){
 		
-		try {
-			return new ResponseEntity<>(cuestionarioService.findById(idCuestionario), HttpStatus.OK);
-			
-		}catch(CovidNotFoundException e) {
-			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-		}
-	}
-	
-	
 }

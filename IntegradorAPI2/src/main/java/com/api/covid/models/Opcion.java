@@ -13,7 +13,7 @@ public class Opcion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idopcion;
+    private long idopcion;
     private String opcion;
     
 	public Opcion() {
@@ -24,12 +24,14 @@ public class Opcion {
 		this.opcion = opcion;
 	}
 	
-	public int getIdopcion() {
+	public long getIdopcion() {
 		return idopcion;
 	}
-	public void setIdopcion(int idopcion) {
+
+	public void setIdopcion(long idopcion) {
 		this.idopcion = idopcion;
 	}
+
 	public String getOpcion() {
 		return opcion;
 	}
