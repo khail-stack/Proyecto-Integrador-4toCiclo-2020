@@ -26,7 +26,7 @@ public class CuestionarioServiceImpl implements CuestionarioService {
 	}
 
 	@Override
-	public Cuestionario updateCuestionario(Cuestionario cuestionario) {
+	public Cuestionario update(Cuestionario cuestionario) {
 		// TODO Auto-generated method stub
 		return cuestionarioRepository.save(cuestionario);
 	}

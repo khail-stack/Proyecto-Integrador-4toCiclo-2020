@@ -12,7 +12,7 @@ public class Pregunta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idpregunta;
+	private long idpregunta;
     private String pregunta;
 	private String valor;
 	
@@ -24,10 +24,11 @@ public class Pregunta {
 		this.pregunta = pregunta;
 		this.valor= valortotal;
 	}
-	public int getIdpregunta() {
+	
+	public long getIdpregunta() {
 		return idpregunta;
 	}
-	public void setIdpregunta(int idpregunta) {
+	public void setIdpregunta(long idpregunta) {
 		this.idpregunta = idpregunta;
 	}
 	public String getPregunta() {

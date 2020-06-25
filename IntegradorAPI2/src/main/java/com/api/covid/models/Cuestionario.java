@@ -16,7 +16,7 @@ public class Cuestionario {
 
 	    @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private int idcuestionario;
+	    private long idcuestionario;
 	    private String fecha;
 	    
 	    private int valortotal;
@@ -30,16 +30,18 @@ public class Cuestionario {
 			
 		}
 		
-		public Cuestionario(String fecha) {
-			
+		public Cuestionario(String fecha) {		
 			this.fecha = fecha;
 		}
-		public int getIdcuestionario() {
+	
+		public long getIdcuestionario() {
 			return idcuestionario;
 		}
-		public void setIdcuestionario(int idcuestionario) {
+
+		public void setIdcuestionario(long idcuestionario) {
 			this.idcuestionario = idcuestionario;
 		}
+
 		public String getFecha() {
 			return fecha;
 		}

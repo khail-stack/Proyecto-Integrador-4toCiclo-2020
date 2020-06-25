@@ -10,7 +10,7 @@ public interface CuestionarioService {
 
     Cuestionario create(Cuestionario cuestionario);
 	
-    Cuestionario updateCuestionario(Cuestionario cuestionario);
+    Cuestionario update(Cuestionario cuestionario);
     
 	void delete(Long idCuestionario) throws CovidNotFoundException;
 	
