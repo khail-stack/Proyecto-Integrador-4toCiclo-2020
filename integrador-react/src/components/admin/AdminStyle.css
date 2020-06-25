@@ -1,0 +1,156 @@
+.fondo-sidebar {
+  background-color: #7341e8 !important;
+  -webkit-box-shadow: 14px 19px 46px -25px rgba(189, 189, 189, 1) !important;
+  -moz-box-shadow: 14px 19px 46px -25px rgba(189, 189, 189, 1) !important;
+  box-shadow: 14px 19px 46px -25px rgba(189, 189, 189, 1) !important;
+}
+
+.linea:hover {
+  text-decoration: none !important;
+}
+
+.sidebar-container {
+  min-height: 100vh !important;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0 !important;
+}
+
+.sidebar-container .titulo-admin {
+  padding: 0.875rem 1.25rem !important;
+}
+
+.fondo-header {
+  background-color: #ffffff !important;
+}
+.sidebar-container .menu {
+  width: 18rem !important;
+}
+
+.btn-buscar {
+  right: 5px !important;
+}
+
+.color-nombre {
+  color: black !important;
+}
+
+.color-boton-admin {
+  background-color: #ff6d6d !important;
+  border: 0 !important;
+}
+
+.stat {
+  border-right: 1px solid #a5adbb;
+}
+
+.bg-mix {
+  background: linear-gradient(180deg, #ffffff 50%, #f7f7f7 0);
+}
+.bg-grafico {
+  background-color: #f7f7f7;
+}
+.contenido-admin {
+  overflow-y: auto;
+  height: 100vh;
+}
+
+@media (max-width: 960px) {
+  .stat {
+    border: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-container {
+    display: none;
+  }
+  .stat {
+    border: 0;
+  }
+}
+
+.color-admin-subtitulo-1 {
+  color: rgba(234, 196, 94, 1) !important;
+}
+
+.color-admin-subtitulo-2 {
+  color: rgba(94, 191, 55, 1) !important;
+}
+
+.color-admin-subtitulo-3 {
+  color: rgba(241, 88, 88, 1) !important;
+}
+
+.diseño-preguntas-admin {
+  -webkit-box-shadow: 9px 0px 46px -25px rgba(153, 153, 153, 1);
+  -moz-box-shadow: 9px 0px 46px -25px rgba(153, 153, 153, 1);
+  box-shadow: 9px 0px 46px -25px rgba(153, 153, 153, 1);
+  border-radius: 15px !important ;
+  border: none !important;
+}
+
+.boton-sombra-admin {
+  -webkit-box-shadow: 10px 7px 10px -12px rgba(153, 153, 153, 1);
+  -moz-box-shadow: 10px 7px 10px -12px rgba(153, 153, 153, 1);
+  box-shadow: 10px 7px 10px -12px rgba(153, 153, 153, 1);
+}
+
+.ajustar-texto-tabla-pregunta {
+  word-wrap: break-word !important;
+  min-width: 220px !important;
+  max-width: 220px !important;
+}
+
+/*
+.ajustar-texto-tabla-opciones {
+  word-wrap: break-word !important;
+  min-width: 100px !important;
+  max-width: 100px !important;
+}
+
+.ajustar-texto-tabla-valor {
+  word-wrap: break-word !important;
+  min-width: 100px !important;
+  max-width: 100px !important;
+}
+
+.ajustar-texto-tabla-acciones {
+  word-wrap: break-word !important;
+  min-width: 200px !important;
+  max-width: 200px !important;
+}*/
+/*Para poner puntos suspensivos en los textos*/
+/*background-color: pink;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 50px;*/
+
+.color-accion-eliminar {
+  color: red;
+  font-size: 25px !important;
+}
+
+.color-accion-editar {
+  font-size: 25px !important;
+}
+
+.hola {
+  background-color: #41b6e8 !important;
+}
+
+.color-listado-boton {
+  background-color: #db7549 !important;
+  color: white !important;
+  border-color: #db7549 !important;
+}
+c66d22 .color-listado-boton:hover {
+  background-color: #c66d22 !important;
+  color: white !important;
+  border-color: #c66d22 !important;
+}
+
+.bordes_cabecera {
+  border: none !important;
+}

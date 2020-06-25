@@ -13,6 +13,7 @@ const initialState = {
   usuarios: [],
   error: null,
   loading: false,
+  rol: 1,
 };
 
 export default function (state = initialState, action) {

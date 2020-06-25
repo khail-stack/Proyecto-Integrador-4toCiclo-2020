@@ -1,0 +1,177 @@
+/** {
+  margin:0px auto;
+  padding: 0px;
+text-align:center;
+}*/
+
+.cont_principal {
+  position: absolute !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+}
+.cont_error {
+  position: absolute !important;
+  width: 100% !important;
+  height: 300px !important;
+  top: 50% !important;
+  margin-top: -150px !important;
+}
+
+.cont_error > .titulo-error {
+  font-family: "Lato", sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 150px !important;
+  color: #231939 !important;
+  position: relative !important;
+  left: -100% !important;
+  transition: all 0.5s !important;
+}
+
+.cont_error > .sutbtitulo-error {
+  font-family: "Lato", sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 24px !important;
+  letter-spacing: 5px !important;
+  color: #9294ae !important;
+  position: relative !important;
+  left: 100% !important;
+  transition: all 0.5s !important;
+  transition-delay: 0.5s !important;
+  -webkit-transition: all 0.5s !important;
+  -webkit-transition-delay: 0.5s !important;
+}
+
+.cont_aura_1 {
+  position: absolute !important;
+  width: 300px !important;
+  height: 120% !important;
+  top: 25px !important;
+  right: -340px !important;
+  background-color: #8a65df !important;
+  box-shadow: 0px 0px 60px 20px rgba(137, 100, 222, 0.5) !important;
+  -webkit-transition: all 0.5s !important;
+  transition: all 0.5s !important;
+}
+
+.cont_aura_2 {
+  position: absolute !important ;
+  width: 100% !important ;
+  height: 300px !important ;
+  right: -10% !important ;
+  bottom: -301px !important ;
+  background-color: #8b65e4 !important ;
+  box-shadow: 0px 0px 60px 10px rgba(131, 95, 214, 0.5),
+    0px 0px 20px 0px rgba(0, 0, 0, 0.1) !important ;
+  z-index: 5 !important ;
+  transition: all 0.5s !important ;
+  -webkit-transition: all 0.5s !important ;
+}
+
+.cont_error_active > .cont_error > .titulo-error {
+  left: 0% !important ;
+}
+.cont_error_active > .cont_error > .sutbtitulo-error {
+  left: 0% !important ;
+}
+
+.cont_error_active > .cont_aura_2 {
+  animation-name: animation_error_2 !important ;
+  animation-duration: 4s !important ;
+  animation-timing-function: linear !important ;
+  animation-iteration-count: infinite !important ;
+  animation-direction: alternate !important ;
+  transform: rotate(-20deg) !important ;
+}
+.cont_error_active > .cont_aura_1 {
+  transform: rotate(20deg) !important;
+  right: -170px !important;
+  animation-name: animation_error_1 !important;
+  animation-duration: 4s !important;
+  animation-timing-function: linear !important;
+  animation-iteration-count: infinite !important;
+  animation-direction: alternate !important;
+}
+
+@-webkit-keyframes animation_error_1 {
+  from {
+    -webkit-transform: rotate(20deg) !important;
+    transform: rotate(20deg);
+  }
+  to {
+    -webkit-transform: rotate(25deg) !important;
+    transform: rotate(25deg) !important;
+  }
+}
+@-o-keyframes animation_error_1 {
+  from {
+    -webkit-transform: rotate(20deg) !important;
+    transform: rotate(20deg) !important;
+  }
+  to {
+    -webkit-transform: rotate(25deg) !important;
+    transform: rotate(25deg) !important;
+  }
+}
+@-moz-keyframes animation_error_1 {
+  from {
+    -webkit-transform: rotate(20deg) !important;
+    transform: rotate(20deg) !important;
+  }
+  to {
+    -webkit-transform: rotate(25deg) !important;
+    transform: rotate(25deg) !important;
+  }
+}
+@keyframes animation_error_1 {
+  from {
+    -webkit-transform: rotate(20deg) !important;
+    transform: rotate(20deg) !important;
+  }
+  to {
+    -webkit-transform: rotate(25deg) !important;
+    transform: rotate(25deg) !important;
+  }
+}
+
+@-webkit-keyframes animation_error_2 {
+  from {
+    -webkit-transform: rotate(-15deg) !important;
+    transform: rotate(-15deg) !important;
+  }
+  to {
+    -webkit-transform: rotate(-20deg) !important;
+    transform: rotate(-20deg) !important;
+  }
+}
+@-o-keyframes animation_error_2 {
+  from {
+    -webkit-transform: rotate(-15deg) !important;
+    transform: rotate(-15deg) !important;
+  }
+  to {
+    -webkit-transform: rotate(-20deg) !important;
+    transform: rotate(-20deg) !important;
+  }
+}
+
+@-moz-keyframes animation_error_2 {
+  from {
+    -webkit-transform: rotate(-15deg) !important;
+    transform: rotate(-15deg) !important;
+  }
+  to {
+    -webkit-transform: rotate(-20deg) !important;
+    transform: rotate(-20deg) !important;
+  }
+}
+@keyframes animation_error_2 {
+  from {
+    -webkit-transform: rotate(-15deg) !important;
+    transform: rotate(-15deg) !important;
+  }
+  to {
+    -webkit-transform: rotate(-20deg) !important;
+    transform: rotate(-20deg) !important;
+  }
+}
