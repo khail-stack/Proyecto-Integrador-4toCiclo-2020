@@ -18,7 +18,7 @@ public interface UserService {
 
 	void update(User user);
 
-	User create(User updateUser);
+	User create(User user);
 
 	
 }

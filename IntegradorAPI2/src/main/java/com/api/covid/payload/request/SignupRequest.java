@@ -35,8 +35,9 @@ public class SignupRequest {
 	private String distrito;
 	
 	private String direccion;
-  
-    public String getUsername() {
+	
+
+	public String getUsername() {
         return username;
     }
  

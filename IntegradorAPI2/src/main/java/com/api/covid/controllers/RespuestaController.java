@@ -18,10 +18,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.covid.models.CuestionarioRespuesta;
-import com.api.covid.models.Opcion;
 import com.api.covid.models.Respuesta;
 import com.api.covid.security.services.RespuestaService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController

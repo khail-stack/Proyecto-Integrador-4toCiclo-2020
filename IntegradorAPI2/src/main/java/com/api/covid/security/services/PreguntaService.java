@@ -24,4 +24,6 @@ public interface PreguntaService {
 	  Iterable<Pregunta> findAll();
 	  
 	  List<Pregunta> obtenerPorPaginacion(Pageable pageable);
+	  
+	
 }

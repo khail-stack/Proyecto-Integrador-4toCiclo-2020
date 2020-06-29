@@ -23,7 +23,8 @@ public interface RespuestaRepository extends CrudRepository<Respuesta, Long>, Pa
     
       Page<Respuesta> findAll(Pageable pageable);
      
-      
+     
+    
       
 }
 
