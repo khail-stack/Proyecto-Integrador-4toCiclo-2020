@@ -39,4 +39,5 @@ public class Opcion {
 		this.opcion = opcion;
 	}
    
+	
 }

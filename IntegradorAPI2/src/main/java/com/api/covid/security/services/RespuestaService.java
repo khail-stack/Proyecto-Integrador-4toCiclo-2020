@@ -1,12 +1,13 @@
 package com.api.covid.security.services;
+import java.util.List;
+import org.springframework.data.domain.Pageable;
 
 import com.api.covid.exception.CovidNotFoundException;
+import com.api.covid.models.CuestionarioRespuesta;
 import com.api.covid.models.Respuesta;
-import com.api.covid.models.Resultado;
 
 public interface RespuestaService {
 
-	Respuesta create(Respuesta respuesta);
 	
 	Respuesta update(Respuesta respuesta);
 	
@@ -14,6 +15,17 @@ public interface RespuestaService {
 	
 	Respuesta findById(Long id) throws CovidNotFoundException;
 
-    Iterable<Respuesta> findAll();
+    List<Respuesta> findAllRespuestas();
+    
+    List<Respuesta> obtenerPorPaginacion(Pageable pageable);
+    
+    Iterable<Respuesta> findBRespuestaIdCuestionario(Long idcuestionario);
+
+	Respuesta create(Respuesta respuesta);
+	
+	CuestionarioRespuesta create(CuestionarioRespuesta respuesta);
+	
+	Iterable<CuestionarioRespuesta> findAll();
+	
 }
 

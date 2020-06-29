@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.api.covid.exception.CovidNotFoundException;
@@ -60,7 +62,11 @@ public class PreguntaServiceImpl implements PreguntaService{
 		
 		return preguntaRepository.findAll();
 	}
-	
-	
+
+	@Override
+	public List<Pregunta> obtenerPorPaginacion(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return preguntaRepository.findAll(pageable).getContent();
+	}
 	
 }

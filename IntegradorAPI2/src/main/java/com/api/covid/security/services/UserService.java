@@ -6,8 +6,7 @@ import com.api.covid.exception.CovidNotFoundException;
 import com.api.covid.models.User;
 
 public interface UserService {
-	
-	User  uptade(User user);
+
 	
 	void delete(Long id)  throws CovidNotFoundException;
 	
@@ -16,5 +15,10 @@ public interface UserService {
 	List<User> findByNombre(String nombre);
 	
 	Iterable<User> findAll();
+
+	void update(User user);
+
+	User create(User updateUser);
+
 	
 }

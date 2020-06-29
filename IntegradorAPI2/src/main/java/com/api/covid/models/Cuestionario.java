@@ -6,7 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -25,15 +27,18 @@ public class Cuestionario {
 		@ManyToOne(optional=true, fetch=FetchType.EAGER)
 		@JoinColumn(name="resultado_id")
 		private Resultado resultado;
-	    
+		
 		public Cuestionario() {
 			
 		}
 		
-		public Cuestionario(String fecha) {		
+		public Cuestionario(String fecha, int valortotal, Resultado resultado) {
+			super();
 			this.fecha = fecha;
+			this.valortotal = valortotal;
+			this.resultado = resultado;
 		}
-	
+
 		public long getIdcuestionario() {
 			return idcuestionario;
 		}
@@ -63,5 +68,6 @@ public class Cuestionario {
 		public void setResultado(Resultado resultado) {
 			this.resultado = resultado;
 		}
+
 
 }

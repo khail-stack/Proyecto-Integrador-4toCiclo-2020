@@ -1,5 +1,6 @@
 package com.api.covid.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,34 +21,36 @@ public class Respuesta {
     private long id;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="cuestionario_idcuestionario")
+	@JoinColumn(name="idcuestionario")
 	private Cuestionario cuestionario;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="pregunta_has_opcion_pregunta_idpregunta")
+	@JoinColumn(name="idpregunta")
 	private Pregunta pregunta;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="pregunta_has_opcion_opcion_idopcion")
+	@JoinColumn(name="idopcion")
 	private Opcion opcion;
 
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="users_id")
 	private User user;
-
+	
 	
 	public Respuesta() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	
 	public Respuesta(Cuestionario cuestionario, Pregunta pregunta, Opcion opcion, User user) {
-		super();
-		this.cuestionario = cuestionario;
-		this.pregunta = pregunta;
-		this.opcion = opcion;
-		this.user = user;
-	}
+	super();
+	this.cuestionario = cuestionario;
+	this.pregunta = pregunta;
+	this.opcion = opcion;
+	this.user = user;
+}
+
 
 	public long getId() {
 		return id;
@@ -88,6 +91,8 @@ public class Respuesta {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	
 	
 	
 }

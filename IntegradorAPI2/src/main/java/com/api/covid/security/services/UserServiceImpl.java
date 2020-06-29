@@ -16,11 +16,6 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	UsersRepository userRepository;
 	
-	@Override
-	public User uptade(User user) {
-		// TODO Auto-generated method stub
-		return userRepository.save(user);
-	}
 
 	@Override
 	public void delete(Long id)  throws CovidNotFoundException {
@@ -53,6 +48,18 @@ public class UserServiceImpl implements UserService{
 	public Iterable<User> findAll() {
 		// TODO Auto-generated method stub
 		return userRepository.findAll();
+	}
+
+	@Override
+	public void update(User user) {
+		// TODO Auto-generated method stub
+		userRepository.save(user);
+	}
+
+	@Override
+	public User create(User updateUser) {
+		// TODO Auto-generated method stub
+		return userRepository.save(updateUser);
 	}
 
 	

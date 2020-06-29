@@ -1,6 +1,9 @@
 package com.api.covid.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.covid.exception.CovidNotFoundException;
 import com.api.covid.models.Pregunta;
+import com.api.covid.security.services.OpcionService;
 import com.api.covid.security.services.PreguntaService;
 
 
@@ -28,11 +32,13 @@ public class PreguntaController {
 	@Autowired
 	private PreguntaService preguntaService;
 	
+	@Autowired
+	private OpcionService opcionService;
+
 	@GetMapping("/preguntas")
 	@PreAuthorize("hasRole('ADMIN')")
-	public Iterable<Pregunta> getPregunta(){
-		
-		return preguntaService.findAll();
+	public List<Pregunta> obtenerNotas(Pageable pageable){
+		return preguntaService.obtenerPorPaginacion(pageable);
 	}
 	
 	@PostMapping("/preguntas")
@@ -83,3 +89,5 @@ public class PreguntaController {
 	}
 	
 }
+
+
