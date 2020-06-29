@@ -4,8 +4,6 @@ import SusanaDistancia from "./../assets/doctor.png";
 import mantenDistancia from "./../assets/mantenDistancia.jpg";
 import quedateCasa from "./../assets/quedateCasa.jpg";
 import lavadoManos from "./../assets/lavadoManos.jpg";
-import Header from "./Header";
-import Footer from "./Footer";
 
 const Home = () => {
   return (
@@ -34,7 +32,7 @@ const Home = () => {
                     Ten en cuenta que este solo es un descarte preliminar, no es
                     el resultado verdadero
                   </p>
-                  <div className="action_btn d-flex align-items-center mt_40 no">
+                  <div className="action_btn d-flex align-items-center mt_30 no">
                     <a
                       className="btn boton-home boton_home"
                       href="/"
@@ -94,7 +92,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Footer></Footer>
     </>
   );
 };

@@ -7,10 +7,10 @@
 }
 
 .shrink {
-  padding-top: 0;
-  padding-bottom: 0;
-  background-color: #ffffff;
-  box-shadow: 1px 2px 4px rgba(38, 38, 38, 0.1);
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  background-color: #ffffff !important;
+  box-shadow: 1px 2px 4px rgba(38, 38, 38, 0.1) !important;
 }
 
 .letra1 {
@@ -44,47 +44,47 @@
 }
 
 .icon-bar {
-  width: 22px;
-  height: 2px;
-  background-color: #ffffff;
+  width: 22px !important;
+  height: 2px !important;
+  background-color: #ffffff !important;
   display: block;
-  transition: all 0.2s;
-  margin-top: 4px;
-  margin-bottom: 1.5px;
-  translate: 3px;
+  transition: all 0.2s !important;
+  margin-top: 4px !important;
+  margin-bottom: 1.5px !important;
+  translate: 3px !important;
 }
 
 .navbar-toggler .top-bar {
-  translate: 3px;
-  transform: rotate(45deg);
-  transform-origin: 10% 10%;
+  translate: 3px !important;
+  transform: rotate(45deg) !important;
+  transform-origin: 10% 10% !important;
 }
 
 .navbar-toggler .middle-bar {
-  opacity: 0;
+  opacity: 0 !important;
 }
 
 .navbar-toggler .bottom-bar {
-  translate: 3px;
-  transform: rotate(-45deg);
-  transform-origin: 10% 90%;
+  translate: 3px !important;
+  transform: rotate(-45deg) !important;
+  transform-origin: 10% 90% !important;
 }
 
 .navbar-toggler.collapsed .top-bar {
-  transform: rotate(0);
+  transform: rotate(0) !important;
 }
 
 .navbar-toggler.collapsed .middle-bar {
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 .navbar-toggler.collapsed .bottom-bar {
-  transform: rotate(0);
+  transform: rotate(0) !important;
 }
 
 .navbar-nav > .nav-item {
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding-bottom: 10px !important;
+  padding-top: 10px !important;
 }
 
 .boton {
@@ -100,25 +100,25 @@
 }
 
 .cursor {
-  line-height: 1.5rem;
+  line-height: 1.5rem !important;
 }
 
 a {
-  text-decoration: none;
-  background-image: linear-gradient(currentColor, currentColor);
-  background-position: 50% 100%;
-  background-repeat: no-repeat;
-  background-size: 0% 1px;
-  transition: background-size 0.5s;
+  text-decoration: none !important;
+  background-image: linear-gradient(currentColor, currentColor) !important;
+  background-position: 50% 100% !important;
+  background-repeat: no-repeat !important;
+  background-size: 0% 1px !important;
+  transition: background-size 0.5s !important;
 }
 
 a:hover,
 a:focus {
-  background-size: 95% 1px;
+  background-size: 95% 1px !important;
 }
 
 .no a {
-  background-image: none;
+  background-image: none !important;
 }
 
 .boton:hover {
@@ -135,7 +135,7 @@ a:focus {
 
 @media (max-width: 1200px) {
   .esto-no a {
-    background-image: none;
+    background-image: none !important;
   }
 }
 

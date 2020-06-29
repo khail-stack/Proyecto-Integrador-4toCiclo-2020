@@ -1,0 +1,21 @@
+.card-columns {
+  @include media-breakpoint-only(lg) {
+    column-count: 4;
+  }
+  @include media-breakpoint-only(xl) {
+    column-count: 5;
+  }
+}
+
+.diseño_carta_noticias {
+  border-radius: 30px !important;
+}
+
+.btn_noticias_color {
+  color: #ffffff !important;
+  background-color: #ff6d6d !important;
+  font-family: "Poppins", sans-serif !important;
+  font-size: 15px !important;
+  border: none !important;
+  border-radius: 10px !important;
+}

@@ -10,7 +10,13 @@ const AdminContent = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-9">
-              <h1 className="font-weight-bold mb-0"> Bienvenido Khail </h1>
+              <h1 className="font-weight-bold mb-0">
+                {localStorage.getItem("username") ? (
+                  "Bienvenido    " + localStorage.getItem("username")
+                ) : (
+                  <div></div>
+                )}
+              </h1>
               <p className="lead text-muted">Revisa las ultimas actividades</p>
             </div>
 

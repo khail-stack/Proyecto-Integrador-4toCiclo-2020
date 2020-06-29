@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Register.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // ACTIONS DE REDUX
 import { registrarNuevoUsuarioAction } from "./../actions/usuarioActions";
-import Header from "./Header";
-import Footer from "./Footer";
 
 const Register = ({ history }) => {
+  const autenticado = useSelector((state) => state.usuarios.autenticado);
+
+  useEffect(() => {
+    if (autenticado) {
+      history.push("/casos-mundo");
+    }
+  }, [autenticado]);
   // State del componente
   const [username, guardarUsername] = useState("");
+  const [email, guardarEmail] = useState("");
   const [password, guardarPassword] = useState("");
   const [nombre, guardarNombre] = useState("");
   const [apellido, guardarApellido] = useState("");
@@ -18,7 +24,7 @@ const Register = ({ history }) => {
   const [dni, guardarDni] = useState("");
   const [sexo, guardarSexo] = useState("");
   const [telefono, guardarTelefono] = useState("");
-  const [tipo, guardarTipo] = useState("1");
+  //const [role, guardarRole] = useState("[" + `  "admin"  ` + "]");
   // Utilizar use dispatch y te crea una función
   const dispatch = useDispatch();
 
@@ -38,14 +44,13 @@ const Register = ({ history }) => {
 
     if (
       username.trim() === "" ||
+      email.trim() === "" ||
       password.trim() === "" ||
       nombre.trim() === "" ||
       apellido.trim() === "" ||
-      edad.trim() === "" ||
-      dni.trim() === "" ||
+      edad <= 0 ||
       sexo.trim() === "" ||
-      telefono.trim() === "" ||
-      tipo.trim() === ""
+      telefono <= 0
     ) {
       return;
     }
@@ -54,6 +59,7 @@ const Register = ({ history }) => {
     // Registrar el nuevo usuario
     registrarUsuario({
       username,
+      email,
       password,
       nombre,
       apellido,
@@ -61,11 +67,8 @@ const Register = ({ history }) => {
       dni,
       sexo,
       telefono,
-      tipo,
+      //role,
     });
-
-    // Redireccionar al login
-    history.push("/login");
   };
   return (
     <>
@@ -220,15 +223,28 @@ const Register = ({ history }) => {
                     </div>
 
                     <div className="form-group subtitulo-formulario">
+                      <label className="texto-formulario">Email</label>
+                      <input
+                        type="email"
+                        placeholder="Correo electronico"
+                        className="form-control diseño-entrada"
+                        name="email"
+                        value={email}
+                        onChange={(e) => guardarEmail(e.target.value)}
+                        required
+                      ></input>
+                    </div>
+
+                    {/*<div className="form-group subtitulo-formulario">
                       <input
                         type="hidden"
                         className="form-control diseño-entrada"
                         name="tipo"
-                        value={tipo}
-                        onChange={(e) => guardarTipo(e.target.value)}
+                        value={role}
+                        onChange={(e) => guardarRole(e.target.value)}
                         required
                       ></input>
-                    </div>
+                      </div>*/}
 
                     <div className="extra-formulario">
                       <div className="d-flex justify-content-start align-items-start">

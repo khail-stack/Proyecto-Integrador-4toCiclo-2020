@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ErrorPage.css";
+import { useDispatch } from "react-redux";
+import { mostrarPaginaError } from "../actions/usuarioActions";
+
 const ErrorPage = () => {
   window.onload = function () {
     document.querySelector(".cont_principal").className =
       "cont_principal cont_error_active";
   };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(mostrarPaginaError());
+  }, [dispatch]);
 
   return (
     <div className="text-center color-error-fondo">
