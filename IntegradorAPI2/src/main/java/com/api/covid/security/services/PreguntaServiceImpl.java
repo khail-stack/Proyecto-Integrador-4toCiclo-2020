@@ -64,9 +64,9 @@ public class PreguntaServiceImpl implements PreguntaService{
 	}
 
 	@Override
-	public List<Pregunta> obtenerPorPaginacion(Pageable pageable) {
+	public Page<Pregunta> obtenerPorPaginacion(Pageable pageable) {
 		// TODO Auto-generated method stub
-		return preguntaRepository.findAll(pageable).getContent();
+		return  preguntaRepository.findAll(pageable);
 	}
 	
 }

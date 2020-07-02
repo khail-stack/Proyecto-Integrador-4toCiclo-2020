@@ -3,9 +3,6 @@ package com.api.covid.controllers;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.api.covid.exception.CovidNotFoundException;
 import com.api.covid.models.ERole;
-import com.api.covid.models.Pregunta;
 import com.api.covid.models.Role;
 import com.api.covid.models.User;
-import com.api.covid.payload.request.SignupRequest;
 import com.api.covid.payload.response.MessageResponse;
 import com.api.covid.repository.RoleRepository;
 import com.api.covid.repository.UsersRepository;

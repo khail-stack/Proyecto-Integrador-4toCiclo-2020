@@ -3,6 +3,8 @@ package com.api.covid.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,21 +37,23 @@ public class PreguntaController {
 	@Autowired
 	private OpcionService opcionService;
 
-	@GetMapping("/preguntas")
-	@PreAuthorize("hasRole('ADMIN')")
-	public List<Pregunta> obtenerNotas(Pageable pageable){
+	@GetMapping("/preguntas/{page}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public Page<Pregunta> index(@PathVariable Integer page){
+		Pageable pageable=PageRequest.of(page, 4);
 		return preguntaService.obtenerPorPaginacion(pageable);
+		
 	}
 	
 	@PostMapping("/preguntas")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	@ResponseStatus(HttpStatus.CREATED)
 	Pregunta create(@RequestBody Pregunta newPregunta ) {
 		return  preguntaService.create(newPregunta);
 	}
 	
 	@GetMapping("/pregunta/{idpregunta}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	ResponseEntity<Pregunta> findOne(@PathVariable Long idpregunta) {
 		try {
 			return new ResponseEntity<>(preguntaService.findById(idpregunta), HttpStatus.OK);
@@ -58,9 +62,8 @@ public class PreguntaController {
 		}
 	}
 	
-	
 	@PutMapping("/pregunta/{idpregunta}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	Pregunta saveOrUpdate(@RequestBody Pregunta newPregunta, @PathVariable Long idpregunta) {
 		Pregunta owner = null;
 		try {
@@ -76,14 +79,13 @@ public class PreguntaController {
 	}
 	
 	@DeleteMapping("/pregunta/{idpregunta}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	ResponseEntity<String> delete(@PathVariable Long idpregunta) {
 
 		try {
 			preguntaService.delete(idpregunta);
 			return new ResponseEntity<>("" + idpregunta, HttpStatus.OK);
 		} catch (CovidNotFoundException e) {
-			// TODO Auto-generated catch block
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
