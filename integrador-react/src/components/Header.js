@@ -2,7 +2,12 @@ import React from "react";
 import $ from "jquery";
 import "./Header.css";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  mostrarContenidoCuestionario,
+  borrarCuestionario,
+  obtenerPagina,
+} from "../actions/cuestionarioAction";
 
 const Header = () => {
   $(document).on("scroll", function () {
@@ -25,8 +30,22 @@ const Header = () => {
     }
   });
 
+  const dispatch = useDispatch();
+
   //const rol = useSelector((state) => state.usuarios.rol);
   const autenticado = useSelector((state) => state.usuarios.autenticado);
+
+  const contenidoCuestionario = useSelector(
+    (state) => state.cuestionario.contenidocuestionario
+  );
+
+  const eliminarCuestionario = () => {
+    if (contenidoCuestionario === true) {
+      dispatch(mostrarContenidoCuestionario(false));
+      dispatch(borrarCuestionario());
+      dispatch(obtenerPagina(0));
+    }
+  };
   return (
     <>
       <nav
@@ -58,6 +77,7 @@ const Header = () => {
                   className="nav-link cursor"
                   href="/"
                   id="letra1"
+                  onClick={eliminarCuestionario}
                 >
                   Realizar Test
                 </Link>
@@ -68,6 +88,7 @@ const Header = () => {
                   className="nav-link cursor"
                   href="/"
                   id="letra2"
+                  onClick={eliminarCuestionario}
                 >
                   Casos en el mundo
                 </Link>
@@ -78,6 +99,7 @@ const Header = () => {
                   className="nav-link cursor"
                   href="/"
                   id="letra3"
+                  onClick={eliminarCuestionario}
                 >
                   Noticias Covid
                 </Link>
@@ -104,6 +126,7 @@ const Header = () => {
                     tabIndex="-1"
                     aria-disabled="true"
                     id="botonNav"
+                    onClick={eliminarCuestionario}
                   >
                     Cerrar Sesión
                   </Link>

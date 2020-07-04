@@ -12,9 +12,10 @@ export function noticiasCovid() {
 
     try {
       const respuesta = await axios.get(
-        "https://cryptic-ravine-96718.herokuapp.com/"
+        "https://newsapi.org/v2/top-headlines?q=coronavirus&apiKey=b9e29dc8c1ce4ea4b13a2f660fd4ec70&language=es"
       );
-      dispatch(getNoticias(respuesta.data.news));
+      dispatch(getNoticias(respuesta.data.articles));
+      console.log(respuesta.data.articles);
     } catch (error) {
       dispatch(getErrorNoticias());
     }
