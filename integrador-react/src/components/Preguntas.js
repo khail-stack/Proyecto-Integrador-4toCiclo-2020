@@ -15,8 +15,8 @@ const Preguntas = ({ contenido }) => {
   const opcion2 = opciones[1].opcion;
 
   const cambioOpcion = (idOpcion) => {
-    const idCuestionario = localStorage.getItem("idCuestionario");
-    const idUsuario = localStorage.getItem("id");
+    const idCuestionario = Number(localStorage.getItem("idCuestionario"));
+    const idUsuario = Number(localStorage.getItem("id"));
     for (let index = 0; index <= respuesta.length; index++) {
       if (index + 1 === idpregunta) {
         respuesta[index] = {
