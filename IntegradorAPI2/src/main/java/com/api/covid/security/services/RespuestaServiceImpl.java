@@ -84,6 +84,12 @@ public class RespuestaServiceImpl implements RespuestaService{
 		return cuestionarioRespuestaRepository.findAll();
 	}
 
+	@Override
+	public int getSumaValor(Long idcuestionario) {
+		// TODO Auto-generated method stub
+		return respuestaRepository.getSumaValor(idcuestionario);
+	}
+
 	
 	
 }

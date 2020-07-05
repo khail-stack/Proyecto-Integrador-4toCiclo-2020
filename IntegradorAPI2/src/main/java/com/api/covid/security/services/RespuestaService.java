@@ -8,6 +8,7 @@ import com.api.covid.models.Respuesta;
 
 public interface RespuestaService {
 
+
 	
 	Respuesta update(Respuesta respuesta);
 	
@@ -26,6 +27,8 @@ public interface RespuestaService {
 	CuestionarioRespuesta create(CuestionarioRespuesta respuesta);
 	
 	Iterable<CuestionarioRespuesta> findAll();
+	
+	int getSumaValor(Long idcuestionario);
 	
 }
 

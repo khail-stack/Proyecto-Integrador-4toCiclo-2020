@@ -24,7 +24,6 @@ public class Pregunta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idpregunta;
     private String pregunta;
-    @JsonIgnore
 	private String valor;
     
 	@ManyToMany(fetch = FetchType.LAZY)
