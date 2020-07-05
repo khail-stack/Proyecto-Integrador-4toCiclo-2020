@@ -16,6 +16,8 @@ public class Resultado {
 	private long id;
 	
 	private String resultado;
+	
+	private String mensaje;
 
 	
 	public Resultado() {
@@ -42,6 +44,14 @@ public class Resultado {
 
 	public void setResultado(String resultado) {
 		this.resultado = resultado;
+	}
+
+	public String getMensaje() {
+		return mensaje;
+	}
+
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
 	}
 	
 	

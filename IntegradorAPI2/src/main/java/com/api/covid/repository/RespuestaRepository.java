@@ -19,7 +19,7 @@ public interface RespuestaRepository extends CrudRepository<Respuesta, Long>, Pa
     
     Page<Respuesta> findAll(Pageable pageable);
     
-    @Query(value = "select sum(valor) from pregunta p inner join respuesta r on p.idpregunta=r.idpregunta  where r.idcuestionario = :idcuestionario",nativeQuery = true)
+    @Query(value = "select sum(valor) from pregunta p inner join respuesta r on p.idpregunta=r.idpregunta  where r.idcuestionario = :idcuestionario and r.idopcion=1",nativeQuery = true)
     int getSumaValor(Long idcuestionario);
          
 }
