@@ -9,7 +9,9 @@ import {
   ERROR_CUESTIONARIO,
   CARGAR_CUESTIONARIO,
   BORRAR_CUESTIONARIO,
+  BORRAR_ESTADO,
   PAGINA_INICIAL,
+  CARGAR_PAGINA,
 } from "./../types/index";
 
 const initialState = {
@@ -73,6 +75,12 @@ export default function (state = initialState, action) {
         error: action.payload,
       };
 
+    case CARGAR_PAGINA:
+      return {
+        ...state,
+        loading: action.payload,
+      };
+
     case PAGINA_INICIAL:
       return {
         ...state,
@@ -87,6 +95,12 @@ export default function (state = initialState, action) {
         loading: false,
         error: false,
         contenidocuestionario: action.payload,
+      };
+
+    case BORRAR_ESTADO:
+      return {
+        ...state,
+        preguntas: action.payload,
       };
 
     default:

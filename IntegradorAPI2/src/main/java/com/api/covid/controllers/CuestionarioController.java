@@ -56,7 +56,7 @@ public class CuestionarioController {
 	
 	
 	@DeleteMapping("/cuestionario/{idcuestionario}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	ResponseEntity<String> delete(@PathVariable Long idcuestionario) {
 
 		try {
