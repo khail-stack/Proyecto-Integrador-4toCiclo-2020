@@ -8,8 +8,13 @@ import {
   VALIDAR_TOKEN,
   FILTRO_LOGIN_ADMIN,
   FILTRO_ERROR,
+  VALIDAR_AUTENTICACION,
+  ERROR_AUTENTICACION,
+  AÑADIR_INFORMACION_CARGA,
+  AÑADIR_INFORMACION_EXITO,
+  AÑADIR_INFORMACION_ERROR,
+  //CARGAR_DATOS_USUARIO_AUTENTICADO,
 } from "./../types/index";
-import { act } from "@testing-library/react";
 
 //cada reducer tiene su propio state
 
@@ -21,10 +26,12 @@ const initialState = {
   usuarioAutenticado: [],
   paginaLoginAdmin: false,
   paginaError: false,
+  informacionAdicional: [],
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    // TYPES PARA REGISTRAR USUARIO
     case REGISTRAR_USUARIO:
       return {
         ...state,
@@ -45,28 +52,30 @@ export default function (state = initialState, action) {
         error: action.payload,
       };
 
+    // TYPES PARA LOGIN
     case LOGIN_USUARIO:
       return {
         ...state,
         loading: action.payload,
       };
+
     case LOGIN_USUARIO_EXITO:
       localStorage.setItem("token", action.payload.accessToken);
       localStorage.setItem("id", action.payload.id);
-      localStorage.setItem("username", action.payload.username);
-      localStorage.setItem("email", action.payload.email);
-      localStorage.setItem("rol", action.payload.roles);
+
       return {
         ...state,
         loading: false,
-        usuarioAutenticado: action.payload,
         autenticado: true,
+        error: null,
       };
-
-    case VALIDAR_TOKEN:
+    case VALIDAR_AUTENTICACION:
       return {
         ...state,
-        autenticado: action.payload,
+        usuarioAutenticado: [action.payload],
+        autenticado: true,
+        loading: false,
+        error: null,
       };
 
     case LOGIN_USUARIO_ERROR:
@@ -75,6 +84,19 @@ export default function (state = initialState, action) {
         loading: false,
         error: action.payload,
       };
+
+    case VALIDAR_TOKEN:
+      return {
+        ...state,
+        autenticado: action.payload,
+      };
+
+    case ERROR_AUTENTICACION:
+      return {
+        ...state,
+        autenticado: action.payload,
+      };
+
     case FILTRO_LOGIN_ADMIN:
       return {
         ...state,
@@ -85,6 +107,25 @@ export default function (state = initialState, action) {
       return {
         ...state,
         paginaError: true,
+      };
+
+    case AÑADIR_INFORMACION_CARGA:
+      return {
+        ...state,
+        loading: action.payload,
+      };
+
+    case AÑADIR_INFORMACION_EXITO:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case AÑADIR_INFORMACION_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
 
     default:

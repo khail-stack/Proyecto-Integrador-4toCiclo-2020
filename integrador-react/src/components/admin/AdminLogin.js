@@ -52,7 +52,7 @@ const AdminLogin = ({ history }) => {
                 className="input100"
                 type="text"
                 name="username"
-                placeholder="Username"
+                placeholder="Usuario"
                 value={username}
                 onChange={(e) => guardarUsername(e.target.value)}
               />
@@ -67,7 +67,7 @@ const AdminLogin = ({ history }) => {
                 className="input100"
                 type="password"
                 name="pass"
-                placeholder="Password"
+                placeholder="Contraseña"
                 value={password}
                 onChange={(e) => guardarPassword(e.target.value)}
               />

@@ -1,10 +1,66 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import alertaTest from "./../assets/alertaTest.svg";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import "./TestPage.css";
+import { añadirInformacionAdicional } from "../actions/usuarioActions";
+import {
+  mostrarContenidoCuestionario,
+  crearCuestionario,
+} from "../actions/cuestionarioAction";
+import CuestionarioContent from "./CuestionarioContent";
+
 const TestPage = () => {
+  const dispatch = useDispatch();
+
+  const [distrito, guardarDistrito] = useState("");
+  const [direccion, guardarDireccion] = useState("");
+
+  const informacionAdicional = (informacion) =>
+    dispatch(añadirInformacionAdicional(informacion));
+
+  const submitAgregarInformacion = (e) => {
+    e.preventDefault();
+
+    // Validamos formulario
+    if (distrito.trim() === "" || direccion.trim() === "") {
+      return;
+    }
+    // Si no hay errores
+
+    // Registrar el nuevo usuario
+    informacionAdicional({
+      distrito,
+      direccion,
+    });
+  };
+
   const autenticado = useSelector((state) => state.usuarios.autenticado);
+
+  const informacion = useSelector((state) => state.usuarios.usuarioAutenticado);
+
+  const cuestionarioContenido = useSelector(
+    (state) => state.cuestionario.contenidocuestionario
+  );
+
+  const uno = informacion.map((dos) => dos.direccion);
+
+  //const tres= uno.
+  const campoDistrito = uno[0];
+  //const {direccion}=dos
+
+  useEffect(() => {
+    if (localStorage.getItem("idCuestionario")) {
+      dispatch(mostrarContenidoCuestionario(true));
+    } else {
+      dispatch(mostrarContenidoCuestionario(false));
+    }
+  }, [dispatch]);
+
+  const crearYmostrarCuestionario = () => {
+    dispatch(mostrarContenidoCuestionario(true));
+    dispatch(crearCuestionario());
+  };
   return (
     <div>
       <div className="fondo-login">
@@ -65,171 +121,77 @@ const TestPage = () => {
               <hr />
             </div>
           </div>
+        ) : cuestionarioContenido === true ? (
+          <CuestionarioContent></CuestionarioContent>
         ) : (
           <div className="container espaciado-login espacio">
             <div className="formulario-contenido">
               <div className="row">
                 <div className="col-lg-12">
                   <div className="contenido">
-                    <h2 className="titulo-derecha text-center">Cuestionario</h2>
+                    <h1 className="titulo-derecha text-center">
+                      Porfavor, para mayor informacion llena estos campos.
+                    </h1>
                     <div className="formulario-test">
-                      <form>
-                        <div className="form-group subtitulo-formulario mb-4">
-                          <label className="texto-formulario mb-4">
-                            <strong>.</strong>
-                            ¿Pertenece a algún grupo de riesgo? (mayor de 60
-                            años,hipertensión, diabetes, cardiopatías, patología
-                            pulmonar, enfermedad renal crónica, inmunosupresión,
-                            patología hepática, neoplasias activas u obesidad)
-                          </label>
-                          <div className="form-check mb-3">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="pregunta1"
-                              id="opcionpregunta1"
-                              value="opcion1"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="opcionpregunta1"
-                            >
-                              Sí
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="pregunta1"
-                              id="opcionpregunta2"
-                              value="opcion2"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="opcionpregunta2"
-                            >
-                              No
-                            </label>
-                          </div>
+                      <form onSubmit={submitAgregarInformacion}>
+                        <div className="form-group subtitulo-formulario">
+                          <label className="texto-formulario">Distrito</label>
+                          <input
+                            type="text"
+                            placeholder="Agrega tu distrito"
+                            className="form-control diseño-entrada"
+                            name="Distrito"
+                            value={distrito}
+                            onChange={(e) => guardarDistrito(e.target.value)}
+                            required
+                          ></input>
                         </div>
 
-                        <div className="form-group subtitulo-formulario mb-4">
-                          <label className="texto-formulario mb-4">
-                            <strong>.</strong>
-                            ¿Presentas Disminución del gusto o del olfato?
-                          </label>
-                          <div className="form-check mb-3">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="pregunta2"
-                              id="opcionpregunta3"
-                              value="opcion3"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="opcionpregunta3"
-                            >
-                              Sí
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="pregunta2"
-                              id="opcionpregunta4"
-                              value="opcion4"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="opcionpregunta4"
-                            >
-                              No
-                            </label>
-                          </div>
+                        <div className="form-group subtitulo-formulario">
+                          <label className="texto-formulario">Dirección</label>
+                          <input
+                            type="text"
+                            placeholder="Agrega tu Dirección"
+                            className="form-control diseño-entrada"
+                            name="Direccion"
+                            value={direccion}
+                            onChange={(e) => guardarDireccion(e.target.value)}
+                            required
+                          ></input>
                         </div>
 
-                        <div className="form-group subtitulo-formulario mb-4">
-                          <label className="texto-formulario mb-4">
-                            <strong>.</strong>
-                            ¿Presentas Tos?
-                          </label>
-                          <div className="form-check mb-3">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="pregunta3"
-                              id="opcionpregunta5"
-                            />
-                            <label
-                              class="form-check-label"
-                              htmlFor="opcionpregunta5"
-                            >
-                              Sí
-                            </label>
+                        {campoDistrito === null ? (
+                          <div className="extra-formulario text-center">
+                            <div className="text-center">
+                              <button
+                                className="btn boton-iniciar text-center"
+                                type="submit"
+                              >
+                                Enviar datos
+                              </button>
+                            </div>
                           </div>
-                          <div class="form-check">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="pregunta3"
-                              id="opcionpregunta6"
-                            />
-                            <label
-                              class="form-check-label"
-                              htmlFor="opcionpregunta6"
-                            >
-                              No
-                            </label>
-                          </div>
-                        </div>
+                        ) : (
+                          <div className="extra-formulario text-center">
+                            <div className="text-center">
+                              <button
+                                className="btn boton-iniciar text-center"
+                                type="submit"
+                              >
+                                Enviar datos
+                              </button>
+                            </div>
 
-                        <div className="form-group subtitulo-formulario mb-4">
-                          <label className="texto-formulario mb-4">
-                            <strong>.</strong>
-                            ¿Presentas dolor de garganta?
-                          </label>
-                          <div class="form-check mb-3">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="pregunta4"
-                              id="opcionpregunta6"
-                              value="opcion5"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="opcionpregunta6"
-                            >
-                              Sí
-                            </label>
+                            <div className="text-center">
+                              <button
+                                className="btn boton-iniciar text-center"
+                                onClick={crearYmostrarCuestionario}
+                              >
+                                Realizar Test
+                              </button>
+                            </div>
                           </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="pregunta4"
-                              id="opcionpregunta7"
-                              value="opcion6"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="opcionpregunta7"
-                            >
-                              No
-                            </label>
-                          </div>
-                        </div>
-
-                        <div className="extra-formulario text-center">
-                          <div className="text-center">
-                            <button className="btn boton-iniciar text-center">
-                              Siguiente
-                            </button>
-                          </div>
-                        </div>
+                        )}
                       </form>
                     </div>
                   </div>

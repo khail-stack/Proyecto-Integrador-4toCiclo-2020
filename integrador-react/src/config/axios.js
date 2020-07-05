@@ -1,7 +1,11 @@
 import axios from "axios";
 
-const clienteAxios = axios.create({
-  baseURL: "http://localhost:8081/v1",
-});
+export const clienteAxios = (token) =>
+  axios.create({
+    baseURL: "http://localhost:8081/v1",
+    headers: { Authorization: `Bearer ${token}` },
+  });
 
-export default clienteAxios;
+export const clienteAxios2 = axios.create({
+  baseURL: "http://localhost:8081",
+});

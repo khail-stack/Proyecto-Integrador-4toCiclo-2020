@@ -29,6 +29,7 @@ const Login = ({ history }) => {
   useEffect(() => {
     if (autenticado) {
       history.push("/casos-mundo");
+      //window.location.href = "/casos-mundo";
     }
   }, [autenticado]);
 

@@ -21,7 +21,10 @@ import AdminLogin from "./components/admin/AdminLogin";
 import Header from "./components/Header";
 import NoticiasCovid from "./components/NoticiasCovid";
 import { useDispatch, useSelector } from "react-redux";
-import { autenticadoToken } from "./actions/usuarioActions";
+import {
+  autenticadoToken,
+  cambiarEstadoAutenticado,
+} from "./actions/usuarioActions";
 import Footer from "./components/Footer";
 import RouteError from "./components/RouteError";
 
@@ -34,53 +37,52 @@ const AppWrapper = () => {
 };
 
 const Logout = () => {
+  //window.location.reload();
   const dispatch = useDispatch();
 
-  localStorage.removeItem("id");
-  localStorage.removeItem("token");
-  localStorage.removeItem("username");
-  localStorage.removeItem("email");
-  localStorage.removeItem("rol");
-  dispatch(autenticadoToken(false));
+  localStorage.clear();
+  dispatch(cambiarEstadoAutenticado(false));
   return <Redirect to={"/login"} />;
 };
 
 const LogoutAdmin = () => {
   const dispatch = useDispatch();
 
-  localStorage.removeItem("id");
-  localStorage.removeItem("token");
-  localStorage.removeItem("username");
-  localStorage.removeItem("email");
-  localStorage.removeItem("rol");
-  dispatch(autenticadoToken(false));
+  localStorage.clear();
+  dispatch(cambiarEstadoAutenticado(false));
   return <Redirect to={"/admin"} />;
 };
 
 const App = () => {
   const dispatch = useDispatch();
 
-  const autenticado = useSelector((state) => state.usuarios.autenticado);
+  //const autenticado = useSelector((state) => state.usuarios.autenticado);
   const paginaLogin = useSelector((state) => state.usuarios.paginaLoginAdmin);
   const paginaError = useSelector((state) => state.usuarios.paginaError);
-  console.log(autenticado);
+  const data = useSelector((state) => state.usuarios.usuarioAutenticado);
+
+  const rolename = data.map((rol) => rol.roles);
+  const roleid = rolename.map((ro) => ro[0]);
+  const salporfa = roleid.map((r) => r.id);
+  const salctmr = salporfa[0];
 
   useEffect(() => {
-    if (localStorage.getItem("token") === null) {
-      dispatch(autenticadoToken(false));
+    if (localStorage.getItem("token")) {
+      dispatch(cambiarEstadoAutenticado(true));
+      const id = localStorage.getItem("id");
+      dispatch(autenticadoToken(id));
     } else {
-      dispatch(autenticadoToken(true));
+      //window.location.reload();
+      dispatch(cambiarEstadoAutenticado(false));
     }
-  }, [autenticado]);
+  }, [dispatch]);
 
   return (
     <Router>
       <Provider store={store}>
-        {localStorage.getItem("rol") === "ROLE_USER" &&
-        paginaLogin === false &&
-        paginaError === false ? (
+        {salctmr === 1 && paginaLogin === false && paginaError === false ? (
           <Header />
-        ) : localStorage.getItem("rol") === null &&
+        ) : salctmr === undefined &&
           paginaLogin === false &&
           paginaError === false ? (
           <Header />
@@ -108,11 +110,9 @@ const App = () => {
           <Route exact path="/logout-admin" component={LogoutAdmin}></Route>
           <Route path="*" component={ErrorPage}></Route>
         </Switch>
-        {localStorage.getItem("rol") === "ROLE_USER" &&
-        paginaLogin === false &&
-        paginaError === false ? (
+        {salctmr === 1 && paginaLogin === false && paginaError === false ? (
           <Footer />
-        ) : localStorage.getItem("rol") === null &&
+        ) : salctmr === undefined &&
           paginaLogin === false &&
           paginaError === false ? (
           <Footer />
