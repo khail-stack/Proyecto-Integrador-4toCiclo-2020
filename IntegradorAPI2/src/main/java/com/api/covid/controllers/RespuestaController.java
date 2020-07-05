@@ -137,9 +137,7 @@ public class RespuestaController {
 			  cues.setResultado(res);
 		  }
       
-		  
 		  cuestionarioService.update(cues);
-		  
 		  return cues;
 		
 	}
