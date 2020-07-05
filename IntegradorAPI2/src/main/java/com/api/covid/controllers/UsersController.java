@@ -45,7 +45,7 @@ public class UsersController {
 	private UserService userService;
 	
 	@GetMapping("/usuarios")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Iterable<User> getUser(){
 		
 		return userRepository.findAll();

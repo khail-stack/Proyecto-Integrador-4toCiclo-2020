@@ -33,7 +33,7 @@ public class CuestionarioController {
 	
 	
 	@GetMapping("/cuestionarios")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Iterable<Cuestionario> getCuestionario(){
 		
 		return cuestionarioService.findAll();
@@ -56,7 +56,7 @@ public class CuestionarioController {
 	
 	
 	@DeleteMapping("/cuestionario/{idcuestionario}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	ResponseEntity<String> delete(@PathVariable Long idcuestionario) {
 
 		try {
