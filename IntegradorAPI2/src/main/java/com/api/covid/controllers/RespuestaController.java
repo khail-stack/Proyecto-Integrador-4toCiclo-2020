@@ -119,7 +119,6 @@ public class RespuestaController {
 		  cues= cuestionarioService.findById(idcuestionario);
 		  cues.setValortotal(valor);
 		   
-		  
 		  if(valor>=18) {
 			  long id= 1;
 			  Resultado res=resultadoService.findById(id);
