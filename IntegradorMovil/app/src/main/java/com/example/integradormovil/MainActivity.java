@@ -14,7 +14,9 @@ import android.view.MenuItem;
 
 import com.example.integradormovil.fragments.ChartFragment;
 import com.example.integradormovil.fragments.CuestionarioFragment;
+import com.example.integradormovil.fragments.GlobalFragment;
 import com.example.integradormovil.fragments.HomeFragment;
+import com.example.integradormovil.fragments.PeruFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,8 +47,11 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.inicio:
                             fragment=new HomeFragment();
                             break;
-                        case R.id.estadisticas:
-                            fragment=new ChartFragment();
+                        case R.id.peru:
+                            fragment=new PeruFragment();
+                            break;
+                        case R.id.global:
+                            fragment=new GlobalFragment();
                             break;
                         case R.id.cuestionario:
                             fragment=new CuestionarioFragment();

@@ -10,10 +10,12 @@ import {
   CARGAR_CUESTIONARIO,
   BORRAR_CUESTIONARIO,
   PAGINA_INICIAL,
+  CARGAR_PAGINA,
   MANDAR_RESPUESTA,
+  BORRAR_ESTADO,
+  BORRAR_ESTADO_RESPUESTA,
 } from "./../types/index";
-import { clienteAxios2, clienteAxios } from "../config/axios";
-import { useSelector } from "react-redux";
+import { clienteAxios } from "../config/axios";
 
 export function mostrarContenidoCuestionario(existeCuestionario) {
   return (dispatch) => {
@@ -78,45 +80,50 @@ export function obtenerPreguntas(getPagina) {
     try {
       const token = localStorage.getItem("token");
       const cuestionario = await clienteAxios(token).get(
-        `/resources/preguntas?page=${getPagina}&size=4`
+        `/resources/preguntas/${getPagina}`
       );
-
-      // const num = respuesta.total.length
-
-      // const objetoPregunta = []
-
-      // for (let index = 0; index <= num; index++) {
-
-      //   objetoPregunta.push( index+1 );
-
-      // }
+      const num = cuestionario.data.totalElements;
 
       const objetoPregunta = [];
+
+      for (let index = 0; index <= num; index++) {
+        objetoPregunta.push(index + 1);
+      }
+
+      //const objetoPregunta = [];
       seteaRespuestas(objetoPregunta);
 
-      cuestionario.data.forEach((element) => {
+      cuestionario.data.content.forEach((element) => {
         dispatch(obtenerPreguntasExito(element));
       });
 
       console.log(getPagina);
-      console.log(cuestionario);
+      console.log(cuestionario.data.content);
+      console.log(cuestionario.data.totalElements);
     } catch (error) {
       dispatch(obtenerPreguntasError());
     }
   };
 }
 
-export function obtenerPagina(page) {
-  return async (dispatch) => {
-    //console.warn("Pagina mas 1 =>" + page);
-
-    dispatch(obtenerPaginaExito(page));
-  };
-}
-
 const seteaRespuestas = (objetoRespuesta) => ({
   type: MANDAR_RESPUESTA,
   payload: objetoRespuesta,
+});
+
+export function obtenerPagina(page) {
+  return async (dispatch) => {
+    //console.warn("Pagina mas 1 =>" + page);
+    await dispatch(cargarPagina());
+    try {
+      dispatch(obtenerPaginaExito(page));
+    } catch (error) {}
+  };
+}
+
+const cargarPagina = () => ({
+  type: CARGAR_PAGINA,
+  payload: true,
 });
 
 const obtenerPaginaExito = (page) => ({
@@ -150,7 +157,11 @@ export function borrarCuestionario() {
     dispatch(borrarCuestionarioExito(cuestionarioEliminado));
     localStorage.removeItem("idCuestionario");
     localStorage.removeItem("fechaCuestionario");
+    localStorage.removeItem("page");
 
+    dispatch(borrarEstado());
+
+    dispatch(borrarEstadoRespuesta());
     console.log(cuestionarioEliminado);
   };
 }
@@ -158,4 +169,14 @@ export function borrarCuestionario() {
 const borrarCuestionarioExito = (cuestionarioEliminado) => ({
   type: BORRAR_CUESTIONARIO,
   payload: cuestionarioEliminado,
+});
+
+const borrarEstado = () => ({
+  type: BORRAR_ESTADO,
+  payload: [],
+});
+
+const borrarEstadoRespuesta = () => ({
+  type: BORRAR_ESTADO_RESPUESTA,
+  payload: [],
 });

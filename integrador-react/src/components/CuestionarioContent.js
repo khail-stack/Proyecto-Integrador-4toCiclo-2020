@@ -9,6 +9,7 @@ import {
   obtenerPagina,
 } from "../actions/cuestionarioAction";
 import Preguntas from "./Preguntas";
+import Spinner from "./Spinner";
 
 const CuestionarioContent = () => {
   const dispatch = useDispatch();
@@ -21,11 +22,14 @@ const CuestionarioContent = () => {
     localStorage.setItem("page", getPagina + 1);
   };
 
+  const cargarPregunta = useSelector((state) => state.cuestionario.loading);
+
   const autenticado = useSelector((state) => state.usuarios.autenticado);
 
   const preguntas = useSelector((state) => state.cuestionario.preguntas);
 
-  const borrarElCuestionario = () => {
+  const borrarElCuestionario = (e) => {
+    e.preventDefault();
     dispatch(mostrarContenidoCuestionario(false));
     dispatch(borrarCuestionario());
     dispatch(obtenerPagina(0));
@@ -41,13 +45,6 @@ const CuestionarioContent = () => {
       {autenticado === false ? (
         <div className="container">
           <div className="row align-content-center espaciado-imagen mt_40">
-            {/*<div className="col-lg-6">
-              <img
-                src={alertaTest}
-                alt="Susana Distancia"
-                className="imagen animated fadeIn"
-              ></img>
-  </div>*/}
             <div className="col-lg-5 offset-lg-1 d-flex align-items-center">
               <div className="presentacion-test-home">
                 <h3 className="mb-3 titulo-test-home">¡Oh no!</h3>
@@ -77,6 +74,59 @@ const CuestionarioContent = () => {
             <hr />
           </div>
         </div>
+      ) : cargarPregunta === true ? (
+        <div className="container espaciado-login espacio">
+          <div className="formulario-contenido">
+            <div className="row">
+              <div className="col-lg-12">
+                <div className="contenido">
+                  <h1 className="titulo-derecha text-center">
+                    Realizar Cuestionario
+                  </h1>
+                  <div className="formulario-test">
+                    <form>
+                      {cargarPregunta === true ? (
+                        <div className="d-flex justify-content-center">
+                          <div role="status">
+                            <Spinner></Spinner>
+                          </div>
+                        </div>
+                      ) : (
+                        preguntas
+                          .slice(getPagina * 4, getPagina * 4 + 4)
+                          .map((pregunta) => (
+                            <Preguntas
+                              key={pregunta.idpregunta}
+                              contenido={pregunta}
+                            ></Preguntas>
+                          ))
+                      )}
+
+                      <div className="extra-formulario text-center">
+                        <div className="text-center">
+                          <button
+                            className="btn boton-iniciar text-center"
+                            onClick={borrarElCuestionario}
+                          >
+                            Cancelar
+                          </button>
+                        </div>
+                        <div className="text-center">
+                          <button
+                            className="btn boton-iniciar text-center"
+                            onClick={paginaSiguiente}
+                          >
+                            Siguiente
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       ) : (
         <div className="container espaciado-login espacio">
           <div className="formulario-contenido">
@@ -88,14 +138,23 @@ const CuestionarioContent = () => {
                   </h1>
                   <div className="formulario-test">
                     <form>
-                      {preguntas
-                        .slice(getPagina * 4, getPagina * 4 + 4)
-                        .map((pregunta) => (
-                          <Preguntas
-                            key={pregunta.idpregunta}
-                            contenido={pregunta}
-                          ></Preguntas>
-                        ))}
+                      {cargarPregunta === true ? (
+                        <div className="d-flex justify-content-center">
+                          <div role="status">
+                            <Spinner></Spinner>
+                          </div>
+                        </div>
+                      ) : (
+                        preguntas
+                          .slice(getPagina * 4, getPagina * 4 + 4)
+                          .map((pregunta) => (
+                            <Preguntas
+                              key={pregunta.idpregunta}
+                              contenido={pregunta}
+                            ></Preguntas>
+                          ))
+                      )}
+
                       <div className="extra-formulario text-center">
                         <div className="text-center">
                           <button

@@ -44,10 +44,12 @@ const TestPage = () => {
   );
 
   const uno = informacion.map((dos) => dos.direccion);
+  const dos = informacion.map((dos) => dos.distrito);
 
+  console.log(uno);
   //const tres= uno.
-  const campoDistrito = uno[0];
-  //const {direccion}=dos
+  const campoDireccion = uno[0];
+  const campoDistrito = dos[0];
 
   useEffect(() => {
     if (localStorage.getItem("idCuestionario")) {
@@ -57,10 +59,12 @@ const TestPage = () => {
     }
   }, [dispatch]);
 
-  const crearYmostrarCuestionario = () => {
+  const crearYmostrarCuestionario = (e) => {
+    e.preventDefault();
     dispatch(mostrarContenidoCuestionario(true));
     dispatch(crearCuestionario());
   };
+
   return (
     <div>
       <div className="fondo-login">
@@ -129,37 +133,81 @@ const TestPage = () => {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="contenido">
-                    <h1 className="titulo-derecha text-center">
-                      Porfavor, para mayor informacion llena estos campos.
-                    </h1>
+                    {campoDistrito === null ? (
+                      <h1 className="titulo-derecha text-center">
+                        Porfavor, para mayor informacion llena estos campos.
+                      </h1>
+                    ) : (
+                      <h1 className="titulo-derecha text-center">
+                        Si desea actualizar tu direccion, cambielo aquí.
+                      </h1>
+                    )}
+
                     <div className="formulario-test">
                       <form onSubmit={submitAgregarInformacion}>
-                        <div className="form-group subtitulo-formulario">
-                          <label className="texto-formulario">Distrito</label>
-                          <input
-                            type="text"
-                            placeholder="Agrega tu distrito"
-                            className="form-control diseño-entrada"
-                            name="Distrito"
-                            value={distrito}
-                            onChange={(e) => guardarDistrito(e.target.value)}
-                            required
-                          ></input>
-                        </div>
+                        {campoDistrito ? (
+                          <div className="form-group subtitulo-formulario">
+                            <label className="texto-formulario">Distrito</label>
 
-                        <div className="form-group subtitulo-formulario">
-                          <label className="texto-formulario">Dirección</label>
-                          <input
-                            type="text"
-                            placeholder="Agrega tu Dirección"
-                            className="form-control diseño-entrada"
-                            name="Direccion"
-                            value={direccion}
-                            onChange={(e) => guardarDireccion(e.target.value)}
-                            required
-                          ></input>
-                        </div>
+                            <input
+                              type="text"
+                              placeholder={campoDistrito}
+                              className="form-control diseño-entrada"
+                              name="Distrito"
+                              value={distrito}
+                              onChange={(e) => guardarDistrito(e.target.value)}
+                              required
+                            ></input>
+                          </div>
+                        ) : (
+                          <div className="form-group subtitulo-formulario">
+                            <label className="texto-formulario">Distrito</label>
 
+                            <input
+                              type="text"
+                              placeholder="Agrega tu distrito"
+                              className="form-control diseño-entrada"
+                              name="Distrito"
+                              value={distrito}
+                              onChange={(e) => guardarDistrito(e.target.value)}
+                              required
+                            ></input>
+                          </div>
+                        )}
+                        ,
+                        {campoDireccion ? (
+                          <div className="form-group subtitulo-formulario">
+                            <label className="texto-formulario">
+                              Dirección
+                            </label>
+
+                            <input
+                              type="text"
+                              placeholder={campoDireccion}
+                              className="form-control diseño-entrada"
+                              name="Direccion"
+                              value={direccion}
+                              onChange={(e) => guardarDireccion(e.target.value)}
+                              required
+                            ></input>
+                          </div>
+                        ) : (
+                          <div className="form-group subtitulo-formulario">
+                            <label className="texto-formulario">
+                              Dirección
+                            </label>
+
+                            <input
+                              type="text"
+                              placeholder="Agrega tu Dirección"
+                              className="form-control diseño-entrada"
+                              name="Direccion"
+                              value={direccion}
+                              onChange={(e) => guardarDireccion(e.target.value)}
+                              required
+                            ></input>
+                          </div>
+                        )}
                         {campoDistrito === null ? (
                           <div className="extra-formulario text-center">
                             <div className="text-center">
@@ -178,7 +226,7 @@ const TestPage = () => {
                                 className="btn boton-iniciar text-center"
                                 type="submit"
                               >
-                                Enviar datos
+                                Actualizar Datos
                               </button>
                             </div>
 
