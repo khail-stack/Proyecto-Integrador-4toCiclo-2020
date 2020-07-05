@@ -28,7 +28,7 @@ public class OpcionController {
 	private OpcionService opcionService;
 	
 	@GetMapping("/opciones")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	
     public Iterable<Opcion> getPregunta(){
 		
@@ -36,14 +36,14 @@ public class OpcionController {
 	}
 	
 	@PostMapping("/opcion")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	@ResponseStatus(HttpStatus.CREATED)
 	Opcion create(@RequestBody Opcion  newOpcion ) {
 		return  opcionService.create(newOpcion);
 	}
 	
 	@GetMapping("/opcion/{idopcion}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	ResponseEntity<Opcion> findOne(@PathVariable Long idopcion) {
 		try {
 			return new ResponseEntity<>(opcionService.findById(idopcion), HttpStatus.OK);
@@ -53,7 +53,7 @@ public class OpcionController {
 	}
 	
 	@DeleteMapping("/opcion/{idopcion}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	ResponseEntity<String> delete(@PathVariable Long idopcion) {
 
 		try {
@@ -66,7 +66,7 @@ public class OpcionController {
 	}
 	
 	@PutMapping("/opcion/{idopcion}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	Opcion saveOrUpdate(@RequestBody Opcion newOpcion, @PathVariable Long idopcion) {
 		
 		Opcion opcion = null;

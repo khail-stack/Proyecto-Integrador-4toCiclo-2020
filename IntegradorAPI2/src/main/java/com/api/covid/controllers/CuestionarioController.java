@@ -33,7 +33,7 @@ public class CuestionarioController {
 	
 	
 	@GetMapping("/cuestionarios")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Iterable<Cuestionario> getCuestionario(){
 		
 		return cuestionarioService.findAll();
@@ -67,5 +67,7 @@ public class CuestionarioController {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	
 	
 }

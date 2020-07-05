@@ -28,7 +28,7 @@ public class ResultadoController {
 	private ResultadoService  resultadoService;
 	
 	@GetMapping("/resultados")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	
     public Iterable<Resultado> getResultado(){
 		
@@ -36,14 +36,14 @@ public class ResultadoController {
 	}
 	
 	@PostMapping("/resultado")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	@ResponseStatus(HttpStatus.CREATED)
 	Resultado create(@RequestBody Resultado newPregunta) {
 		return  resultadoService.create(newPregunta);
 	}
 	
 	@GetMapping("/resultado/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	ResponseEntity<Resultado> findOne(@PathVariable Long id) {
 		try {
 			return new ResponseEntity<>(resultadoService.findById(id), HttpStatus.OK);
@@ -53,7 +53,7 @@ public class ResultadoController {
 	}
 	
 	@DeleteMapping("/resultado/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	ResponseEntity<String> delete(@PathVariable Long id) {
 
 		try {
@@ -66,7 +66,7 @@ public class ResultadoController {
 	}
 	
 	@PutMapping("/resultado/{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	Resultado saveOrUpdate(@RequestBody Resultado newPregunta, @PathVariable Long id) {
 		Resultado resultado = null;
 		try {
