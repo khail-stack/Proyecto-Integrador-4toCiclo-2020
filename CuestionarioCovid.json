@@ -1,0 +1,379 @@
+{
+	"info": {
+		"_postman_id": "2c1b7fea-9dd5-4c36-adde-f58ba05a12a9",
+		"name": "CuestionarioCovid",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Autenticación",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"hpareja\",\r\n    \"password\": \"Tecsup2020\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/v1/users/login/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"users",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"hpareja\",\r\n    \"email\": \"hpareja@tecsup.edu.pe\",\r\n    \"password\": \"Tecsup2020\",\r\n    \"nombre\": \"Hernan\",\r\n    \"apellido\": \"Pareja\",\r\n    \"edad\": 26,\r\n    \"dni\": 48146663,\r\n    \"sexo\": \"Masculino\",\r\n    \"telefono\": 949520526\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/v1/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Usuario",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb25hdGhhbiIsImlhdCI6MTU5MzExNjIwNiwiZXhwIjoxNTkzMjAyNjA2fQ.t4zS9DDAZ-y8K05f8bNz5H-NZ5GtxdahWnrBLHV8IsJRaBMjxO8XPZF1703sThCNhiZwhjA5R_ciVg_2HgOy5A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/v1/users/usuario/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"users",
+								"usuario",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Cuestionario",
+			"item": [
+				{
+					"name": "Registrar Cuestionario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJocGFyZWphIiwiaWF0IjoxNTkzOTg5NTI3LCJleHAiOjE1OTQwNzU5Mjd9.r1GzUl4JrgcUnvm4W6vnGBRWw9K7pK_VhhiexdABtyhhPWP5Z5B9oUypTRmJZegor4RJn9cInumN_GN97bO7GA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/v1/resources/cuestionario",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"resources",
+								"cuestionario"
+							]
+						},
+						"description": "Crea el cuestionario"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Resultados",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "https://covid19.mathdro.id/api/daily",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://covid19.mathdro.id/api/daily",
+					"protocol": "https",
+					"host": [
+						"covid19",
+						"mathdro",
+						"id"
+					],
+					"path": [
+						"api",
+						"daily"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://cryptic-ravine-96718.herokuapp.com/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://cryptic-ravine-96718.herokuapp.com/",
+					"protocol": "https",
+					"host": [
+						"cryptic-ravine-96718",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/v1/users/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"username\":\"Roberto\",\r\n \"email\":\"AS@gmail.com\",\r\n \"password\":\"12345678\",\r\n \"nombre\":\"Roberto\",\r\n \"apellido\":\"Diaz\",\r\n \"edad\":28,\r\n \"dni\":73122323,\r\n \"sexo\":\"Masculino\",\r\n \"telefono\":989887423\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/v1/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/v1/users/usuario/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJNYXJjb2NzeCIsImlhdCI6MTU5MzQwNDY1MSwiZXhwIjoxNTkzNDkxMDUxfQ.ojkpecBNmyuMLJ9L_GgnUFK94ztA0fjSp30cJXCNbWq7LOgOP35kfXg0gJh4S3AqndrK8IvxyQClD2r3B2w2Bw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"distrito\":\"Surco\",\r\n    \"direccion\":\"Av.Mariona\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/v1/users/usuario/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"users",
+						"usuario",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/v1/resources/cuestionario/3",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJNYXJjb2NzeCIsImlhdCI6MTU5MzQ2MzI0MiwiZXhwIjoxNTkzNTQ5NjQyfQ.evHGJ-lfvBp2pomeE88wX4bBnS1CRhONv4bH8YUZsH7wxwBvOFiQxl1bD12JUeke2mGtVi7w6iVGLxc_3B__FA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/v1/resources/cuestionario/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"resources",
+						"cuestionario",
+						"3"
+					]
+				},
+				"description": "Elimina cuestionario"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/v1/resources/preguntas/0",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJNYXJjb2NzeCIsImlhdCI6MTU5Mzg5MjM3NCwiZXhwIjoxNTkzOTc4Nzc0fQ._bNmfG0bUThm5JYsXMyZoPaJbC7sXcLu-1AkwIm0H5VwJT0quYpwsvZAfB96X4oW2Y8dwx-yFrgaXqd8heJ-cQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/v1/resources/preguntas/0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"resources",
+						"preguntas",
+						"0"
+					]
+				},
+				"description": "Obtener preguntas con paginacion\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8081/v1/resources/respuesta/resultado/1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJNYXJjb2NzeCIsImlhdCI6MTU5MzkyNzkzOSwiZXhwIjoxNTk0MDE0MzM5fQ.td6mZQqJhmGS9SuYj0NzDb5zE5wxW_OxyJYMH1e6-d3hbLweS4z7eT9nm_0mi-LeUjTSCs03NXpE5OHuhLn1NQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n      {\r\n      \"idcuestionario\":2,\r\n      \"idpregunta\":9,\r\n      \"idopcion\":1,\r\n      \"idusuario\":1\r\n      },\r\n\r\n      {\r\n      \"idcuestionario\":2,\r\n      \"idpregunta\":10,\r\n      \"idopcion\":1,\r\n      \"idusuario\":1\r\n      },\r\n\r\n      {\r\n      \"idcuestionario\":2,\r\n      \"idpregunta\":11,\r\n      \"idopcion\":1,\r\n      \"idusuario\":1\r\n      }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/v1/resources/respuesta/resultado/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"v1",
+						"resources",
+						"respuesta",
+						"resultado",
+						"1"
+					]
+				},
+				"description": "Resultado\r\n"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

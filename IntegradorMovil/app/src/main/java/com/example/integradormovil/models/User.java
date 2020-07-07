@@ -1,9 +1,9 @@
 package com.example.integradormovil.models;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class User {
+
     private int id;
     private String username;
     private String email;
@@ -14,6 +14,9 @@ public class User {
     private Integer dni;
     private String sexo;
     private Integer telefono;
+    private String distrito;
+    private String direccion;
+    private List<String> roles;
 
     public int getId() {
         return id;
@@ -95,19 +98,46 @@ public class User {
         this.telefono = telefono;
     }
 
+    public String getDistrito() {
+        return distrito;
+    }
+
+    public void setDistrito(String distrito) {
+        this.distrito = distrito;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id + '\'' +
-                "nombre=" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", sexo='" + sexo + '\'' +
-                ", edad='" + edad + '\'' +
-                ", dni='" + dni + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", email='" + email + '\'' +
+                "id=" + id +
                 ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", edad=" + edad +
+                ", dni=" + dni +
+                ", sexo='" + sexo + '\'' +
+                ", telefono=" + telefono +
+                ", distrito='" + distrito + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }
