@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.covid.exception.CovidNotFoundException;
 import com.api.covid.models.Cuestionario;
+import com.api.covid.models.Respuesta;
 import com.api.covid.security.services.CuestionarioService;
+import com.api.covid.security.services.RespuestaService;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -30,6 +32,9 @@ public class CuestionarioController {
 
 	@Autowired
 	private CuestionarioService cuestionarioService;
+	
+	@Autowired
+	private RespuestaService respuestaService;
 	
 	
 	@GetMapping("/cuestionarios")
@@ -60,14 +65,13 @@ public class CuestionarioController {
 	ResponseEntity<String> delete(@PathVariable Long idcuestionario) {
 
 		try {
-			 cuestionarioService.delete(idcuestionario);
-			return new ResponseEntity<>("" + idcuestionario, HttpStatus.OK);
-		} catch (CovidNotFoundException e) {
-			
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-		}
+			    respuestaService.deleteRespuestaCuestionario(idcuestionario);
+				cuestionarioService.delete(idcuestionario);
+				return new ResponseEntity<>("" + idcuestionario, HttpStatus.OK);
+			} catch (CovidNotFoundException e) {
+				return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+			}
+	
 	}
-	
-	
 	
 }

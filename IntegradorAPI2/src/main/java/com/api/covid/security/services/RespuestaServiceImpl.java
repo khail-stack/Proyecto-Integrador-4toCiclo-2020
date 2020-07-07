@@ -3,6 +3,8 @@ package com.api.covid.security.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -13,7 +15,7 @@ import com.api.covid.models.Respuesta;
 import com.api.covid.repository.CuestionarioRespuestaRepository;
 import com.api.covid.repository.RespuestaRepository;
 
-
+@Transactional
 @Service
 public class RespuestaServiceImpl implements RespuestaService{
 
@@ -90,6 +92,17 @@ public class RespuestaServiceImpl implements RespuestaService{
 		return respuestaRepository.getSumaValor(idcuestionario);
 	}
 
-	
-	
+	@Transactional
+	@Override
+	public void deleteRespuestaCuestionario(Long idcuestionario) throws CovidNotFoundException {
+		// TODO Auto-generated method stub
+		respuestaRepository.deleteRespuestaCuestionario(idcuestionario);
+	}
+
+	@Override
+	public void delete(Long idcuestionario) throws CovidNotFoundException {
+		// TODO Auto-generated method stub
+		respuestaRepository.deleteById(idcuestionario);
+	}
+
 }

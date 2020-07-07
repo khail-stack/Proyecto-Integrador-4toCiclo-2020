@@ -30,5 +30,8 @@ public interface RespuestaService {
 	
 	int getSumaValor(Long idcuestionario);
 	
+	void deleteRespuestaCuestionario(Long idcuestionario) throws CovidNotFoundException;
+	
+	void delete(Long idcuestionario) throws CovidNotFoundException;
 }
 
