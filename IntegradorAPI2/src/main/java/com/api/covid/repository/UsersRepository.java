@@ -30,8 +30,11 @@ public interface UsersRepository extends CrudRepository<User, Long>, PagingAndSo
 	@Query(value = " select DISTINCT u.id ,email,username,password, nombre, apellido,edad, dni, sexo, telefono,distrito,direccion from users u inner join respuesta r on u.id=r.users_id inner join cuestionario c on r.idcuestionario=c.idcuestionario where c.resultado_id = 1 ",nativeQuery = true)
 	Page<User> findAll(Pageable pageable);
 	
-	@Query(value = " select DISTINCT u.id ,email,username,password, nombre, apellido,edad, dni, sexo, telefono,distrito,direccion from users u inner join respuesta r on u.id=r.users_id inner join cuestionario c on r.idcuestionario=c.idcuestionario where c.resultado_id = 2 or c.resultado_id=3 ",nativeQuery = true)
+	@Query(value = " select DISTINCT u.id ,email,username,password, nombre, apellido,edad, dni, sexo, telefono,distrito,direccion from users u inner join respuesta r on u.id=r.users_id inner join cuestionario c on r.idcuestionario=c.idcuestionario where c.resultado_id = 3  ",nativeQuery = true)
 	Page<User> findAllLibres(Pageable pageable);
+	
+	@Query(value = " select DISTINCT u.id ,email,username,password, nombre, apellido,edad, dni, sexo, telefono,distrito,direccion from users u inner join respuesta r on u.id=r.users_id inner join cuestionario c on r.idcuestionario=c.idcuestionario where c.resultado_id = 2 ",nativeQuery = true)
+	Page<User> findAllZonaRiesgo(Pageable pageable);
 	
 	@Query(value = " select count(distinct nombre) from users u inner join respuesta r on u.id=r.users_id inner join cuestionario c on r.idcuestionario=c.idcuestionario where c.resultado_id = 1 and u.sexo='Masculino' ",nativeQuery = true)
     int posibleMasculino();

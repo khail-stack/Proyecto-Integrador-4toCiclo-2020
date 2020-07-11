@@ -115,6 +115,14 @@ public class UsersController {
 		
 	}
 	
+	@GetMapping("/riesgo/usuarios/{page}")
+	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public Page<User> paginacionZonaRiesgo(@PathVariable Integer page){
+		Pageable pageable=PageRequest.of(page, 10);
+		return userRepository.findAllZonaRiesgo(pageable);
+		
+	}
+	
 	@GetMapping("/libres/usuarios/{page}")
 	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Page<User> paginacioLibres(@PathVariable Integer page){

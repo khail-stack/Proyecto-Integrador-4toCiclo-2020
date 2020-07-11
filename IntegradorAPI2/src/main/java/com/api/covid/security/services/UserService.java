@@ -25,6 +25,8 @@ public interface UserService {
 
 	Page<User> findAllLibres(Pageable pageable);
 	
+	Page<User> findAllZonaRiesgo(Pageable pageable);
+	
 	int posibleMasculino();
 	
 	int posibleFemenino();

@@ -99,4 +99,10 @@ public class UserServiceImpl implements UserService{
 		userRepository.deleteUserRoles(id);
 	}
 
+	@Override
+	public Page<User> findAllZonaRiesgo(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return userRepository.findAllZonaRiesgo(pageable);
+	}
+
 }
