@@ -13,6 +13,7 @@ const Register = ({ history }) => {
     if (autenticado) {
       history.push("/casos-mundo");
     }
+    // eslint-disable-next-line
   }, [autenticado]);
   // State del componente
   const [username, guardarUsername] = useState("");
@@ -159,19 +160,30 @@ const Register = ({ history }) => {
                     <div className="form-group subtitulo-formulario">
                       <label className="texto-formulario">DNI</label>
                       <input
-                        type="number"
+                        //type="number"
                         placeholder="DNI"
                         className="form-control diseño-entrada"
                         name="dni"
                         value={dni}
                         onChange={(e) => guardarDni(e.target.value)}
+                        maxLength="9"
                         required
+                        type="number"
                       ></input>
                     </div>
 
                     <div className="form-group subtitulo-formulario">
                       <label className="texto-formulario">Sexo</label>
-                      <input
+
+                      <select
+                        value={sexo}
+                        onChange={(e) => guardarSexo(e.target.value)}
+                        className="form-control diseño-entrada"
+                      >
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                      </select>
+                      {/* <input
                         type="text"
                         placeholder="Sexo"
                         className="form-control diseño-entrada"
@@ -179,7 +191,7 @@ const Register = ({ history }) => {
                         value={sexo}
                         onChange={(e) => guardarSexo(e.target.value)}
                         required
-                      ></input>
+                      ></input> */}
                     </div>
 
                     <div className="form-group subtitulo-formulario">

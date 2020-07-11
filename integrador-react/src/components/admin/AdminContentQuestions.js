@@ -6,73 +6,73 @@ const AdminContentQuestions = () => {
     <>
       <section className="content">
         <div className="container">
-          <div class="row mt-5">
-            <div class="col-sm-12">
-              <div class="card diseño-preguntas-admin border-2">
-                <div class="card-body">
-                  <h2 class="card-title mt-3 mb-5">Crea las preguntas</h2>
+          <div className="row mt-5">
+            <div className="col-sm-12">
+              <div className="card diseño-preguntas-admin border-2">
+                <div className="card-body">
+                  <h2 className="card-title mt-3 mb-5">Crea las preguntas</h2>
                   <form>
-                    <div class="form-row">
-                      <div class="form-group col-md-12">
+                    <div className="form-row">
+                      <div className="form-group col-md-12">
                         <label for="inputEmail4">Pregunta</label>
                         <input
                           type="email"
-                          class="form-control"
+                          className="form-control"
                           id="inputEmail4"
                         />
                       </div>
-                      <div class="form-group col-md-6">
+                      <div className="form-group col-md-6">
                         <label for="inputPassword4">Opcion 1</label>
                         <input
                           type="password"
-                          class="form-control"
+                          className="form-control"
                           id="inputPassword4"
                         />
                       </div>
-                      <div class="form-group col-md-6">
+                      <div className="form-group col-md-6">
                         <label for="inputPassword4">Valor Opcion 1</label>
                         <input
                           type="password"
-                          class="form-control"
+                          className="form-control"
                           id="inputPassword4"
                         />
                       </div>
-                      <div class="form-group col-md-6">
+                      <div className="form-group col-md-6">
                         <label for="inputPassword4">Opcion 2</label>
                         <input
                           type="password"
-                          class="form-control"
+                          className="form-control"
                           id="inputPassword4"
                         />
                       </div>
-                      <div class="form-group col-md-6">
+                      <div className="form-group col-md-6">
                         <label for="inputPassword4">Valor Opcion 2</label>
                         <input
                           type="password"
-                          class="form-control"
+                          className="form-control"
                           id="inputPassword4"
                         />
                       </div>
-                      <div class="form-group col-md-6">
+                      <div className="form-group col-md-6">
                         <label for="inputPassword4">Opcion 3</label>
                         <input
                           type="password"
-                          class="form-control"
+                          className="form-control"
                           id="inputPassword4"
                         />
                       </div>
-                      <div class="form-group col-md-6">
+                      <div className="form-group col-md-6">
                         <label for="inputPassword4">Valor Opcion 3</label>
                         <input
                           type="password"
-                          class="form-control"
+                          className="form-control"
                           id="inputPassword4"
                         />
                       </div>
                     </div>
                     <button
                       type="submit"
-                      class="btn btn-primary my-2 color-boton-admin boton-sombra-admin"
+                      className="btn btn-primary my-2 color-boton-admin boton-sombra-admin"
                     >
                       Crear pregunta
                     </button>

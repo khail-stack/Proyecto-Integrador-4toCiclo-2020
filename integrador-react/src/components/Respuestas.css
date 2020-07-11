@@ -1,0 +1,10 @@
+.titulo_pregunta {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.opcion_marcada {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+}

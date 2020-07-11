@@ -10,6 +10,7 @@ import {
   CARGAR_CUESTIONARIO,
   BORRAR_CUESTIONARIO,
   PAGINA_INICIAL,
+  ULTIMA_PAGINA,
   CARGAR_PAGINA,
   MANDAR_RESPUESTA,
   BORRAR_ESTADO,
@@ -18,10 +19,10 @@ import {
 import { clienteAxios } from "../config/axios";
 
 export function mostrarContenidoCuestionario(existeCuestionario) {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(mostrarCuestionarioCarga());
     try {
-      dispatch(mostrarCuestionarioExito(existeCuestionario));
+      await dispatch(mostrarCuestionarioExito(existeCuestionario));
     } catch (error) {
       dispatch(mostrarCuestionarioError());
     }
@@ -52,6 +53,7 @@ export function crearCuestionario() {
         "/resources/cuestionario"
       );
       dispatch(crearCuestionarioExisto(cuestionario.data));
+      dispatch(mostrarContenidoCuestionario(true));
       console.log(cuestionario);
     } catch (error) {
       dispatch(crearCuestionarioError());
@@ -82,6 +84,9 @@ export function obtenerPreguntas(getPagina) {
       const cuestionario = await clienteAxios(token).get(
         `/resources/preguntas/${getPagina}`
       );
+
+      dispatch(obtenerUltimaPagina(cuestionario.data));
+
       const num = cuestionario.data.totalElements;
 
       const objetoPregunta = [];
@@ -97,9 +102,9 @@ export function obtenerPreguntas(getPagina) {
         dispatch(obtenerPreguntasExito(element));
       });
 
-      console.log(getPagina);
-      console.log(cuestionario.data.content);
-      console.log(cuestionario.data.totalElements);
+      console.log(cuestionario.data.totalPages);
+
+      // console.log(ultimaPagina);
     } catch (error) {
       dispatch(obtenerPreguntasError());
     }
@@ -109,6 +114,11 @@ export function obtenerPreguntas(getPagina) {
 const seteaRespuestas = (objetoRespuesta) => ({
   type: MANDAR_RESPUESTA,
   payload: objetoRespuesta,
+});
+
+const obtenerUltimaPagina = (ultimaPagina) => ({
+  type: ULTIMA_PAGINA,
+  payload: ultimaPagina,
 });
 
 export function obtenerPagina(page) {
@@ -158,6 +168,7 @@ export function borrarCuestionario() {
     localStorage.removeItem("idCuestionario");
     localStorage.removeItem("fechaCuestionario");
     localStorage.removeItem("page");
+    localStorage.removeItem("ultimaPagina");
 
     dispatch(borrarEstado());
 

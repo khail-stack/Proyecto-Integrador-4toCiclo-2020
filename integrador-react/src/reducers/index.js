@@ -5,6 +5,8 @@ import rutasAdminReducer from "./rutasAdminReducer";
 import noticiasCovidReducer from "./noticiasCovidReducer";
 import cuestionarioReducer from "./cuestionarioReducer";
 import mandarRespuestaReducer from "./mandarRespuestaReducer";
+import obtenerRespuestasReducer from "./obtenerRespuestasReducer";
+import resultadoReducer from "./resultadoReducer";
 
 export default combineReducers({
   usuarios: usuariosReducer,
@@ -13,4 +15,6 @@ export default combineReducers({
   noticiascovid: noticiasCovidReducer,
   cuestionario: cuestionarioReducer,
   respuesta: mandarRespuestaReducer,
+  obtenerRespuestas: obtenerRespuestasReducer,
+  obtenerResultados: resultadoReducer,
 });

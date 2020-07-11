@@ -49,7 +49,7 @@ const Header = () => {
   return (
     <>
       <nav
-        className="navbar navbar-expand-xl navbar-dark fondo pt-3 pb-3 fixed-top stroke"
+        className="navbar navbar-expand-xl navbar-dark pt-3 pb-3 fixed-top stroke"
         id="banner"
       >
         <div className="container">

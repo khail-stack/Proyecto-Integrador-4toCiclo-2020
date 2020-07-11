@@ -6,13 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 
-import android.annotation.SuppressLint;
-import android.app.FragmentTransaction;
-
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.integradormovil.fragments.ChartFragment;
 import com.example.integradormovil.fragments.CuestionarioFragment;
 import com.example.integradormovil.fragments.GlobalFragment;
 import com.example.integradormovil.fragments.HomeFragment;
@@ -28,19 +24,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         btn_view=findViewById(R.id.bottom_view);
+
 
         btn_view.setOnNavigationItemSelectedListener(bottomNavMethod);
         getSupportFragmentManager().beginTransaction().replace(R.id.container,new HomeFragment()).commit();
     }
 
+
+
+
+
+
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNavMethod=new
             BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
+               @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                    Fragment fragment=null;
+                   Fragment fragment=null;
 
                     switch (item.getItemId())
                     {

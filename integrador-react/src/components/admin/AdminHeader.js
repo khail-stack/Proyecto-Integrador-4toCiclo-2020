@@ -1,8 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./AdminStyle.css";
+import { useSelector } from "react-redux";
 
 const AdminHeader = () => {
+  const usuario = useSelector((state) => state.usuarios.usuarioAutenticado);
+
+  const uno = usuario.map((dos) => dos.username);
+
+  const campoEmail = uno[0];
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light fondo-header border-bottom sticky-top">
@@ -20,7 +26,7 @@ const AdminHeader = () => {
           </button>
 
           <form className="form-inline my-2 d-inline-block position-relative">
-            <label className="sr-only" for="inlineFormInputGroup">
+            <label className="sr-only" htmlFor="inlineFormInputGroup">
               Buscar
             </label>
             <div className="input-group mt-2 mb-2" style={{ width: "200px" }}>
@@ -42,18 +48,14 @@ const AdminHeader = () => {
             <ul className="navbar-nav ml-auto">
               <li className="nav-item dropdown no">
                 <Link
-                  className="nav-link dropdown-toggle color-nombre"
+                  className="nav-link dropdown-toggle color_cabecera_admin"
                   id="navbarDropdown"
                   role="button"
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  {localStorage.getItem("email") ? (
-                    localStorage.getItem("email")
-                  ) : (
-                    <div></div>
-                  )}
+                  {campoEmail ? campoEmail : <div></div>}
                 </Link>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <Link className="dropdown-item" href="#">

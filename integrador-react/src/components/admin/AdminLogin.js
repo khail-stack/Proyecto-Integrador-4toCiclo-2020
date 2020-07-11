@@ -32,6 +32,7 @@ const AdminLogin = ({ history }) => {
     if (autenticado) {
       history.push("/admin/home");
     }
+    // eslint-disable-next-line
   }, [autenticado]);
 
   return (

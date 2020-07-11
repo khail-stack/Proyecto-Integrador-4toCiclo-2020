@@ -11,7 +11,7 @@ const AdminTablasPreguntas = () => {
   );
 
   return (
-    <section class="content">
+    <section className="content">
       <div className="container-fluid">
         <div className="row mt-5">
           <div className="col-xl-12 col-lg-12 col-md-12">
@@ -30,7 +30,7 @@ const AdminTablasPreguntas = () => {
                         dispatch(rutaAgregarPreguntas(agregarPregunta))
                       }
                     >
-                      Nueva Pregunta <i class="fas fa-plus ml-2"></i>
+                      Nueva Pregunta <i className="fas fa-plus ml-2"></i>
                     </Link>
                   </div>
                 </div>
