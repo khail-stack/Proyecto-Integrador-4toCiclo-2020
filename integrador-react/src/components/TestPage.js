@@ -46,7 +46,6 @@ const TestPage = () => {
   const uno = informacion.map((dos) => dos.direccion);
   const dos = informacion.map((dos) => dos.distrito);
 
-  console.log(uno);
   //const tres= uno.
   const campoDireccion = uno[0];
   const campoDistrito = dos[0];
@@ -61,7 +60,6 @@ const TestPage = () => {
 
   const crearYmostrarCuestionario = (e) => {
     e.preventDefault();
-    dispatch(mostrarContenidoCuestionario(true));
     dispatch(crearCuestionario());
   };
 
@@ -89,13 +87,6 @@ const TestPage = () => {
         {autenticado === false ? (
           <div className="container ">
             <div className="row align-content-center espaciado-imagen mt_40">
-              {/*<div className="col-lg-6">
-              <img
-                src={alertaTest}
-                alt="Susana Distancia"
-                className="imagen animated fadeIn"
-              ></img>
-  </div>*/}
               <div className="col-lg-5 offset-lg-1 d-flex align-items-center">
                 <div className="presentacion-test-home">
                   <h3 className="mb-3 titulo-test-home">¡Oh no!</h3>

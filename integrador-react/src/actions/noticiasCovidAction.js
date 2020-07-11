@@ -12,7 +12,7 @@ export function noticiasCovid() {
 
     try {
       const respuesta = await axios.get(
-        "https://newsapi.org/v2/top-headlines?q=coronavirus&apiKey=b9e29dc8c1ce4ea4b13a2f660fd4ec70&language=es"
+        "https://gnews.io/api/v3/search?q=covid&token=9f8de7fa3c3cedf7e30fe32b2fc40e9b&lang=es"
       );
       dispatch(getNoticias(respuesta.data.articles));
       console.log(respuesta.data.articles);

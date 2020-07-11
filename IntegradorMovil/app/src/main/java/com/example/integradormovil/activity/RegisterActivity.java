@@ -1,5 +1,6 @@
 package com.example.integradormovil.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.ViewAnimator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.integradormovil.MainActivity;
 import com.example.integradormovil.R;
 import com.example.integradormovil.models.ResponseMessage;
 import com.example.integradormovil.models.User;
@@ -61,15 +63,15 @@ public class RegisterActivity extends AppCompatActivity {
         btnNext = findViewById(R.id.btnNext);
 
         // Texto fijos para pruebas
-        txtNombres.setText("José Paolo");
-        txtApellidos.setText("Guerrero Gonzales");
-        txtSexo.setText("Masculino");
-        txtEdad.setText("35");
-        txtDni.setText("11223344");
-        txtCelular.setText("999666333");
-        txtEmail.setText("pguerrero@fpf.pe");
-        txtUsuario.setText("pguerrero");
-        txtPassword.setText("123456");
+        //txtNombres.setText("José Paolo");
+        //txtApellidos.setText("Guerrero Gonzales");
+        //txtSexo.setText("Masculino");
+        //txtEdad.setText("35");
+        //txtDni.setText("11223344");
+        //txtCelular.setText("999666333");
+        //txtEmail.setText("pguerrero@fpf.pe");
+        //txtUsuario.setText("pguerrero");
+        //txtPassword.setText("123456");
 
         viewAnimator.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left));
         viewAnimator.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_out_right));
@@ -116,6 +118,8 @@ public class RegisterActivity extends AppCompatActivity {
                                     Log.d(TAG, "responseMessage: " + responseMessage);
                                     Toast.makeText(RegisterActivity.this, responseMessage.getMessage(), Toast.LENGTH_LONG).show();
                                     finish();
+                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    startActivity(intent);
                                 } else {
                                     Log.e(TAG, "onError: " + response.errorBody().toString());
                                     Toast.makeText(RegisterActivity.this, "Ocurrió un error", Toast.LENGTH_LONG).show();

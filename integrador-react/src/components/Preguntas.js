@@ -20,10 +20,10 @@ const Preguntas = ({ contenido }) => {
     for (let index = 0; index <= respuesta.length; index++) {
       if (index + 1 === idpregunta) {
         respuesta[index] = {
-          idCuestionario: idCuestionario,
-          idPregunta: idpregunta,
-          idOpcion: idOpcion,
-          id: idUsuario,
+          idcuestionario: idCuestionario,
+          idpregunta: idpregunta,
+          idopcion: idOpcion,
+          idusuario: idUsuario,
         };
       }
     }

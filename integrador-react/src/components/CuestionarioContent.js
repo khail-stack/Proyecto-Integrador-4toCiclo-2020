@@ -10,11 +10,19 @@ import {
 } from "../actions/cuestionarioAction";
 import Preguntas from "./Preguntas";
 import Spinner from "./Spinner";
+import { mandarRespuestas } from "./../actions/mandarRespuestaAction";
+import MostrarRespuestas from "./MostrarRespuestas";
 
 const CuestionarioContent = () => {
   const dispatch = useDispatch();
 
   const getPagina = useSelector((state) => state.cuestionario.page);
+
+  console.log(
+    getPagina + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaavestruz"
+  );
+
+  console.log(localStorage.getItem("ultimaPagina"));
 
   const paginaSiguiente = (e) => {
     e.preventDefault();
@@ -28,6 +36,17 @@ const CuestionarioContent = () => {
 
   const preguntas = useSelector((state) => state.cuestionario.preguntas);
 
+  const respuesta = useSelector((state) => state.respuesta.respuesta);
+
+  const mostrarRespuesta = useSelector(
+    (state) => state.obtenerRespuestas.contenidoRespuesta
+  );
+
+  useEffect(() => {
+    localStorage.setItem("page", getPagina);
+    dispatch(obtenerPreguntas(getPagina));
+  }, [getPagina, dispatch]);
+
   const borrarElCuestionario = (e) => {
     e.preventDefault();
     dispatch(mostrarContenidoCuestionario(false));
@@ -35,10 +54,13 @@ const CuestionarioContent = () => {
     dispatch(obtenerPagina(0));
   };
 
-  useEffect(() => {
-    localStorage.setItem("page", getPagina);
-    dispatch(obtenerPreguntas(getPagina));
-  }, [getPagina]);
+  const mandarRespuesta = (respuestas) =>
+    dispatch(mandarRespuestas(respuestas));
+
+  const submitRespuestas = (e) => {
+    e.preventDefault();
+    mandarRespuesta(respuesta);
+  };
 
   return (
     <div>
@@ -74,110 +96,71 @@ const CuestionarioContent = () => {
             <hr />
           </div>
         </div>
-      ) : cargarPregunta === true ? (
+      ) : cargarPregunta === false ? (
         <div className="container espaciado-login espacio">
           <div className="formulario-contenido">
             <div className="row">
               <div className="col-lg-12">
-                <div className="contenido">
-                  <h1 className="titulo-derecha text-center">
-                    Realizar Cuestionario
-                  </h1>
-                  <div className="formulario-test">
-                    <form>
-                      {cargarPregunta === true ? (
-                        <div className="d-flex justify-content-center">
-                          <div role="status">
-                            <Spinner></Spinner>
-                          </div>
-                        </div>
-                      ) : (
-                        preguntas
+                {mostrarRespuesta === true ? (
+                  <MostrarRespuestas></MostrarRespuestas>
+                ) : (
+                  <div className="contenido">
+                    <h1 className="titulo-derecha text-center">
+                      Realizar Cuestionario
+                    </h1>
+                    <div className="formulario-test">
+                      <form onSubmit={submitRespuestas}>
+                        {preguntas
                           .slice(getPagina * 4, getPagina * 4 + 4)
                           .map((pregunta) => (
                             <Preguntas
                               key={pregunta.idpregunta}
                               contenido={pregunta}
                             ></Preguntas>
-                          ))
-                      )}
+                          ))}
 
-                      <div className="extra-formulario text-center">
-                        <div className="text-center">
-                          <button
-                            className="btn boton-iniciar text-center"
-                            onClick={borrarElCuestionario}
-                          >
-                            Cancelar
-                          </button>
+                        <div className="extra-formulario text-center">
+                          <div className="text-center">
+                            <button
+                              className="btn boton-iniciar text-center"
+                              onClick={borrarElCuestionario}
+                            >
+                              Cancelar
+                            </button>
+                          </div>
+                          {getPagina ===
+                          Number(localStorage.getItem("ultimaPagina")) ? (
+                            <div className="text-center">
+                              <button
+                                className="btn boton-iniciar text-center"
+                                type="submit"
+                              >
+                                Enviar
+                              </button>
+                            </div>
+                          ) : (
+                            <div className="text-center">
+                              <button
+                                className="btn boton-iniciar text-center"
+                                onClick={paginaSiguiente}
+                              >
+                                Siguiente
+                              </button>
+                            </div>
+                          )}
                         </div>
-                        <div className="text-center">
-                          <button
-                            className="btn boton-iniciar text-center"
-                            onClick={paginaSiguiente}
-                          >
-                            Siguiente
-                          </button>
-                        </div>
-                      </div>
-                    </form>
+                      </form>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
         </div>
       ) : (
-        <div className="container espaciado-login espacio">
-          <div className="formulario-contenido">
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="contenido">
-                  <h1 className="titulo-derecha text-center">
-                    Realizar Cuestionario
-                  </h1>
-                  <div className="formulario-test">
-                    <form>
-                      {cargarPregunta === true ? (
-                        <div className="d-flex justify-content-center">
-                          <div role="status">
-                            <Spinner></Spinner>
-                          </div>
-                        </div>
-                      ) : (
-                        preguntas
-                          .slice(getPagina * 4, getPagina * 4 + 4)
-                          .map((pregunta) => (
-                            <Preguntas
-                              key={pregunta.idpregunta}
-                              contenido={pregunta}
-                            ></Preguntas>
-                          ))
-                      )}
-
-                      <div className="extra-formulario text-center">
-                        <div className="text-center">
-                          <button
-                            className="btn boton-iniciar text-center"
-                            onClick={borrarElCuestionario}
-                          >
-                            Cancelar
-                          </button>
-                        </div>
-                        <div className="text-center">
-                          <button
-                            className="btn boton-iniciar text-center"
-                            onClick={paginaSiguiente}
-                          >
-                            Siguiente
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div className="d-flex justify-content-center">
+          <div role="status">
+            <Spinner></Spinner>
           </div>
         </div>
       )}

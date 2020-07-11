@@ -31,6 +31,7 @@ const Login = ({ history }) => {
       history.push("/casos-mundo");
       //window.location.href = "/casos-mundo";
     }
+    // eslint-disable-next-line
   }, [autenticado]);
 
   return (

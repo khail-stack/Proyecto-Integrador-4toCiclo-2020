@@ -10,6 +10,7 @@ import {
   CARGAR_CUESTIONARIO,
   BORRAR_CUESTIONARIO,
   BORRAR_ESTADO,
+  ULTIMA_PAGINA,
   PAGINA_INICIAL,
   CARGAR_PAGINA,
 } from "./../types/index";
@@ -89,12 +90,23 @@ export default function (state = initialState, action) {
         page: action.payload,
       };
 
+    case ULTIMA_PAGINA:
+      localStorage.setItem(
+        "ultimaPagina",
+        Number(action.payload.totalPages) - 1
+      );
+      return {
+        ...state,
+        loading: false,
+        error: null,
+      };
+
     case BORRAR_CUESTIONARIO:
       return {
         ...state,
         loading: false,
         error: false,
-        contenidocuestionario: action.payload,
+        contenidocuestionario: false,
       };
 
     case BORRAR_ESTADO:

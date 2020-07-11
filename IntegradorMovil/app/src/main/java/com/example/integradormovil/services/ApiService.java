@@ -15,7 +15,7 @@ import retrofit2.http.Path;
 
 public interface ApiService {
 
-    String API_BASE_URL = "http://192.168.100.7:8081/";
+    String API_BASE_URL = "https://juntos-contra-covid-spring.herokuapp.com/";
 
     @FormUrlEncoded
     @POST("v1/users/android/register")
@@ -39,3 +39,6 @@ public interface ApiService {
     Call<User> getUser(@Path("userId") int userId);
 
 }
+
+//Marcocsx
+//khailmipastor

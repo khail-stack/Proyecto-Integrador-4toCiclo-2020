@@ -5,12 +5,13 @@ const CardNoticia = ({ contenido }) => {
   return (
     <div className="card diseño_carta_noticias">
       <img
-        src={contenido.urlToImage}
+        src={contenido.image}
         className="card-img-top"
         alt={contenido.title}
       />
       <div className="card-body">
         <h5 className="card-title">{contenido.title}</h5>
+        <p className="card-text">{contenido.description}</p>
         <div className="no text-center mt-3">
           <a
             className="btn btn-danger btn_noticias_color btn-block"

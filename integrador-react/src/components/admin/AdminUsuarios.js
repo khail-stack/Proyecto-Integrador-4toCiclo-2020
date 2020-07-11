@@ -2,7 +2,7 @@ import React from "react";
 
 const AdminUsuarios = () => {
   return (
-    <section class="content">
+    <section className="content">
       <div className="container-fluid">
         <div className="row mt-5">
           <div className="col-xl-12 col-lg-12 col-md-12">

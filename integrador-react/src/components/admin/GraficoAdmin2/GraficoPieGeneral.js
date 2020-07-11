@@ -8,7 +8,7 @@ const GraficoPieGeneral = () => {
         datasets: [
           {
             backgroundColor: ["rgba(234, 196, 94, 1)", "rgba(137, 234, 94, 1)"],
-            data: [10, 30],
+            data: [100, 300],
           },
         ],
       }}

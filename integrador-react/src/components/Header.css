@@ -1,14 +1,26 @@
-.fondo {
-  background-color: none;
-  padding: 240px 0 170px;
+/* .fondo {
+  background: transparent;
   position: relative;
   z-index: 1;
-  overflow: hidden;
+} */
+
+.nav-link {
+  color: #ffffff !important;
+  font-size: 17px !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 500;
+}
+
+.navbar-brand {
+  color: #ffffff !important;
+  font-size: 28px !important;
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 600;
 }
 
 .shrink {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
   background-color: #ffffff !important;
   box-shadow: 1px 2px 4px rgba(38, 38, 38, 0.1) !important;
 }

@@ -17,15 +17,15 @@ const ErrorPage = () => {
 
   return (
     <div className="text-center color-error-fondo">
-      <div class="cont_principal">
-        <div class="cont_error">
+      <div className="cont_principal">
+        <div className="cont_error">
           <h1 className="titulo-error">404</h1>
           <p className="sutbtitulo-error">
             La página a la que usted ha ingresado, no existe.
           </p>
         </div>
-        <div class="cont_aura_1"></div>
-        <div class="cont_aura_2"></div>
+        <div className="cont_aura_1"></div>
+        <div className="cont_aura_2"></div>
       </div>
     </div>
   );

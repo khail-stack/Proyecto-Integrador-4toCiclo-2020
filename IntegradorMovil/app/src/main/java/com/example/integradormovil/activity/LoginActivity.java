@@ -46,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btn_login);
         btnGoRegister = findViewById(R.id.btn_goRegister);
 
-        edtUser.setText("pguerrero");
-        edtPass.setText("123456");
+        //edtUser.setText("pguerrero");
+        //edtPass.setText("123456");
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +76,9 @@ public class LoginActivity extends AppCompatActivity {
                             LoginUtil.saveLogin(getContext(), userId, token);
 
                             Toast.makeText(getContext(), "El login es exitoso", Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
                         } else {
                             // error response, no access to resource?
                         }
@@ -91,22 +94,22 @@ public class LoginActivity extends AppCompatActivity {
         btnGoRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);*/
-                int userId = LoginUtil.getUserId(getContext());
-                String token = LoginUtil.getToken(getContext());
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+                //int userId = LoginUtil.getUserId(getContext());
+                //String token = LoginUtil.getToken(getContext());
 
-                ApiService service = ApiServiceGenerator.createService(ApiService.class, token);
-                Call<User> call = service.getUser(userId);
-                call.enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        Log.d(TAG, response.body().toString());
-                    }
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                    }
-                });
+                //ApiService service = ApiServiceGenerator.createService(ApiService.class, token);
+                //Call<User> call = service.getUser(userId);
+                //call.enqueue(new Callback<User>() {
+                 //   @Override
+                 //   public void onResponse(Call<User> call, Response<User> response) {
+                 //      Log.d(TAG, response.body().toString());
+                 //   }
+                 //   @Override
+                 //   public void onFailure(Call<User> call, Throwable t) {
+                 //   }
+                 //});
             }
         });
     }

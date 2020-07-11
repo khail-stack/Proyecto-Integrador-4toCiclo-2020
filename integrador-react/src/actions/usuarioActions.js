@@ -132,7 +132,7 @@ export function iniciarSesionAction(usuarioLogueado) {
     //window.location.reload();
     try {
       const usuariolog = await clienteAxios2.post(
-        "/v1/users/login/",
+        "/v1/users/login",
         usuarioLogueado
       );
       dispatch(loginUsuarioExito(usuariolog.data));

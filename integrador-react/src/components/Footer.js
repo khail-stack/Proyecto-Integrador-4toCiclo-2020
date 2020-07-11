@@ -36,7 +36,7 @@ const Footer = () => {
           <hr></hr>
           <div className="footer-footer">
             <p className="text-center copyright w-100 no-gutters copyright">
-              &copy; Khail 2020.Todos los derechos reservados
+              &copy; Grupo 8B 2020.Todos los derechos reservados
             </p>
           </div>
         </div>
