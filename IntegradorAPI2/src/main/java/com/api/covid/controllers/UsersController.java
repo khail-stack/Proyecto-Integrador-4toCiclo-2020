@@ -3,12 +3,19 @@ package com.api.covid.controllers;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,9 +25,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.api.covid.exception.CovidNotFoundException;
+import com.api.covid.models.Datos;
 import com.api.covid.models.ERole;
+import com.api.covid.models.MascuFeme;
+import com.api.covid.models.Pregunta;
 import com.api.covid.models.Role;
 import com.api.covid.models.User;
+import com.api.covid.payload.request.SignupRequest;
 import com.api.covid.payload.response.MessageResponse;
 import com.api.covid.repository.RoleRepository;
 import com.api.covid.repository.UsersRepository;
@@ -66,94 +77,76 @@ public class UsersController {
 	
 	@PutMapping("/usuario/{id}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	User saveOrUpdate(@RequestBody User updateUser, @PathVariable Long id) {
+	ResponseEntity<MessageResponse> saveOrUpdate(@Valid @RequestBody SignupRequest updateUser, @PathVariable Long id) throws CovidNotFoundException {
 		User user = null;
-		try {
+
+		
+		if (userRepository.existsByEmail(updateUser.getEmail())) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Error: El email ingresado ya existe!"));
+		}
+		
+    	else {
+			
 			user = userService.findById(id);
+		 	user.setEmail(updateUser.getEmail());
+			user.setPassword(encoder.encode(updateUser.getPassword()));
+			user.setNombre(updateUser.getNombre());
+			user.setApellido(updateUser.getApellido());
+			user.setEdad(updateUser.getEdad());
+			user.setDni(updateUser.getDni());
+			user.setSexo(updateUser.getSexo());
+			user.setTelefono(updateUser.getTelefono());
 			user.setDistrito(updateUser.getDistrito());
 			user.setDireccion(updateUser.getDireccion());
-			
 			userService.update(user);
-		} catch (CovidNotFoundException e) {
-			user = userService.create(updateUser);
+			
 		}
-		return user;
+			return  ResponseEntity.ok(new MessageResponse("Usuario actualizado correctamente!"));
 	}
 	
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/android/register")
-	public ResponseEntity<?> reterUser(@RequestParam(name="username") String username ,
-			@RequestParam(name="email") String email , @RequestParam(name="password") String password, 
-			@RequestParam(name="nombre") String nombre, @RequestParam(name="apellido") String apellido,
-			@RequestParam(name="edad") int edad, @RequestParam(name="dni") int dni,
-			@RequestParam(name="sexo") String sexo, @RequestParam(name="telefono") int telefono) {
+	@GetMapping("/posibles/usuarios/{page}")
+	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public Page<User> paginacionPosibles(@PathVariable Integer page){
+		Pageable pageable=PageRequest.of(page, 10);
+		return userRepository.findAll(pageable);
 		
-		     User signUpRequests = new User();
-			 signUpRequests.setUsername(username);
-			 signUpRequests.setEmail(email);
-			 signUpRequests.setPassword(password);
-			 signUpRequests.setNombre(nombre);
-			 signUpRequests.setApellido(apellido);
-			 signUpRequests.setEdad(edad);
-			 signUpRequests.setDni( dni);
-			 signUpRequests.setSexo(sexo);
-			 signUpRequests.setTelefono(telefono);
-			
-			 if (userRepository.existsByUsername(signUpRequests.getUsername())) {
-					return ResponseEntity
-							.badRequest()
-							.body(new MessageResponse("Error: Username is already taken!"));
-				}
+	}
+	
+	@GetMapping("/libres/usuarios/{page}")
+	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public Page<User> paginacioLibres(@PathVariable Integer page){
+		Pageable pageable=PageRequest.of(page, 10);
+		return userRepository.findAllLibres(pageable);
 		
-				if (userRepository.existsByEmail(signUpRequests.getEmail())) {
-					return ResponseEntity
-							.badRequest()
-							.body(new MessageResponse("Error: Email is already in use!"));
-				}
+	}
+	
+	@GetMapping("/posiblesCasos/usuarios")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	 public MascuFeme totales() {
+	
+		MascuFeme n= new MascuFeme();
 		
-				// Create new user's account
-				User user = new User(signUpRequests.getUsername(), 
-									 signUpRequests.getEmail(),
-									 encoder.encode(signUpRequests.getPassword()),
-									 signUpRequests.getNombre(),
-									 signUpRequests.getApellido(),
-									 signUpRequests.getEdad(),
-									 signUpRequests.getDni(),
-									 signUpRequests.getSexo(),
-									 signUpRequests.getTelefono(),
-									 signUpRequests.getDistrito(),
-									 signUpRequests.getDireccion());
+		int masculino=userRepository.posibleMasculino();
+		int femenino=userRepository.posibleFemenino();
 		
-				Set<String> strRoles = null;
-				Set<Role> roles = new HashSet<>();
+		n.setMasculino(masculino);
+		n.setFemenino(femenino);
 		
-				if (strRoles == null) {
-					Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-							.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-					roles.add(userRole);
-				} else {
-					strRoles.forEach(role -> {
-						switch (role) {
-						case "admin":
-							Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-									.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-							roles.add(adminRole);
+		return n;
+	}
+	
+	@DeleteMapping("/usuario/{id}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	ResponseEntity<String> delete(@PathVariable long id) {
+
+		userRepository.deleteRespuestaIduser(id);
+		userRepository.deleteUserRoles(id);
+		userRepository.deleteById(id);
+		return new ResponseEntity<>("Usuario  eliminado correctamente! ", HttpStatus.OK);
 		
-							break;
-						case "user":
-							Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-									.orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-							roles.add(userRole);
-						}
-					});
-				}
-		
-				user.setRoles(roles);
-				userRepository.save(user);
-		
-				return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-		
-		 
-		 }
+	}
 	
 }

@@ -105,4 +105,10 @@ public class RespuestaServiceImpl implements RespuestaService{
 		respuestaRepository.deleteById(idcuestionario);
 	}
 
+	@Override
+	public void deleteRespuestaIdpregunta(Long idpregunta) throws CovidNotFoundException {
+		// TODO Auto-generated method stub
+		respuestaRepository.deleteRespuestaIdpregunta(idpregunta);
+	}
+
 }

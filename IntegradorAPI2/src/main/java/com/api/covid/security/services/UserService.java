@@ -1,7 +1,8 @@
 package com.api.covid.security.services;
 
 import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import com.api.covid.exception.CovidNotFoundException;
 import com.api.covid.models.User;
 
@@ -19,6 +20,17 @@ public interface UserService {
 	void update(User user);
 
 	User create(User user);
+	
+	Page<User> obtenerPorPaginacion(Pageable pageable);
 
+	Page<User> findAllLibres(Pageable pageable);
+	
+	int posibleMasculino();
+	
+	int posibleFemenino();
+	
+	void deleteRespuestaIduser(Long id)  throws CovidNotFoundException ;
+	
+	void deleteUserRoles(Long id)  throws CovidNotFoundException ;
 	
 }

@@ -30,6 +30,11 @@ public interface RespuestaRepository extends CrudRepository<Respuesta, Long>, Pa
     @Query(value = "delete from respuesta where idcuestionario = :idcuestionario ", nativeQuery = true)
     @Transactional
     public  void deleteRespuestaCuestionario(Long idcuestionario);
+    
+    @Modifying
+    @Query(value = "delete from respuesta where idpregunta = :idpregunta ", nativeQuery = true)
+    @Transactional
+    public  void deleteRespuestaIdpregunta(Long idpregunta);
          
 }
 

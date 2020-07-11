@@ -33,5 +33,7 @@ public interface RespuestaService {
 	void deleteRespuestaCuestionario(Long idcuestionario) throws CovidNotFoundException;
 	
 	void delete(Long idcuestionario) throws CovidNotFoundException;
+	
+	void deleteRespuestaIdpregunta(Long idpregunta) throws CovidNotFoundException ;
 }
 

@@ -68,5 +68,11 @@ public class PreguntaServiceImpl implements PreguntaService{
 		// TODO Auto-generated method stub
 		return  preguntaRepository.findAll(pageable);
 	}
+
+	@Override
+	public void deletePreguntaOpcion(long idpregunta) throws CovidNotFoundException {
+		// TODO Auto-generated method stub
+		preguntaRepository.deletePreguntaOpcion(idpregunta);
+	}
 	
 }

@@ -25,5 +25,5 @@ public interface PreguntaService {
 	  
 	  Page<Pregunta> obtenerPorPaginacion(Pageable pageable);
 	  
-	
+	  void deletePreguntaOpcion(long idpregunta) throws CovidNotFoundException ;
 }

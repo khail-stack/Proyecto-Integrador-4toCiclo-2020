@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.api.covid.exception.CovidNotFoundException;
 import com.api.covid.models.Cuestionario;
+import com.api.covid.models.Datos;
 
 
 public interface CuestionarioService {
@@ -20,4 +21,15 @@ public interface CuestionarioService {
 	
 	Iterable<Cuestionario> findAll();
 	
+	int getCasosTotales(Datos datos);
+	
+	int getPosibleCaso(Datos datos);
+	
+	int getZonadeRiesgo(Datos datos);
+	
+	int getLibredeRiesgo(Datos datos);
+	
+	List<Object[]> findCountFecha();
+	
+	List<Object[]> findDistritoPositivo();
 }

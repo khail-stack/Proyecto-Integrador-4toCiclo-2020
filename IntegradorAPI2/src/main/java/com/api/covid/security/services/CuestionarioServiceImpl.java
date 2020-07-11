@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.api.covid.exception.CovidNotFoundException;
 import com.api.covid.models.Cuestionario;
+import com.api.covid.models.Datos;
 import com.api.covid.repository.CuestionarioRepository;
+
 
 
 @Service
@@ -18,6 +20,7 @@ public class CuestionarioServiceImpl implements CuestionarioService {
 	
 	@Autowired
 	CuestionarioRepository cuestionarioRepository;
+	
 
 	@Override
 	public Cuestionario create(Cuestionario cuestionario) {
@@ -61,8 +64,45 @@ public class CuestionarioServiceImpl implements CuestionarioService {
 		return cuestionarioRepository.findAll();
 	}
 
+	@Override
+	public int getCasosTotales(Datos datos) {
+		// TODO Auto-generated method stub
 	
+		return cuestionarioRepository.getCasosTotales();
+	}
 
+	@Override
+	public int getPosibleCaso(Datos datos) {
+		// TODO Auto-generated method stub
 	
+		return cuestionarioRepository.getPosibleCaso();
+	}
+
+	@Override
+	public int getZonadeRiesgo(Datos datos) {
+		// TODO Auto-generated method stub
+	
+		return cuestionarioRepository.getZonadeRiesgo();
+	}
+
+	@Override
+	public int getLibredeRiesgo(Datos datos) {
+		// TODO Auto-generated method stub
+	
+		return cuestionarioRepository.getLibredeRiesgo();
+	}
+
+	@Override
+	public List<Object[]> findCountFecha() {
+		// TODO Auto-generated method stub
+		
+		return cuestionarioRepository.findCountFecha();
+	}
+
+	@Override
+	public List<Object[]> findDistritoPositivo() {
+		// TODO Auto-generated method stub
+		return cuestionarioRepository.findDistritoPositivo();
+	}
 
 }
