@@ -78,6 +78,19 @@ public class UsersController {
 	@PutMapping("/usuario/{id}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	ResponseEntity<MessageResponse> saveOrUpdate(@Valid @RequestBody SignupRequest updateUser, @PathVariable Long id) throws CovidNotFoundException {
+		
+	        User user = null;
+			user = userService.findById(id);
+			user.setDistrito(updateUser.getDistrito());
+			user.setDireccion(updateUser.getDireccion());
+			userService.update(user);
+			return  ResponseEntity.ok(new MessageResponse("Usuario actualizado correctamente!"));
+			
+	}
+	
+	@PutMapping("/usuario/administrador/{id}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	ResponseEntity<MessageResponse> saveOrUpdateTotal(@Valid @RequestBody SignupRequest updateUser, @PathVariable Long id) throws CovidNotFoundException {
 		User user = null;
 
 		
@@ -105,7 +118,6 @@ public class UsersController {
 		}
 			return  ResponseEntity.ok(new MessageResponse("Usuario actualizado correctamente!"));
 	}
-	
 	
 	@GetMapping("/posibles/usuarios/{page}")
 	//@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
