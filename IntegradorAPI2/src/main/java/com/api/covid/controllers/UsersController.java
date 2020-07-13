@@ -104,7 +104,6 @@ public class UsersController {
 			
 			user = userService.findById(id);
 		 	user.setEmail(updateUser.getEmail());
-			user.setPassword(encoder.encode(updateUser.getPassword()));
 			user.setNombre(updateUser.getNombre());
 			user.setApellido(updateUser.getApellido());
 			user.setEdad(updateUser.getEdad());
