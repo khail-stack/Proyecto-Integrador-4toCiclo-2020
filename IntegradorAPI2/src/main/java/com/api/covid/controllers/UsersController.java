@@ -91,16 +91,8 @@ public class UsersController {
 	@PutMapping("/usuario/administrador/{id}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	ResponseEntity<MessageResponse> saveOrUpdateTotal(@Valid @RequestBody SignupRequest updateUser, @PathVariable Long id) throws CovidNotFoundException {
-		User user = null;
+		    User user = null;
 
-		
-		if (userRepository.existsByEmail(updateUser.getEmail())) {
-			return ResponseEntity
-					.badRequest()
-					.body(new MessageResponse("Error: El email ingresado ya existe!"));
-		}
-		
-    	else {
 			
 			user = userService.findById(id);
 		 	user.setEmail(updateUser.getEmail());
@@ -114,7 +106,7 @@ public class UsersController {
 			user.setDireccion(updateUser.getDireccion());
 			userService.update(user);
 			
-		}
+	
 			return  ResponseEntity.ok(new MessageResponse("Usuario actualizado correctamente!"));
 	}
 	
