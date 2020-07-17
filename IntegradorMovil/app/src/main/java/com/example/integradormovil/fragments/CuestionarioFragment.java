@@ -99,12 +99,12 @@ public class CuestionarioFragment extends Fragment {
                             int cuestionarioId = response.body().getIdcuestionario();
 
 
-                            CuestionarioUtil.saveCuestionario(getContext(), cuestionarioId);
+                            //CuestionarioUtil.saveCuestionario(getContext(), cuestionarioId);
 
                             Toast.makeText(getContext(), "El cuestionario se creó correctamente", Toast.LENGTH_SHORT).show();
 
                             FragmentTransaction fr = getFragmentManager().beginTransaction();
-                            fr.replace(R.id.container, new CuestionarioContentFragment());
+                            fr.replace(R.id.container, CuestionarioContentFragment.newInstance(cuestionarioId));
                             fr.commit();
 
                         } else {

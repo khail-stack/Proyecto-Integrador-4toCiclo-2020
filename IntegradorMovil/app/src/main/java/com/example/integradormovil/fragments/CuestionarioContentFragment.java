@@ -9,34 +9,38 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.Toast;
 import android.widget.ViewAnimator;
 
 import com.example.integradormovil.R;
+import com.example.integradormovil.models.ContenidoPregunta;
+import com.example.integradormovil.models.Preguntas;
+
+import java.util.List;
 
 public class CuestionarioContentFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ID_CUESTIONARIO = "idCuestionario";
+
     private ViewAnimator viewAnimatorCuestionarioContent;
     private Button botonSiguiente;
     private Button botonCancelar;
     private Button botonAtras;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    //private List<ContenidoPregunta>
+
+    private int idCuestionario;
 
     public CuestionarioContentFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static CuestionarioContentFragment newInstance(String param1, String param2) {
+    public static CuestionarioContentFragment newInstance(int idCuestionario) {
         CuestionarioContentFragment fragment = new CuestionarioContentFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ID_CUESTIONARIO, idCuestionario);
         fragment.setArguments(args);
         return fragment;
     }
@@ -45,8 +49,8 @@ public class CuestionarioContentFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            idCuestionario = getArguments().getInt(ID_CUESTIONARIO);
+            Toast.makeText(getActivity(), "idCuestionario: " + idCuestionario, Toast.LENGTH_SHORT).show();
         }
     }
 
