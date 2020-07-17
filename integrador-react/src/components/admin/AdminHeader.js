@@ -6,9 +6,12 @@ import { useSelector } from "react-redux";
 const AdminHeader = () => {
   const usuario = useSelector((state) => state.usuarios.usuarioAutenticado);
 
-  const uno = usuario.map((dos) => dos.username);
+  const uno = usuario.map((dos) => dos.nombre);
+  const tres = usuario.map((cuatro) => cuatro.apellido);
 
-  const campoEmail = uno[0];
+  const nombre = uno[0];
+  const apellido = tres[0];
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light fondo-header border-bottom sticky-top">
@@ -46,16 +49,16 @@ const AdminHeader = () => {
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item dropdown no">
+              <li className="nav-item dropdown no paso">
                 <Link
-                  className="nav-link dropdown-toggle color_cabecera_admin"
+                  className="nav-link dropdown-toggle color_cabecera_admin a"
                   id="navbarDropdown"
                   role="button"
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  {campoEmail ? campoEmail : <div></div>}
+                  {`${nombre ? nombre + " " + apellido : <div></div>}`}
                 </Link>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <Link className="dropdown-item" href="#">

@@ -1,35 +1,26 @@
 import React, { useState } from "react";
-import "./AdminStyle.css";
 import { useDispatch, useSelector } from "react-redux";
-import { agregarPregunta } from "../../actions/agregarPreguntaAction";
+import { editarPreguntaAdmin } from "../../actions/agregarPreguntaAction";
 
-const AdminContentQuestions = (nuevapregunta) => {
-  const [pregunta, guardarPregunta] = useState("");
-  const [valor, guardarValor] = useState("");
+const AdminEditarPregunta = () => {
+  const preguntaeditar = useSelector((state) => state.preguntas.preguntaEditar);
 
+  console.log(preguntaeditar);
   const dispatch = useDispatch();
 
-  const cargando = useSelector((state) => state.preguntas.loading);
+  const { pregunta, valor, idpregunta } = preguntaeditar;
 
-  const crearPregunta = (nuevapregunta) =>
-    dispatch(agregarPregunta(nuevapregunta));
+  const [tituloPregunta, settituloPregunta] = useState(pregunta);
+  const [valorPregunta, setValorPregunta] = useState(valor);
 
-  const crearNuevaPregunta = (e) => {
-    e.preventDefault();
-
-    if (pregunta.trim() === "" || valor <= 0) {
-      return;
-    }
-
-    crearPregunta({
-      pregunta,
-      valor,
-    });
-
-    console.log(pregunta);
-    console.log(valor);
+  const objetoEditar = {
+    pregunta: tituloPregunta,
+    valor: Number(valorPregunta),
   };
-
+  const editarPregunta = (e) => {
+    e.preventDefault();
+    dispatch(editarPreguntaAdmin(idpregunta, objetoEditar));
+  };
   return (
     <>
       <section className="content">
@@ -38,8 +29,8 @@ const AdminContentQuestions = (nuevapregunta) => {
             <div className="col-sm-12">
               <div className="card diseño-preguntas-admin border-2">
                 <div className="card-body">
-                  <h2 className="card-title mt-3 mb-5">Crea las preguntas</h2>
-                  <form onSubmit={crearNuevaPregunta}>
+                  <h2 className="card-title mt-3 mb-5">Editar las preguntas</h2>
+                  <form onSubmit={editarPregunta}>
                     <div className="form-row">
                       <div className="form-group col-md-12">
                         <label for="pregunta">Pregunta</label>
@@ -48,8 +39,8 @@ const AdminContentQuestions = (nuevapregunta) => {
                           className="form-control"
                           id="pregunta"
                           name="titulopregunta"
-                          value={pregunta}
-                          onChange={(e) => guardarPregunta(e.target.value)}
+                          value={tituloPregunta}
+                          onChange={(e) => settituloPregunta(e.target.value)}
                         />
                       </div>
                       <div className="form-group col-md-12">
@@ -59,8 +50,10 @@ const AdminContentQuestions = (nuevapregunta) => {
                           className="form-control"
                           id="valor"
                           name="valorPregunta"
-                          value={valor}
-                          onChange={(e) => guardarValor(Number(e.target.value))}
+                          value={valorPregunta}
+                          onChange={(e) =>
+                            setValorPregunta(Number(e.target.value))
+                          }
                         />
                       </div>
                     </div>
@@ -68,10 +61,9 @@ const AdminContentQuestions = (nuevapregunta) => {
                       type="submit"
                       className="btn btn-primary my-2 color-boton-admin boton-sombra-admin"
                     >
-                      Crear pregunta
+                      Guardar cambios
                     </button>
                   </form>
-                  {cargando ? <p>Cargando...</p> : null}
                 </div>
               </div>
             </div>
@@ -82,4 +74,4 @@ const AdminContentQuestions = (nuevapregunta) => {
   );
 };
 
-export default AdminContentQuestions;
+export default AdminEditarPregunta;

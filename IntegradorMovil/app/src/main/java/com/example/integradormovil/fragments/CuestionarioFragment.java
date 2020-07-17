@@ -4,22 +4,38 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.integradormovil.MainActivity;
 import com.example.integradormovil.R;
 import com.example.integradormovil.activity.LoginActivity;
+import com.example.integradormovil.models.Cuestionario;
+import com.example.integradormovil.models.CuestionarioResponse;
+import com.example.integradormovil.models.User;
+import com.example.integradormovil.models.response.LoginResponse;
+import com.example.integradormovil.services.ApiService;
+import com.example.integradormovil.services.ApiServiceGenerator;
+import com.example.integradormovil.util.CuestionarioUtil;
+import com.example.integradormovil.util.LoginUtil;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CuestionarioFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-   // private Button btn_realizar_test;
+    private Button btn_goRealizarTest;
 
 
     // TODO: Rename and change types of parameters
@@ -55,11 +71,76 @@ public class CuestionarioFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cuestionario, container, false);
 
-        return view;
-        // btn_realizar_test = v.findViewById(R.id.btn_go_realizar_test);
+        btn_goRealizarTest = (Button) view.findViewById(R.id.btn_goRealizarTest);
 
-        //return v;
+        crearFormularioYgoFragmentContent();
+
+
+        return view;
     }
+
+    private void crearFormularioYgoFragmentContent(){
+        btn_goRealizarTest.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String token = LoginUtil.getToken(getContext());
+                Cuestionario cuestionario = new Cuestionario();
+
+                ApiService service = ApiServiceGenerator.createService(ApiService.class, token);
+                Call<CuestionarioResponse> call = service.createCuestionario(cuestionario);
+                call.enqueue(new Callback<CuestionarioResponse>() {
+                    @Override
+                    public void onResponse(Call<CuestionarioResponse> call, Response<CuestionarioResponse> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("Exito", response.body().toString());
+
+                            int cuestionarioId = response.body().getIdcuestionario();
+
+
+                            CuestionarioUtil.saveCuestionario(getContext(), cuestionarioId);
+
+                            Toast.makeText(getContext(), "El cuestionario se creó correctamente", Toast.LENGTH_SHORT).show();
+
+                            FragmentTransaction fr = getFragmentManager().beginTransaction();
+                            fr.replace(R.id.container, new CuestionarioContentFragment());
+                            fr.commit();
+
+                        } else {
+                                
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<CuestionarioResponse> call, Throwable t) {
+                        Log.d("Error", t.getMessage());
+                    }
+                });
+                //Toast.makeText(getActivity().getApplicationContext(), "He pulsado el boton", Toast.LENGTH_SHORT).show();
+
+
+                //int userId = LoginUtil.getUserId(getContext());
+                //String token = LoginUtil.getToken(getContext());
+
+                //ApiService service = ApiServiceGenerator.createService(ApiService.class, token);
+                //Call<User> call = service.getUser(userId);
+                //call.enqueue(new Callback<User>() {
+                //   @Override
+                //   public void onResponse(Call<User> call, Response<User> response) {
+                //      Log.d(TAG, response.body().toString());
+                //   }
+                //   @Override
+                //   public void onFailure(Call<User> call, Throwable t) {
+                //   }
+                //});
+
+
+            }
+        });
+    }
+
+
+
 
 
 

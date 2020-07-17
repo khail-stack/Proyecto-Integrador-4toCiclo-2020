@@ -1,6 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { editarPerfilAdmin } from "../../actions/usuariosAdminAction";
 
 const AdminPerfil = () => {
+  const dispatch = useDispatch();
+
+  const usuarioGeneral = useSelector(
+    (state) => state.usuarios.usuarioAutenticado
+  );
+
+  const datosUsuario = usuarioGeneral.map((dos) => dos);
+
+  console.log(datosUsuario[0]);
+
+  const {
+    id,
+    direccion,
+    distrito,
+    email,
+    nombre,
+    telefono,
+    apellido,
+  } = datosUsuario[0];
+
+  const [apellidoAdmin, setApellido] = useState(apellido);
+  const [nombreAdmin, setNombre] = useState(nombre);
+  const [telefonoAdmin, setTelefono] = useState(telefono);
+  const [distritoAdmin, setDistrito] = useState(distrito);
+  const [direccionAdmin, setDireccion] = useState(direccion);
+  const [emailAdmin, setEmail] = useState(email);
+
+  const usuarioEditado = {
+    email: emailAdmin,
+    nombre: nombreAdmin,
+    apellido: apellidoAdmin,
+    telefono: telefonoAdmin,
+    distrito: distritoAdmin,
+    direccion: direccionAdmin,
+  };
+  const editarUsuarioGeneral = (e) => {
+    e.preventDefault();
+
+    dispatch(editarPerfilAdmin(id, usuarioEditado));
+  };
+
   return (
     <section className="content">
       <div className="container">
@@ -14,60 +57,72 @@ const AdminPerfil = () => {
                   </div>
                 </div>
 
-                <form>
+                <form onSubmit={editarUsuarioGeneral}>
                   <div className="form-row justify-content-center">
                     <div className="form-group col-md-8">
-                      <label htmlFor="inputEmail4">Apellidos</label>
+                      <label htmlFor="inputEmail1">Apellidos</label>
                       <input
-                        type="email"
+                        type="text"
                         className="form-control"
-                        id="inputEmail4"
+                        id="inputEmail1"
                         placeholder="Mogollon"
+                        value={apellidoAdmin}
+                        onChange={(e) => setApellido(e.target.value)}
                       />
                     </div>
                     <div className="form-group col-md-8">
-                      <label htmlFor="inputEmail4">Nombres</label>
+                      <label htmlFor="inputEmail2">Nombres</label>
                       <input
-                        type="email"
+                        type="text"
                         className="form-control"
-                        id="inputEmail4"
+                        id="inputEmail2"
                         placeholder="Khail"
+                        value={nombreAdmin}
+                        onChange={(e) => setNombre(e.target.value)}
                       />
                     </div>
                     <div className="form-group col-md-8">
-                      <label htmlFor="inputEmail4">Email</label>
+                      <label htmlFor="inputEmail3">Email</label>
                       <input
                         type="email"
                         className="form-control"
-                        id="inputEmail4"
+                        id="inputEmail3"
                         placeholder="kmogollon1507@gmail.com"
+                        value={emailAdmin}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
                     <div className="form-group col-md-8">
                       <label htmlFor="inputEmail4">Telefono</label>
                       <input
-                        type="email"
+                        type="text"
                         className="form-control"
                         id="inputEmail4"
                         placeholder="920096114"
+                        value={telefonoAdmin}
+                        onChange={(e) => setTelefono(e.target.value)}
                       />
                     </div>
                     <div className="form-group col-md-8">
-                      <label htmlFor="inputEmail4">Usuario</label>
+                      <label htmlFor="inputEmail5">Distrito</label>
                       <input
-                        type="email"
+                        type="text"
                         className="form-control"
-                        id="inputEmail4"
-                        placeholder="admin"
+                        id="inputEmail5"
+                        placeholder="Distrito"
+                        value={distritoAdmin}
+                        onChange={(e) => setDistrito(e.target.value)}
                       />
                     </div>
                     <div className="form-group col-md-8">
-                      <label htmlFor="inputPassword4">Contraseña</label>
+                      <label htmlFor="inputPassword6">Direccion</label>
                       <input
-                        type="password"
+                        type="text"
                         className="form-control"
-                        id="inputPassword4"
-                        placeholder="admin"
+                        id="inputPassword6"
+                        placeholder="Direccion"
+                        value={direccionAdmin}
+                        onChange={(e) => setDireccion(e.target.value)}
                       />
                     </div>
                   </div>

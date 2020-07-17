@@ -1,14 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./AdminStyle.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { rutaAgregarPreguntas } from "./../../actions/rutasAdminAction";
+import {
+  obtenerPreguntasAdmin,
+  obtenerPaginaPreguntaAdmin,
+} from "../../actions/agregarPreguntaAction";
+import PreguntasAdmin from "../PreguntasAdmin";
+import Spinner from "../Spinner";
 const AdminTablasPreguntas = () => {
   const dispatch = useDispatch();
+
+  const getPaginaPreguntasAdmin = useSelector((state) => state.preguntas.page);
+  const cargando = useSelector((state) => state.preguntas.loading);
+  //const error = useSelector((state) => state.preguntas.error);
 
   const agregarPregunta = useSelector(
     (state) => state.rutasadmin.agregarPregunta
   );
+
+  console.log(
+    getPaginaPreguntasAdmin +
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaavestruz"
+  );
+
+  console.log(localStorage.getItem("ultimaPaginaPreguntasAdmin"));
+
+  useEffect(() => {
+    localStorage.setItem("pagePreguntasAdmin", getPaginaPreguntasAdmin);
+    dispatch(obtenerPreguntasAdmin(getPaginaPreguntasAdmin));
+  }, [getPaginaPreguntasAdmin, dispatch]);
+
+  const preguntasAdmin = useSelector((state) => state.preguntas.listaPreguntas);
+  console.log(preguntasAdmin);
+
+  const paginaPreguntaSiguiente = (e) => {
+    e.preventDefault();
+    dispatch(
+      obtenerPaginaPreguntaAdmin(
+        Number(localStorage.getItem("pagePreguntasAdmin")) + 1
+      )
+    );
+    localStorage.setItem("pagePreguntasAdmin", getPaginaPreguntasAdmin + 1);
+  };
+
+  const paginaPreguntaAnterior = (e) => {
+    e.preventDefault();
+    dispatch(
+      obtenerPaginaPreguntaAdmin(
+        Number(localStorage.getItem("pagePreguntasAdmin")) - 1
+      )
+    );
+    localStorage.setItem("pagePreguntasAdmin", getPaginaPreguntasAdmin - 1);
+  };
 
   return (
     <section className="content">
@@ -22,6 +67,13 @@ const AdminTablasPreguntas = () => {
                     <h4 className=" mx-5 my-3 mb-2 text-uppercase">
                       Listado de preguntas
                     </h4>
+                    {cargando ? (
+                      <div className="d-flex justify-content-center mt-5">
+                        <div role="status">
+                          <Spinner></Spinner>
+                        </div>
+                      </div>
+                    ) : null}
                   </div>
                   <div className="col-xl-2 col-sm-12 d-block d-sm-inline-block my-3 mb-2">
                     <Link
@@ -41,225 +93,51 @@ const AdminTablasPreguntas = () => {
                       <tr className="text-center">
                         <th scope="col">#</th>
                         <th scope="col text-center">Pregunta</th>
-                        <th scope="col text-center">Opcion 1</th>
-                        <th scope="col text-center">Valor 1</th>
-                        <th scope="col text-center">Opcion 2</th>
-                        <th scope="col text-center">Valor 2</th>
-                        <th scope="col text-center">Opcion 3</th>
-                        <th scope="col text-center">Valor 3</th>
+                        <th scope="col text-center">Valor</th>
                         <th scope="col text-center">Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row" className="text-center">
-                          1
-                        </th>
-                        <td className="ajustar-texto-tabla-pregunta">
-                          ¿Pertenece a algún grupo de riesgo? (mayor de 60
-                          años,hipertensión, diabetes, cardiopatías, patología
-                          pulmonar, enfermedad renal crónica, inmunosupresión,
-                          patología hepática, neoplasias activas u obesidad)
-                        </td>
-                        <td className="ajustar-texto-tabla-opciones text-center">
-                          Sí
-                        </td>
-                        <td className="ajustar-texto-tabla-valor text-center">
-                          02
-                        </td>
-                        <td className="ajustar-texto-tabla-opciones text-center">
-                          No
-                        </td>
-                        <td className="ajustar-texto-tabla-valor text-center">
-                          00
-                        </td>
-                        <td className="ajustar-texto-tabla-opciones text-center">
-                          --
-                        </td>
-                        <td className="ajustar-texto-tabla-valor text-center">
-                          --
-                        </td>
-                        <td className="no text-center">
-                          <a href="/">
-                            <i className="fas fa-edit lead mr-2 color-accion-editar"></i>
-                          </a>
-                          <a href="/">
-                            <i className="fas fa-trash-alt lead ml-3 color-accion-eliminar"></i>
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row" className="text-center">
-                          2
-                        </th>
-                        <td className="ajustar-texto-tabla-pregunta">
-                          ¿Presentas Disminución del gusto o del olfato?
-                        </td>
-                        <td className="ajustar-texto-tabla-opciones text-center">
-                          Sí
-                        </td>
-                        <td className="ajustar-texto-tabla-valor text-center">
-                          02
-                        </td>
-                        <td className="ajustar-texto-tabla-opciones text-center">
-                          No
-                        </td>
-                        <td className="ajustar-texto-tabla-valor text-center">
-                          00
-                        </td>
-                        <td className="ajustar-texto-tabla-opciones text-center">
-                          --
-                        </td>
-                        <td className="ajustar-texto-tabla-valor text-center">
-                          --
-                        </td>
-                        <td className="no text-center">
-                          <a href="/">
-                            <i className="fas fa-edit lead mr-2 color-accion-editar"></i>
-                          </a>
-                          <a href="/">
-                            <i className="fas fa-trash-alt lead ml-3 color-accion-eliminar"></i>
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row" className="text-center">
-                          3
-                        </th>
-                        <td className="ajustar-texto-tabla-pregunta">
-                          ¿Presentas Tos?
-                        </td>
-                        <td className="ajustar-texto-tabla-opciones text-center">
-                          Sí
-                        </td>
-                        <td className="ajustar-texto-tabla-valor text-center">
-                          02
-                        </td>
-                        <td className="ajustar-texto-tabla-opciones text-center">
-                          No
-                        </td>
-                        <td className="ajustar-texto-tabla-valor text-center">
-                          00
-                        </td>
-                        <td className="ajustar-texto-tabla-opciones text-center">
-                          --
-                        </td>
-                        <td className="ajustar-texto-tabla-valor text-center">
-                          --
-                        </td>
-                        <td className="no text-center">
-                          <a href="/">
-                            <i className="fas fa-edit lead mr-2 color-accion-editar"></i>
-                          </a>
-                          <a href="/">
-                            <i className="fas fa-trash-alt lead ml-3 color-accion-eliminar"></i>
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row" className="text-center">
-                          4
-                        </th>
-                        <td className="ajustar-texto-tabla-pregunta">
-                          ¿Presentas dolor de garganta?
-                        </td>
-                        <td className="ajustar-texto-tabla-opciones text-center">
-                          Sí
-                        </td>
-                        <td className="ajustar-texto-tabla-valor text-center">
-                          02
-                        </td>
-                        <td className="ajustar-texto-tabla-opciones text-center">
-                          No
-                        </td>
-                        <td className="ajustar-texto-tabla-valor text-center">
-                          00
-                        </td>
-                        <td className="ajustar-texto-tabla-opciones text-center">
-                          --
-                        </td>
-                        <td className="ajustar-texto-tabla-valor text-center">
-                          --
-                        </td>
-                        <td className="no text-center">
-                          <a href="/">
-                            <i className="fas fa-edit lead mr-2 color-accion-editar"></i>
-                          </a>
-                          <a href="/">
-                            <i className="fas fa-trash-alt lead ml-3 color-accion-eliminar"></i>
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row" className="text-center">
-                          5
-                        </th>
-                        <td className="ajustar-texto-tabla-pregunta">
-                          ¿Presentas dificultad para respirar?
-                        </td>
-                        <td className="ajustar-texto-tabla-opciones text-center">
-                          Sí
-                        </td>
-                        <td className="ajustar-texto-tabla-valor text-center">
-                          02
-                        </td>
-                        <td className="ajustar-texto-tabla-opciones text-center">
-                          No
-                        </td>
-                        <td className="ajustar-texto-tabla-valor text-center">
-                          00
-                        </td>
-                        <td className="ajustar-texto-tabla-opciones text-center">
-                          --
-                        </td>
-                        <td className="ajustar-texto-tabla-valor text-center">
-                          --
-                        </td>
-                        <td className="no text-center">
-                          <a href="/">
-                            <i className="fas fa-edit lead mr-2 color-accion-editar"></i>
-                          </a>
-                          <a href="/">
-                            <i className="fas fa-trash-alt lead ml-3 color-accion-eliminar"></i>
-                          </a>
-                        </td>
-                      </tr>
+                      {preguntasAdmin.length === 0
+                        ? "No hay preguntas"
+                        : preguntasAdmin.map((preguntas, index) => (
+                            <PreguntasAdmin
+                              index={index + 1}
+                              key={preguntas.idpregunta}
+                              preguntas={preguntas}
+                            />
+                          ))}
                     </tbody>
-                    <tr>
-                      <th scope="row" className="text-center">
-                        6
-                      </th>
-                      <td className="ajustar-texto-tabla-pregunta">
-                        ¿Presentas congestión nasal?
-                      </td>
-                      <td className="ajustar-texto-tabla-opciones text-center">
-                        Sí
-                      </td>
-                      <td className="ajustar-texto-tabla-valor text-center">
-                        02
-                      </td>
-                      <td className="ajustar-texto-tabla-opciones text-center">
-                        No
-                      </td>
-                      <td className="ajustar-texto-tabla-valor text-center">
-                        00
-                      </td>
-                      <td className="ajustar-texto-tabla-opciones text-center">
-                        --
-                      </td>
-                      <td className="ajustar-texto-tabla-valor text-center">
-                        --
-                      </td>
-                      <td className="no text-center">
-                        <a href="/">
-                          <i className="fas fa-edit lead mr-2 color-accion-editar"></i>
-                        </a>
-                        <a href="/">
-                          <i className="fas fa-trash-alt lead ml-3 color-accion-eliminar"></i>
-                        </a>
-                      </td>
-                    </tr>
                   </table>
+                </div>
+
+                <div className="row justify-content-between mx-2">
+                  {getPaginaPreguntasAdmin === 0 ? (
+                    <div></div>
+                  ) : (
+                    <div className="text-left">
+                      <button
+                        className="btn boton-iniciar"
+                        onClick={paginaPreguntaAnterior}
+                      >
+                        Anterior
+                      </button>
+                    </div>
+                  )}
+
+                  {getPaginaPreguntasAdmin ===
+                  Number(localStorage.getItem("ultimaPaginaPreguntasAdmin")) ? (
+                    <div></div>
+                  ) : (
+                    <div className="text-right">
+                      <button
+                        className="btn boton-iniciar"
+                        onClick={paginaPreguntaSiguiente}
+                      >
+                        Siguiente
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

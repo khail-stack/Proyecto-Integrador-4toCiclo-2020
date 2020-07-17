@@ -13,6 +13,78 @@ import CuestionarioContent from "./CuestionarioContent";
 const TestPage = () => {
   const dispatch = useDispatch();
 
+  const autenticado = useSelector((state) => state.usuarios.autenticado);
+
+  const informacion = useSelector((state) => state.usuarios.usuarioAutenticado);
+
+  useEffect(() => {
+    console.log(informacion, "CHISTE1-");
+    const long = informacion.length;
+    if (long !== 0) {
+      const uno = informacion.map((dos) => dos);
+      console.log("AAAAAAAAAAAAAAAAA", uno[0].direccion);
+      if (uno[0].direccion === null) {
+        actualizarDato(false);
+      } else {
+        actualizarDato(true);
+      }
+      guardarDireccion(uno[0].direccion);
+      guardarDistrito(uno[0].distrito);
+    }
+  }, [informacion]);
+
+  const cuestionarioContenido = useSelector(
+    (state) => state.cuestionario.contenidocuestionario
+  );
+
+  const distritos = [
+    { value: "Cercado de Lima", label: "Cercado de Lima" },
+    { value: "Ancón", label: "Ancón" },
+    { value: "Ate", label: "Ate" },
+    { value: "Barranco", label: "Barranco" },
+    { value: "Breña", label: "Breña" },
+    { value: "Carabayllo", label: "Carabayllo" },
+    { value: "Chaclacayo", label: "Chaclacayo" },
+    { value: "Chorrillos", label: "Chorrillos" },
+    { value: "Cieneguilla", label: "Cieneguilla" },
+    { value: "Comas", label: "Comas" },
+    { value: "El Agustino", label: "El Agustino" },
+    { value: "Independencia", label: "Independencia" },
+    { value: "Jesús María", label: "Jesús María" },
+    { value: "La Molina", label: "La Molina" },
+    { value: "La Victoria", label: "La Victoria" },
+    { value: "Lince", label: "Lince" },
+    { value: "Los Olivos", label: "Los Olivos" },
+    { value: "Lurigancho", label: "Lurigancho" },
+    { value: "Lurín", label: "Lurín" },
+    { value: "Magdalena del Mar", label: "Magdalena del Mar" },
+    { value: "Miraflores", label: "Miraflores" },
+    { value: "Pachacamac", label: "Pachacamac" },
+    { value: "Pucusuna", label: "Pucusuna" },
+    { value: "Pueblo Libre", label: "Pueblo Libre" },
+    { value: "Puente Piedra", label: "Puente Piedra" },
+    { value: "Punta Hermosa", label: "Punta Hermosa" },
+    { value: "Punta Negra", label: "Punta Negra" },
+    { value: "Rímac", label: "Rímac" },
+    { value: "San Bartolo", label: "San Bartolo" },
+    { value: "San Borja", label: "San Borja" },
+    { value: "San Isidro", label: "San Isidro" },
+    { value: "San Juan de Lurigancho", label: "San Juan de Lurigancho" },
+    { value: "San Juan de Miraflores", label: "San Juan de Miraflores" },
+    { value: "San Luis", label: "San Luis" },
+    { value: "San Martin de Porres", label: "San Martin de Porres" },
+    { value: "San Miguel", label: "San Miguel" },
+    { value: "Santa Anita", label: "Santa Anita" },
+    { value: "Santa María del Mar", label: "Santa María del Mar" },
+    { value: "Santa Rosa", label: "Santa Rosa" },
+    { value: "Santiago de Surco", label: "Santiago de Surco" },
+    { value: "Surquillo", label: "Surquillo" },
+    { value: "Villa El Salvador", label: "Villa El Salvador" },
+    { value: "Villa María del Triunfo", label: "Villa María del Triunfo" },
+  ];
+
+  //const tres= uno.
+  const [datoanterior, actualizarDato] = useState(false);
   const [distrito, guardarDistrito] = useState("");
   const [direccion, guardarDireccion] = useState("");
 
@@ -34,21 +106,6 @@ const TestPage = () => {
       direccion,
     });
   };
-
-  const autenticado = useSelector((state) => state.usuarios.autenticado);
-
-  const informacion = useSelector((state) => state.usuarios.usuarioAutenticado);
-
-  const cuestionarioContenido = useSelector(
-    (state) => state.cuestionario.contenidocuestionario
-  );
-
-  const uno = informacion.map((dos) => dos.direccion);
-  const dos = informacion.map((dos) => dos.distrito);
-
-  //const tres= uno.
-  const campoDireccion = uno[0];
-  const campoDistrito = dos[0];
 
   useEffect(() => {
     if (localStorage.getItem("idCuestionario")) {
@@ -118,13 +175,13 @@ const TestPage = () => {
           </div>
         ) : cuestionarioContenido === true ? (
           <CuestionarioContent></CuestionarioContent>
-        ) : (
+        ) : informacion ? (
           <div className="container espaciado-login espacio">
             <div className="formulario-contenido">
               <div className="row">
                 <div className="col-lg-12">
                   <div className="contenido">
-                    {campoDistrito === null ? (
+                    {distrito === null ? (
                       <h1 className="titulo-derecha text-center">
                         Porfavor, para mayor informacion llena estos campos.
                       </h1>
@@ -136,25 +193,31 @@ const TestPage = () => {
 
                     <div className="formulario-test">
                       <form onSubmit={submitAgregarInformacion}>
-                        {campoDistrito ? (
+                        {distrito ? (
                           <div className="form-group subtitulo-formulario">
                             <label className="texto-formulario">Distrito</label>
 
-                            <input
+                            <select
                               type="text"
-                              placeholder={campoDistrito}
+                              placeholder={distrito}
                               className="form-control diseño-entrada"
                               name="Distrito"
                               value={distrito}
                               onChange={(e) => guardarDistrito(e.target.value)}
                               required
-                            ></input>
+                            >
+                              {distritos.map((distrititos) => (
+                                <option value={distrititos.value}>
+                                  {distrititos.label}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                         ) : (
                           <div className="form-group subtitulo-formulario">
                             <label className="texto-formulario">Distrito</label>
 
-                            <input
+                            <select
                               type="text"
                               placeholder="Agrega tu distrito"
                               className="form-control diseño-entrada"
@@ -162,11 +225,20 @@ const TestPage = () => {
                               value={distrito}
                               onChange={(e) => guardarDistrito(e.target.value)}
                               required
-                            ></input>
+                            >
+                              <option selected>
+                                Selecciona un distrito...
+                              </option>
+                              {distritos.map((distrititos) => (
+                                <option value={distrititos.value}>
+                                  {distrititos.label}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                         )}
                         ,
-                        {campoDireccion ? (
+                        {direccion ? (
                           <div className="form-group subtitulo-formulario">
                             <label className="texto-formulario">
                               Dirección
@@ -174,7 +246,7 @@ const TestPage = () => {
 
                             <input
                               type="text"
-                              placeholder={campoDireccion}
+                              placeholder={direccion}
                               className="form-control diseño-entrada"
                               name="Direccion"
                               value={direccion}
@@ -199,7 +271,7 @@ const TestPage = () => {
                             ></input>
                           </div>
                         )}
-                        {campoDistrito === null ? (
+                        {datoanterior === false ? (
                           <div className="extra-formulario text-center">
                             <div className="text-center">
                               <button
@@ -238,6 +310,8 @@ const TestPage = () => {
               </div>
             </div>
           </div>
+        ) : (
+          <div></div>
         )}
       </div>
     </div>

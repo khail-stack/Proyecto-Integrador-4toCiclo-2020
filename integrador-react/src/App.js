@@ -60,6 +60,10 @@ const App = () => {
   const paginaLogin = useSelector((state) => state.usuarios.paginaLoginAdmin);
   const paginaError = useSelector((state) => state.usuarios.paginaError);
   const data = useSelector((state) => state.usuarios.usuarioAutenticado);
+  const autenticado = useSelector((state) => state.usuarios.autenticado);
+
+  console.log(autenticado);
+  const rolcito = localStorage.getItem("rol");
 
   const rolename = data.map((rol) => rol.roles);
   const roleid = rolename.map((ro) => ro[0]);
@@ -75,7 +79,7 @@ const App = () => {
       //window.location.reload();
       dispatch(cambiarEstadoAutenticado(false));
     }
-  }, [dispatch]);
+  }, [dispatch, autenticado]);
 
   return (
     <Router>
@@ -100,11 +104,23 @@ const App = () => {
           <Route exact path="/casos-mundo" component={CovidPage}></Route>
           <Route exact path="/cuestionario" component={TestPage}></Route>
           <Route exact path="/noticias/covid" component={NoticiasCovid}></Route>
-          <RouteError
-            exact
-            path="/admin/home"
-            component={AdminPage}
-          ></RouteError>
+          {autenticado ? (
+            rolcito === "ROLE_USER" ? (
+              <RouteError
+                exact
+                path="/admin/home"
+                component={AdminPage}
+              ></RouteError>
+            ) : (
+              <Route exact path="/admin/home" component={AdminPage}></Route>
+            )
+          ) : (
+            <RouteError
+              exact
+              path="/admin/home"
+              component={AdminPage}
+            ></RouteError>
+          )}
           <Route exact path="/admin" component={AdminLogin}></Route>
           <Route exact path="/logout" component={Logout}></Route>
           <Route exact path="/logout-admin" component={LogoutAdmin}></Route>

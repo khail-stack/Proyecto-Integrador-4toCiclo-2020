@@ -15,8 +15,11 @@ import {
   MANDAR_RESPUESTA,
   BORRAR_ESTADO,
   BORRAR_ESTADO_RESPUESTA,
+  BORRAR_ESTADO_OBTENER_RESPUESTAS,
+  BORRAR_ESTADO_OBTENER_RESULTADOS,
 } from "./../types/index";
 import { clienteAxios } from "../config/axios";
+//import { mostrarResultados } from "./resultadosAction";
 
 export function mostrarContenidoCuestionario(existeCuestionario) {
   return async (dispatch) => {
@@ -54,7 +57,6 @@ export function crearCuestionario() {
       );
       dispatch(crearCuestionarioExisto(cuestionario.data));
       dispatch(mostrarContenidoCuestionario(true));
-      console.log(cuestionario);
     } catch (error) {
       dispatch(crearCuestionarioError());
     }
@@ -87,33 +89,24 @@ export function obtenerPreguntas(getPagina) {
 
       dispatch(obtenerUltimaPagina(cuestionario.data));
 
-      const num = cuestionario.data.totalElements;
-
-      const objetoPregunta = [];
-
-      for (let index = 0; index <= num; index++) {
-        objetoPregunta.push(index + 1);
-      }
-
-      //const objetoPregunta = [];
-      seteaRespuestas(objetoPregunta);
-
       cuestionario.data.content.forEach((element) => {
         dispatch(obtenerPreguntasExito(element));
       });
-
-      console.log(cuestionario.data.totalPages);
-
-      // console.log(ultimaPagina);
     } catch (error) {
       dispatch(obtenerPreguntasError());
     }
   };
 }
 
-const seteaRespuestas = (objetoRespuesta) => ({
+export function setearRespuesta(respuestas) {
+  return async (dispatch) => {
+    await dispatch(seteaRespuestas(respuestas));
+  };
+}
+
+const seteaRespuestas = (respuestas) => ({
   type: MANDAR_RESPUESTA,
-  payload: objetoRespuesta,
+  payload: respuestas,
 });
 
 const obtenerUltimaPagina = (ultimaPagina) => ({
@@ -169,11 +162,8 @@ export function borrarCuestionario() {
     localStorage.removeItem("fechaCuestionario");
     localStorage.removeItem("page");
     localStorage.removeItem("ultimaPagina");
-
     dispatch(borrarEstado());
-
     dispatch(borrarEstadoRespuesta());
-    console.log(cuestionarioEliminado);
   };
 }
 
@@ -182,6 +172,21 @@ const borrarCuestionarioExito = (cuestionarioEliminado) => ({
   payload: cuestionarioEliminado,
 });
 
+export function terminarCuestionarioGeneral() {
+  return (dispatch) => {
+    localStorage.removeItem("idCuestionario");
+    localStorage.removeItem("fechaCuestionario");
+    localStorage.removeItem("page");
+    localStorage.removeItem("ultimaPagina");
+    dispatch(borrarEstado());
+    dispatch(borrarEstadoRespuesta());
+    //dispatch(mostrarContenidoCuestionario(false));
+    dispatch(borrarEstadoObtenerRespuestas());
+    dispatch(borrarEstadoObtenerResultados());
+    //dispatch(mostrarResultados(false));
+  };
+}
+
 const borrarEstado = () => ({
   type: BORRAR_ESTADO,
   payload: [],
@@ -189,5 +194,15 @@ const borrarEstado = () => ({
 
 const borrarEstadoRespuesta = () => ({
   type: BORRAR_ESTADO_RESPUESTA,
+  payload: [],
+});
+
+const borrarEstadoObtenerRespuestas = () => ({
+  type: BORRAR_ESTADO_OBTENER_RESPUESTAS,
+  payload: [],
+});
+
+const borrarEstadoObtenerResultados = () => ({
+  type: BORRAR_ESTADO_OBTENER_RESULTADOS,
   payload: [],
 });

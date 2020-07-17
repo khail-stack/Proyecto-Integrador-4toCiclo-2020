@@ -1,25 +1,18 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 
-const GraficoLinealGeneral = () => {
+const GraficoLinealGeneral = ({ contenido }) => {
   const lineChart = [0] ? (
     <Line
       data={{
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-        ],
+        labels: contenido.map(({ fecha }) => fecha),
         datasets: [
           {
-            label: "My First dataset",
-            backgroundColor: "rgb(255, 99, 132)",
+            data: contenido.map((data) => data.total),
+            label: "Encuestas realizadas",
             borderColor: "rgb(255, 99, 132)",
-            data: [0, 10, 5, 2, 20, 30, 45],
+            backgroundColor: "rgba(255,255,255,0.1)",
+            fill: true,
           },
         ],
       }}

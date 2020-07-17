@@ -5,6 +5,7 @@ import {
   MOSTRAR_VISTA_RESPUESTA_CARGA,
   MOSTRAR_VISTA_RESPUESTA_EXITO,
   MOSTRAR_VISTA_RESPUESTA_ERROR,
+  BORRAR_ESTADO_OBTENER_RESPUESTAS,
 } from "./../types/index";
 
 const initialState = {
@@ -41,6 +42,15 @@ export default function (state = initialState, action) {
     case MOSTRAR_VISTA_RESPUESTA_EXITO:
       return {
         contenidoRespuesta: action.payload,
+        loading: false,
+        error: false,
+      };
+
+    case BORRAR_ESTADO_OBTENER_RESPUESTAS:
+      return {
+        ...state,
+        obtenerRespuesta: [],
+        contenidoRespuesta: false,
         loading: false,
         error: false,
       };

@@ -113,6 +113,10 @@ export default function (state = initialState, action) {
       return {
         ...state,
         preguntas: action.payload,
+        page: 0,
+        contenidocuestionario: false,
+        loading: false,
+        error: null,
       };
 
     default:

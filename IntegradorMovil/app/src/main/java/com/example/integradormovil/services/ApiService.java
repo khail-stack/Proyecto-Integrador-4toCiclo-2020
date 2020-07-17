@@ -1,5 +1,8 @@
 package com.example.integradormovil.services;
 
+import com.example.integradormovil.models.Cuestionario;
+import com.example.integradormovil.models.CuestionarioResponse;
+import com.example.integradormovil.models.Preguntas;
 import com.example.integradormovil.models.ResponseMessage;
 import com.example.integradormovil.models.User;
 import com.example.integradormovil.models.response.LoginResponse;
@@ -12,10 +15,13 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Url;
 
 public interface ApiService {
 
-    String API_BASE_URL = "https://juntos-contra-covid-spring.herokuapp.com/";
+    //String API_BASE_URL = "https://juntos-contra-covid-spring.herokuapp.com/";
+
+    String API_BASE_URL = "http://192.168.10.1:8081/";
 
     @FormUrlEncoded
     @POST("v1/users/android/register")
@@ -37,6 +43,12 @@ public interface ApiService {
 
     @GET("v1/users/usuario/{userId}")
     Call<User> getUser(@Path("userId") int userId);
+
+    @POST("v1/resources/cuestionario")
+    Call<CuestionarioResponse> createCuestionario(@Body Cuestionario cuestionario);
+
+    @GET("v1/resources/preguntas/{page}")
+    Call<Preguntas> getPreguntas(@Path("page") int page );
 
 }
 

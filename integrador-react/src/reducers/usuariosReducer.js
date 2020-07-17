@@ -62,6 +62,7 @@ export default function (state = initialState, action) {
     case LOGIN_USUARIO_EXITO:
       localStorage.setItem("token", action.payload.accessToken);
       localStorage.setItem("id", action.payload.id);
+      localStorage.setItem("rol", action.payload.roles);
 
       return {
         ...state,

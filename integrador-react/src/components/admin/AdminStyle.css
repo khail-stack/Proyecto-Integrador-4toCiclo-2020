@@ -35,6 +35,10 @@
   color: black !important;
 }
 
+.paso .nav-link {
+  color: black !important;
+}
+
 .color-boton-admin {
   background-color: #ff6d6d !important;
   border: 0 !important;
@@ -80,6 +84,10 @@
 
 .color-admin-subtitulo-3 {
   color: rgba(241, 88, 88, 1) !important;
+}
+
+.color-admin-subtitulo-4 {
+  color: rgba(255, 181, 112, 1) !important;
 }
 
 .diseño-preguntas-admin {

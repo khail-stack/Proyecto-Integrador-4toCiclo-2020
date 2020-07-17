@@ -38,14 +38,11 @@ export function obtenerResultados(idCuestionario) {
   return async (dispatch) => {
     dispatch(cargarResultados());
     try {
-      console.log(idCuestionario);
       const token = localStorage.getItem("token");
       const resultado = await clienteAxios(token).get(
         `resources/respuesta/resultado/${idCuestionario}`
       );
       dispatch(obtenerResultadosExito(resultado.data));
-
-      console.log(resultado.data);
 
       dispatch(mostrarResultados(true));
     } catch (error) {

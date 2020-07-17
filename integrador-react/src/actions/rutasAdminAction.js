@@ -4,6 +4,7 @@ import {
   FILTRO_USUARIOS,
   FILTRO_PERFIL,
   FILTRO_AGREGAR_PREGUNTA,
+  FILTRO_EDITAR_PREGUNTA_ADMIN,
 } from "./../types/index";
 
 export function rutaMostrarDashboard() {
@@ -58,5 +59,16 @@ export function rutaAgregarPreguntas() {
 
 const mostrarAgregarPreguntas = () => ({
   type: FILTRO_AGREGAR_PREGUNTA,
+  payload: true,
+});
+
+export function rutaEditarPreguntaAdmin() {
+  return (dispatch) => {
+    dispatch(mostrarEditarPreguntaAdmin());
+  };
+}
+
+const mostrarEditarPreguntaAdmin = () => ({
+  type: FILTRO_EDITAR_PREGUNTA_ADMIN,
   payload: true,
 });

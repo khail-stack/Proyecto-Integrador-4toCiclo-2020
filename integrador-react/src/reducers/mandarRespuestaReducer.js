@@ -26,6 +26,9 @@ export default function (state = initialState, action) {
       return {
         ...state,
         respuesta: action.payload,
+        error: null,
+        loading: false,
+        mandarRespuesta: [],
       };
 
     case CARGAR_REPSUESTA:

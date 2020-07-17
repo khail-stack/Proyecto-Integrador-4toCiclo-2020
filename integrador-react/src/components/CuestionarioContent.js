@@ -12,17 +12,12 @@ import Preguntas from "./Preguntas";
 import Spinner from "./Spinner";
 import { mandarRespuestas } from "./../actions/mandarRespuestaAction";
 import MostrarRespuestas from "./MostrarRespuestas";
+import Swal from "sweetalert2";
 
 const CuestionarioContent = () => {
   const dispatch = useDispatch();
 
   const getPagina = useSelector((state) => state.cuestionario.page);
-
-  console.log(
-    getPagina + "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaavestruz"
-  );
-
-  console.log(localStorage.getItem("ultimaPagina"));
 
   const paginaSiguiente = (e) => {
     e.preventDefault();
@@ -49,9 +44,22 @@ const CuestionarioContent = () => {
 
   const borrarElCuestionario = (e) => {
     e.preventDefault();
-    dispatch(mostrarContenidoCuestionario(false));
-    dispatch(borrarCuestionario());
-    dispatch(obtenerPagina(0));
+    Swal.fire({
+      title: "¿Estas seguro?",
+      text: "Se perdera el progreso del cuestionario",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, cancelar!",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.value) {
+        dispatch(borrarCuestionario());
+        dispatch(obtenerPagina(0));
+        dispatch(mostrarContenidoCuestionario(false));
+      }
+    });
   };
 
   const mandarRespuesta = (respuestas) =>
@@ -112,8 +120,9 @@ const CuestionarioContent = () => {
                       <form onSubmit={submitRespuestas}>
                         {preguntas
                           .slice(getPagina * 4, getPagina * 4 + 4)
-                          .map((pregunta) => (
+                          .map((pregunta, index) => (
                             <Preguntas
+                              index={index + 1}
                               key={pregunta.idpregunta}
                               contenido={pregunta}
                             ></Preguntas>

@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ViewAnimator;
 
 import com.example.integradormovil.R;
 
@@ -15,6 +18,10 @@ public class CuestionarioContentFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private ViewAnimator viewAnimatorCuestionarioContent;
+    private Button botonSiguiente;
+    private Button botonCancelar;
+    private Button botonAtras;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -47,6 +54,33 @@ public class CuestionarioContentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cuestionario_content, container, false);
+        View view = inflater.inflate(R.layout.fragment_cuestionario_content, container, false);
+
+        viewAnimatorCuestionarioContent = (ViewAnimator) view.findViewById(R.id.viewAnimatorCuestionarioContent);
+        botonSiguiente = (Button) view.findViewById(R.id.botonSiguiente);
+        botonCancelar = (Button) view.findViewById(R.id.botonCancelar);
+
+        viewAnimatorCuestionarioContent.setInAnimation(AnimationUtils.loadAnimation(getActivity().getApplicationContext(), android.R.anim.slide_in_left));
+        viewAnimatorCuestionarioContent.setOutAnimation(AnimationUtils.loadAnimation(getActivity().getApplicationContext(), android.R.anim.slide_out_right));
+
+        siguiente();
+        atras();
+
+        return view;
+    }
+
+    private void cancelar () {
+
+    }
+
+    private void siguiente(){
+            viewAnimatorCuestionarioContent.showNext();
+    }
+
+    private void atras(){
+        if (viewAnimatorCuestionarioContent.getCurrentView().getId() != R.id.cuestionarioUno) {
+            viewAnimatorCuestionarioContent.showPrevious();
+        }
     }
 }
+

@@ -8,6 +8,7 @@ import AdminTablasPreguntas from "./AdminTablasPreguntas.js";
 import AdminUsuarios from "./AdminUsuarios.js";
 import AdminPerfil from "./AdminPerfil.js";
 import AdminContentQuestions from "./AdminContentQuestions.js";
+import AdminEditarPregunta from "./AdminEditarPregunta.js";
 
 const AdminPage = () => {
   const dashboard = useSelector((state) => state.rutasadmin.dashboard);
@@ -16,6 +17,9 @@ const AdminPage = () => {
   const perfil = useSelector((state) => state.rutasadmin.perfil);
   const agregarPregunta = useSelector(
     (state) => state.rutasadmin.agregarPregunta
+  );
+  const editarPregunta = useSelector(
+    (state) => state.rutasadmin.editarPregunta
   );
   return (
     <div className="d-flex">
@@ -28,6 +32,7 @@ const AdminPage = () => {
         {usuarios ? <AdminUsuarios /> : null}
         {perfil ? <AdminPerfil /> : null}
         {agregarPregunta ? <AdminContentQuestions /> : null}
+        {editarPregunta ? <AdminEditarPregunta /> : null}
       </div>
     </div>
   );

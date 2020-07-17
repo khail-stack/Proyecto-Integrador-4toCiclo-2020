@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // ACTIONS DE REDUX
 import { registrarNuevoUsuarioAction } from "./../actions/usuarioActions";
+import Spinner from "./Spinner";
 
 const Register = ({ history }) => {
   const autenticado = useSelector((state) => state.usuarios.autenticado);
@@ -23,7 +24,7 @@ const Register = ({ history }) => {
   const [apellido, guardarApellido] = useState("");
   const [edad, guardarEdad] = useState("");
   const [dni, guardarDni] = useState("");
-  const [sexo, guardarSexo] = useState("");
+  const [sexo, guardarSexo] = useState("Masculino");
   const [telefono, guardarTelefono] = useState("");
   //const [role, guardarRole] = useState("[" + `  "admin"  ` + "]");
   // Utilizar use dispatch y te crea una función
@@ -33,7 +34,6 @@ const Register = ({ history }) => {
   const cargando = useSelector((state) => state.usuarios.loading);
   const error = useSelector((state) => state.usuarios.error);
 
-  console.log(cargando);
   // Mandar llamar el action de usuarioAction
   const registrarUsuario = (usuario) =>
     dispatch(registrarNuevoUsuarioAction(usuario));
@@ -267,7 +267,13 @@ const Register = ({ history }) => {
                     </div>
                   </form>
 
-                  {cargando ? <p>Cargando...</p> : null}
+                  {cargando ? (
+                    <div className="d-flex justify-content-center mt-5">
+                      <div role="status">
+                        <Spinner></Spinner>
+                      </div>
+                    </div>
+                  ) : null}
                   {error ? (
                     <p className="alert-danger py-2 mt-4 text-center">
                       Hubo un error

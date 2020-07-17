@@ -15,7 +15,7 @@ export function noticiasCovid() {
         "https://gnews.io/api/v3/search?q=covid&token=9f8de7fa3c3cedf7e30fe32b2fc40e9b&lang=es"
       );
       dispatch(getNoticias(respuesta.data.articles));
-      console.log(respuesta.data.articles);
+      //console.log(respuesta.data.articles);
     } catch (error) {
       dispatch(getErrorNoticias());
     }

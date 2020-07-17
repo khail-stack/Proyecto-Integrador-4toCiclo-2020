@@ -4,6 +4,7 @@ import {
   FILTRO_USUARIOS,
   FILTRO_PERFIL,
   FILTRO_AGREGAR_PREGUNTA,
+  FILTRO_EDITAR_PREGUNTA_ADMIN,
 } from "./../types/index";
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   usuariosAdmin: false,
   perfil: false,
   agregarPregunta: false,
+  editarPregunta: false,
 };
 
 export default function (state = initialState, action) {
@@ -24,6 +26,7 @@ export default function (state = initialState, action) {
         usuariosAdmin: false,
         perfil: false,
         agregarPregunta: false,
+        editarPregunta: false,
       };
 
     case FILTRO_PREGUNTAS:
@@ -34,6 +37,7 @@ export default function (state = initialState, action) {
         usuariosAdmin: false,
         perfil: false,
         agregarPregunta: false,
+        editarPregunta: false,
       };
 
     case FILTRO_USUARIOS:
@@ -44,6 +48,7 @@ export default function (state = initialState, action) {
         preguntas: false,
         perfil: false,
         agregarPregunta: false,
+        editarPregunta: false,
       };
 
     case FILTRO_PERFIL:
@@ -54,6 +59,7 @@ export default function (state = initialState, action) {
         preguntas: false,
         usuariosAdmin: false,
         agregarPregunta: false,
+        editarPregunta: false,
       };
 
     case FILTRO_AGREGAR_PREGUNTA:
@@ -64,6 +70,18 @@ export default function (state = initialState, action) {
         dashboard: false,
         preguntas: false,
         usuariosAdmin: false,
+        editarPregunta: false,
+      };
+
+    case FILTRO_EDITAR_PREGUNTA_ADMIN:
+      return {
+        ...state,
+        editarPregunta: action.payload,
+        perfil: false,
+        dashboard: false,
+        preguntas: false,
+        usuariosAdmin: false,
+        agregarPregunta: false,
       };
     default:
       return state;

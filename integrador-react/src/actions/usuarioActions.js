@@ -72,7 +72,6 @@ export function añadirInformacionAdicional(informacion) {
 
     try {
       const token = localStorage.getItem("token");
-      console.log(token);
 
       //http://localhost:8081/v1/users/usuario/1
       //insertar en la Api
@@ -138,13 +137,12 @@ export function iniciarSesionAction(usuarioLogueado) {
       dispatch(loginUsuarioExito(usuariolog.data));
 
       const token = localStorage.getItem("token");
-      console.log(token);
+
       const usuarioautenticado = await clienteAxios(token).get(
         `/users/usuario/${localStorage.getItem("id")}`
       );
-      console.log(usuarioautenticado);
+      //console.log(usuarioautenticado);
       dispatch(informacionAutenticado(usuarioautenticado.data));
-      console.log(usuarioautenticado.data);
     } catch (error) {
       console.log(error);
       dispatch(loginUsuarioError(true));
@@ -203,7 +201,6 @@ export function autenticadoToken(id) {
       dispatch(informacionAutenticado(validarusuarioautenticado.data));
     } catch (error) {
       console.log(error.response);
-      console.log("entra error de mrd");
       localStorage.clear();
       dispatch(errorAutenticado());
       //window.location.reload();
