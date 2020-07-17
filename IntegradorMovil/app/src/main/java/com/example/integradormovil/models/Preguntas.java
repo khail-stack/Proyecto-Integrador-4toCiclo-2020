@@ -1,10 +1,11 @@
 package com.example.integradormovil.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Preguntas {
 
-    private List<ContenidoPregunta> content = null;
+    private ContenidoPregunta[] content;
     private Pageable pageable;
     private Boolean last;
     private Integer totalElements;
@@ -15,11 +16,11 @@ public class Preguntas {
     private Boolean first;
     private Boolean empty;
 
-    public List<ContenidoPregunta> getContent() {
+    public ContenidoPregunta[] getContent() {
         return content;
     }
 
-    public void setContent(List<ContenidoPregunta> content) {
+    public void setContent(ContenidoPregunta[] content) {
         this.content = content;
     }
 

@@ -9,6 +9,13 @@ public class ContenidoPregunta {
     private String valor;
     private List<Opciones> opciones = null;
 
+    public ContenidoPregunta(Integer idpregunta, String pregunta, String valor, List<Opciones> opciones) {
+        this.idpregunta = idpregunta;
+        this.pregunta = pregunta;
+        this.valor = valor;
+        this.opciones = opciones;
+    }
+
     public Integer getIdpregunta() {
         return idpregunta;
     }

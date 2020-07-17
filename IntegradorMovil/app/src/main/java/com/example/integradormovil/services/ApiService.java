@@ -1,5 +1,6 @@
 package com.example.integradormovil.services;
 
+import com.example.integradormovil.models.ContenidoPregunta;
 import com.example.integradormovil.models.Cuestionario;
 import com.example.integradormovil.models.CuestionarioResponse;
 import com.example.integradormovil.models.Preguntas;
@@ -8,8 +9,11 @@ import com.example.integradormovil.models.User;
 import com.example.integradormovil.models.response.LoginResponse;
 
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -49,6 +53,10 @@ public interface ApiService {
 
     @GET("v1/resources/preguntas/{page}")
     Call<Preguntas> getPreguntas(@Path("page") int page );
+
+    @DELETE("v1/resources/cuestionario/{idCuestionario}")
+    Call<CuestionarioResponse> deleteCuestionario(@Path("idCuestionario") int idCuestionario);
+
 
 }
 
