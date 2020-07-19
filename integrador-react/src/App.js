@@ -62,7 +62,7 @@ const App = () => {
   const data = useSelector((state) => state.usuarios.usuarioAutenticado);
   const autenticado = useSelector((state) => state.usuarios.autenticado);
 
-  console.log(autenticado);
+  //console.log(autenticado);
   const rolcito = localStorage.getItem("rol");
 
   const rolename = data.map((rol) => rol.roles);

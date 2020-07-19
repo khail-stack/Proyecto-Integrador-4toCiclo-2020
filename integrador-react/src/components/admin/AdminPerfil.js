@@ -11,7 +11,7 @@ const AdminPerfil = () => {
 
   const datosUsuario = usuarioGeneral.map((dos) => dos);
 
-  console.log(datosUsuario[0]);
+  //console.log(datosUsuario[0]);
 
   const {
     id,

@@ -1,9 +1,5 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  mostrarContenidoCuestionario,
-  borrarCuestionario,
-} from "../actions/cuestionarioAction";
 import { terminarCuestionarioGeneral } from "./../actions/cuestionarioAction";
 
 const MostrarResultados = () => {
@@ -18,13 +14,6 @@ const MostrarResultados = () => {
     dispatch(terminarCuestionarioGeneral());
   };
 
-  const eliminarCuestionario = (e) => {
-    e.preventDefault();
-    const idCuestionario = localStorage.getItem("idCuestionario");
-    dispatch(borrarCuestionario(idCuestionario));
-    dispatch(mostrarContenidoCuestionario(false));
-  };
-
   return (
     <div>
       <div className="contenido">
@@ -35,14 +24,6 @@ const MostrarResultados = () => {
             Recomendacion: {resultado.resultado.mensaje}
           </h5>
           <div className="extra-formulario text-center">
-            <div className="text-center">
-              <button
-                className="btn boton-iniciar text-center"
-                onClick={eliminarCuestionario}
-              >
-                Cancelar
-              </button>
-            </div>
             <div className="text-center">
               <button
                 className="btn boton-iniciar text-center"

@@ -128,6 +128,14 @@ const CuestionarioContent = () => {
                             ></Preguntas>
                           ))}
 
+                        <div>
+                          <i>
+                            *Las preguntas de este cuestionario son una
+                            recopilacíon de la aplicación de la nacion llamada
+                            "Peru en tus manos".
+                          </i>
+                        </div>
+
                         <div className="extra-formulario text-center">
                           <div className="text-center">
                             <button

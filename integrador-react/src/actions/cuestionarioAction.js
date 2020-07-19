@@ -164,6 +164,8 @@ export function borrarCuestionario() {
     localStorage.removeItem("ultimaPagina");
     dispatch(borrarEstado());
     dispatch(borrarEstadoRespuesta());
+    //dispatch(mostrarContenidoCuestionario(false));
+    dispatch(borrarEstadoObtenerRespuestas());
   };
 }
 

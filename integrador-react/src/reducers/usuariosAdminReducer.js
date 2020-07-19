@@ -41,7 +41,7 @@ const initialState = {
   pageUsuarioLibre: 0,
   pageUsuarioPosibles: 0,
   pageUsuarioRiesgos: 0,
-  usuarioGeneralEditado: null,
+  usuarioGeneralEditado: [],
   error: null,
   loading: false,
 };

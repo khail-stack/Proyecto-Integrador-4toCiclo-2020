@@ -5,6 +5,8 @@ import com.example.integradormovil.models.Cuestionario;
 import com.example.integradormovil.models.CuestionarioResponse;
 import com.example.integradormovil.models.Preguntas;
 import com.example.integradormovil.models.ResponseMessage;
+import com.example.integradormovil.models.Respuesta;
+import com.example.integradormovil.models.RespuestaResponse;
 import com.example.integradormovil.models.User;
 import com.example.integradormovil.models.response.LoginResponse;
 
@@ -57,7 +59,8 @@ public interface ApiService {
     @DELETE("v1/resources/cuestionario/{idCuestionario}")
     Call<CuestionarioResponse> deleteCuestionario(@Path("idCuestionario") int idCuestionario);
 
-
+    @POST("v1/resources/respuesta")
+    Call<RespuestaResponse> sendRespuestas(@Body Respuesta respuesta);
 }
 
 //Marcocsx

@@ -40,6 +40,19 @@ const NoticiasCovid = () => {
               <CardNoticia contenido={noticia}></CardNoticia>
             ))}
           </div>
+
+          <div>
+            <i className="datos_de_informacion">
+              * Datos proporcionados por el api de "BreakingApi"
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://app.breakingapi.com/playground"
+              >
+                https://app.breakingapi.com/playground
+              </a>
+            </i>
+          </div>
         </div>
       ) : (
         <div className="d-flex justify-content-center mt-5">

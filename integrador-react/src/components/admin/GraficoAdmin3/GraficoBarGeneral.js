@@ -1,7 +1,7 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
 const GraficoBarGeneral = ({ contenido }) => {
-  console.log(contenido);
+  //console.log(contenido);
   const barChart = [0] ? (
     <Bar
       data={{

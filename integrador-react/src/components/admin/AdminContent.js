@@ -10,6 +10,8 @@ import {
   graficoBarrasAdmin,
 } from "./../../actions/graficosAdminAction";
 
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
+
 const AdminContent = () => {
   const usuario = useSelector((state) => state.usuarios.usuarioAutenticado);
 
@@ -47,11 +49,16 @@ const AdminContent = () => {
               <p className="lead text-muted">Revisa las ultimas actividades</p>
             </div>
 
-            {/* <div className="col-lg-3 d-flex">
-              <button className="btn btn-primary color-boton-admin w-100 align-self-center">
-                Descargar Reporte
-              </button>
-            </div> */}
+            <div className="col-lg-3 d-flex">
+              <ReactHTMLTableToExcel
+                className="btn btn-primary color-boton-admin w-100 align-self-center"
+                id="botonExportarAexcel"
+                table="tablaPosiblesUsuarios"
+                filename="posiblesUsuarios"
+                sheet="pagina 1"
+                buttonText="Descargar Reporte"
+              />
+            </div>
           </div>
         </div>
       </section>

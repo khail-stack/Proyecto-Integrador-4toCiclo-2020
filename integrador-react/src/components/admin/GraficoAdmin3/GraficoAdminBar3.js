@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const GraficoAdminBar3 = () => {
   const dataBarras = useSelector((state) => state.graficasAdmin.graficaBarras);
-  console.log(dataBarras);
+  //console.log(dataBarras);
   return (
     <>
       {dataBarras !== 0 ? (

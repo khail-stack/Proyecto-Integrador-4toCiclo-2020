@@ -6,7 +6,7 @@ const GraficoAdminPie2 = () => {
   const dataCircular = useSelector(
     (state) => state.graficasAdmin.graficaCircular
   );
-  console.log(dataCircular);
+  //console.log(dataCircular);
   return (
     <>
       {dataCircular !== 0 ? (

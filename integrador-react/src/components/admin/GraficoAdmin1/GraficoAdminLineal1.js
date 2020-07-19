@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 const GraficoAdminLineal1 = () => {
   const dataLineal = useSelector((state) => state.graficasAdmin.graficaLineal);
 
-  console.log(dataLineal);
+  //console.log(dataLineal);
   return (
     <>
       {dataLineal !== 0 ? (

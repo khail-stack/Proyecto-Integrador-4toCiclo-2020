@@ -44,7 +44,6 @@ public class PreguntasAdapter extends RecyclerView.Adapter<PreguntasAdapter.View
         return content.size();
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView txtPreguntas;
@@ -55,24 +54,6 @@ public class PreguntasAdapter extends RecyclerView.Adapter<PreguntasAdapter.View
             txtPreguntas = (TextView) item.findViewById(R.id.txtPreguntas);
         }
 
-        /*public void bindMaterial(Preguntas preguntas) {
-            String titulopreguntas = new String();
-
-            for (int i=0 ; i<preguntas.getContent().size();i++){
-                titulopreguntas = titulopreguntas + preguntas.getContent().get(i);
-                if(!(i+1 == preguntas.getContent().size())){
-                    titulopreguntas = titulopreguntas + " - ";
-                }
-            }
-
-
-        }*/
-
     }
-
-
-
-
-
 
 }

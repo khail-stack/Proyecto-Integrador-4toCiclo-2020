@@ -123,6 +123,19 @@ const CovidPage = () => {
                   <LinealChartGlobal></LinealChartGlobal>
                 </div>
               </div>
+
+              <div>
+                <i className="datos_de_informacion">
+                  * Datos proporcionados por el api de "Mathdroid"{" "}
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://covid19.mathdro.id/api"
+                  >
+                    https://covid19.mathdro.id/api
+                  </a>
+                </i>
+              </div>
             </div>
           </>
         ) : (
@@ -147,6 +160,18 @@ const CovidPage = () => {
                 <div className="col margentitulo">
                   <BarChartPeru></BarChartPeru>
                 </div>
+              </div>
+              <div>
+                <i className="datos_de_informacion">
+                  * Datos proporcionados por el api de "Mathdroid"{" "}
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://covid19.mathdro.id/api"
+                  >
+                    https://covid19.mathdro.id/api
+                  </a>
+                </i>
               </div>
             </div>
           </>

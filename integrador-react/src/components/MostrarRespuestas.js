@@ -3,9 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Respuestas from "./Respuestas";
 import { obtenerResultados } from "../actions/resultadosAction";
 import MostrarResultados from "./MostrarResultados";
+import Swal from "sweetalert2";
+
 import {
   borrarCuestionario,
   mostrarContenidoCuestionario,
+  obtenerPagina,
 } from "../actions/cuestionarioAction";
 
 const MostrarRespuestas = () => {
@@ -29,9 +32,22 @@ const MostrarRespuestas = () => {
 
   const eliminarCuestionario = (e) => {
     e.preventDefault();
-    const idCuestionario = localStorage.getItem("idCuestionario");
-    dispatch(borrarCuestionario(idCuestionario));
-    dispatch(mostrarContenidoCuestionario(false));
+    Swal.fire({
+      title: "¿Estas seguro?",
+      text: "Se perdera el progreso del cuestionario",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, cancelar!",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.value) {
+        dispatch(borrarCuestionario());
+        dispatch(obtenerPagina(0));
+        dispatch(mostrarContenidoCuestionario(false));
+      }
+    });
   };
 
   return (

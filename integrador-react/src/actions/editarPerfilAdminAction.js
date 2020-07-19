@@ -4,6 +4,7 @@ import {
   EDITAR_PERFIL_ADMIN_ERROR,
 } from "./../types/index";
 import { clienteAxios } from "../config/axios";
+import { autenticadoToken } from "./usuarioActions";
 
 export function editarUsuarioAdmin(id, usuarioAdminEditado) {
   return async (dispatch) => {
@@ -15,7 +16,15 @@ export function editarUsuarioAdmin(id, usuarioAdminEditado) {
         usuarioAdminEditado
       );
 
+      console.log(usuarioAdminEditado);
+
+      const idUsuario = localStorage.getItem("id");
+      dispatch(autenticadoToken(idUsuario));
+      console.log(idUsuario);
+
       dispatch(editarUsuarioAdminExito(usuarioAdminEditado));
+
+      console.log(idUsuario);
     } catch (error) {
       console.log(error.response);
       editarUsuarioAdminError(true);

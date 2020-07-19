@@ -46,9 +46,11 @@ public class CuestionarioContentFragment extends Fragment {
     private Button botonAtras;
     private ArrayList<ContenidoPregunta> data;
     private int totalpages;
+
     private RecyclerView recyclerView;
     private RecyclerView recyclerView2;
     private RecyclerView recyclerView3;
+    private RecyclerView recyclerView4;
 
     private PreguntasAdapter preguntasAdapter;
     private int idCuestionario;
@@ -90,10 +92,28 @@ public class CuestionarioContentFragment extends Fragment {
         cargarVistas(view);
         obtenerPreguntas();
 
+        /*if (viewAnimatorCuestionarioContent.getCurrentView().getId() == R.id.cuestionarioUno) {
+            cargarSeguntaVista(view);
+        } else if (viewAnimatorCuestionarioContent.getCurrentView().getId() == R.id.cuestionarioUno){
 
-        cargarSeguntaVista(view);
+        }*/
+        //cargarSeguntaVista(view);
+        //cargarTerceraVista(view);
 
-        /*cargarTerceraVista(view);*/
+
+        recyclerView2 = (RecyclerView) view.findViewById(R.id.recyclerView2);
+        recyclerView2.setLayoutManager(
+                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+        recyclerView3 = (RecyclerView) view.findViewById(R.id.recyclerView3);
+        recyclerView3.setLayoutManager(
+                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+        recyclerView4 = (RecyclerView) view.findViewById(R.id.recyclerView4);
+        recyclerView4.setLayoutManager(
+                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        botonPrueba();
+
 
         //SiguientePagina();
 
@@ -113,8 +133,6 @@ public class CuestionarioContentFragment extends Fragment {
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         obtenerPreguntas();
-
-
     }
 
     private void cargarSeguntaVista(View view){
@@ -122,15 +140,17 @@ public class CuestionarioContentFragment extends Fragment {
         recyclerView2.setLayoutManager(
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         siguientePagina();
+        //siguientePagina2();
     }
 
-    /*private void cargarTerceraVista(View view){
+    private void cargarTerceraVista(View view){
         recyclerView3 = (RecyclerView) view.findViewById(R.id.recyclerView3);
         recyclerView3.setLayoutManager(
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        siguientePagina2();
+        siguientePaginaDos();
     }
-*/
+
+
 
 
     private void obtenerPreguntas() {
@@ -171,95 +191,60 @@ public class CuestionarioContentFragment extends Fragment {
         });
     }
 
-    private void cancelar () {
-
-        botonCancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String token = LoginUtil.getToken(getContext());
-
-                ApiService service = ApiServiceGenerator.createService(ApiService.class, token);
-                Call<CuestionarioResponse> call = service.deleteCuestionario(idCuestionario);
-                call.enqueue(new Callback<CuestionarioResponse>() {
-                    @Override
-                    public void onResponse(Call<CuestionarioResponse> call, Response<CuestionarioResponse> response) {
-                        if (response.isSuccessful()) {
-                            Log.d("Exito", response.body().toString());
-                            Toast.makeText(getContext(), "El cuestionario se elimino correctamente", Toast.LENGTH_SHORT).show();
 
 
-
-                        } else {
-
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<CuestionarioResponse> call, Throwable t) {
-                        Log.d("Error", t.getMessage());
-                    }
-
-
-                });
-                FragmentTransaction fr = getFragmentManager().beginTransaction();
-                fr.replace(R.id.container, new CuestionarioFragment());
-                fr.commit();
-            }
-        });
-
-    }
 
 
     private void siguientePagina(){
-        botonSiguiente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                String token = LoginUtil.getToken(getContext());
-                int page = 1;
+            botonSiguiente.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                ApiService service = ApiServiceGenerator.createService(ApiService.class, token);
-                Call<Preguntas> call = service.getPreguntas(page);
-                call.enqueue(new Callback<Preguntas>() {
-                    @Override
-                    public void onResponse(Call<Preguntas> call, Response<Preguntas> response) {
-                        if (response.isSuccessful()) {
+                    String token = LoginUtil.getToken(getContext());
+                    int page = 1;
 
-                            Preguntas preguntas = response.body();
-                            Log.d("Exito", "Contenido de preguntas" + preguntas);
+                    ApiService service = ApiServiceGenerator.createService(ApiService.class, token);
+                    Call<Preguntas> call = service.getPreguntas(page);
+                    call.enqueue(new Callback<Preguntas>() {
+                        @Override
+                        public void onResponse(Call<Preguntas> call, Response<Preguntas> response) {
+                            if (response.isSuccessful()) {
 
-                            data = new ArrayList<>(Arrays.asList(preguntas.getContent()));
+                                Preguntas preguntas = response.body();
+                                Log.d("Exito", "Contenido de preguntas" + preguntas);
 
-                            totalpages = preguntas.getTotalPages();
+                                data = new ArrayList<>(Arrays.asList(preguntas.getContent()));
 
-                            preguntasAdapter = new PreguntasAdapter(data);
+                                totalpages = preguntas.getTotalPages();
 
-                            recyclerView2.setAdapter(preguntasAdapter);
+                                preguntasAdapter = new PreguntasAdapter(data);
 
-                            Toast.makeText(getContext(), "Se obtuvo la lista correctamente", Toast.LENGTH_SHORT).show();
+                                recyclerView2.setAdapter(preguntasAdapter);
 
-                            viewAnimatorCuestionarioContent.showNext();
+                                Toast.makeText(getContext(), "Se obtuvo la lista correctamente Pagina: 2", Toast.LENGTH_SHORT).show();
 
-                        } else {
+                                viewAnimatorCuestionarioContent.showNext();
+
+                            } else {
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Preguntas> call, Throwable t) {
+                            Log.d("Error", t.getMessage());
 
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<Preguntas> call, Throwable t) {
-                        Log.d("Error", t.getMessage());
+                    });
 
-                    }
-
-                });
-
-            }
-        });
-
-    }
+                }
+            });
+        }
 
 
-
-    /*private void siguientePagina2(){
+    private void siguientePaginaDos(){
         botonSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -285,7 +270,7 @@ public class CuestionarioContentFragment extends Fragment {
 
                             recyclerView3.setAdapter(preguntasAdapter);
 
-                            Toast.makeText(getContext(), "Se obtuvo la lista correctamente", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Se obtuvo la lista correctamente Pagina: 3", Toast.LENGTH_SHORT).show();
 
                             viewAnimatorCuestionarioContent.showNext();
 
@@ -304,8 +289,212 @@ public class CuestionarioContentFragment extends Fragment {
 
             }
         });
+    }
 
-    }*/
 
+
+
+
+    private void botonPrueba(){
+        botonSiguiente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //if( viewAnimatorCuestionarioContent.getCurrentView().getId() == R.id.cuestionarioDos){
+                    mostrarDatosPaginaDos();
+                    mostrarDatosPaginaTres();
+                    mostrarDatosPaginaCuatro();
+                    viewAnimatorCuestionarioContent.showNext();
+                //}
+            }
+        });
+    }
+
+    private void mostrarDatosPaginaDos(){
+        String token = LoginUtil.getToken(getContext());
+        int page = 1;
+
+        ApiService service = ApiServiceGenerator.createService(ApiService.class, token);
+        Call<Preguntas> call = service.getPreguntas(page);
+        call.enqueue(new Callback<Preguntas>() {
+            @Override
+            public void onResponse(Call<Preguntas> call, Response<Preguntas> response) {
+                if (response.isSuccessful()) {
+
+                    Preguntas preguntas = response.body();
+                    Log.d("Exito", "Contenido de preguntas" + preguntas);
+
+                    data = new ArrayList<>(Arrays.asList(preguntas.getContent()));
+
+                    totalpages = preguntas.getTotalPages();
+
+                    preguntasAdapter = new PreguntasAdapter(data);
+
+                    recyclerView2.setAdapter(preguntasAdapter);
+
+                    Toast.makeText(getContext(), "Se obtuvo la lista correctamente", Toast.LENGTH_SHORT).show();
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Preguntas> call, Throwable t) {
+                Log.d("Error", t.getMessage());
+
+            }
+
+        });
+    }
+
+    private void mostrarDatosPaginaTres(){
+        String token = LoginUtil.getToken(getContext());
+        int page = 2;
+
+        ApiService service = ApiServiceGenerator.createService(ApiService.class, token);
+        Call<Preguntas> call = service.getPreguntas(page);
+        call.enqueue(new Callback<Preguntas>() {
+            @Override
+            public void onResponse(Call<Preguntas> call, Response<Preguntas> response) {
+                if (response.isSuccessful()) {
+
+                    Preguntas preguntas = response.body();
+                    Log.d("Exito", "Contenido de preguntas" + preguntas);
+
+                    data = new ArrayList<>(Arrays.asList(preguntas.getContent()));
+
+                    totalpages = preguntas.getTotalPages();
+
+                    preguntasAdapter = new PreguntasAdapter(data);
+
+                    recyclerView3.setAdapter(preguntasAdapter);
+
+                    Toast.makeText(getContext(), "Se obtuvo la lista correctamente", Toast.LENGTH_SHORT).show();
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Preguntas> call, Throwable t) {
+                Log.d("Error", t.getMessage());
+
+            }
+
+        });
+    }
+
+
+
+    private void mostrarDatosPaginaCuatro(){
+        String token = LoginUtil.getToken(getContext());
+        int page = 3;
+
+        ApiService service = ApiServiceGenerator.createService(ApiService.class, token);
+        Call<Preguntas> call = service.getPreguntas(page);
+        call.enqueue(new Callback<Preguntas>() {
+            @Override
+            public void onResponse(Call<Preguntas> call, Response<Preguntas> response) {
+                if (response.isSuccessful()) {
+
+                    Preguntas preguntas = response.body();
+                    Log.d("Exito", "Contenido de preguntas" + preguntas);
+
+                    data = new ArrayList<>(Arrays.asList(preguntas.getContent()));
+
+                    totalpages = preguntas.getTotalPages();
+
+                    preguntasAdapter = new PreguntasAdapter(data);
+
+                    recyclerView4.setAdapter(preguntasAdapter);
+
+                    Toast.makeText(getContext(), "Se obtuvo la lista correctamente", Toast.LENGTH_SHORT).show();
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Preguntas> call, Throwable t) {
+                Log.d("Error", t.getMessage());
+            }
+        });
+    }
+
+
+       /* if ( viewAnimatorCuestionarioContent.getCurrentView().getId() == R.id.cuestionarioDos ){
+            botonSiguiente.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    String token = LoginUtil.getToken(getContext());
+                    int page = 2;
+
+                    ApiService service = ApiServiceGenerator.createService(ApiService.class, token);
+                    Call<Preguntas> call = service.getPreguntas(page);
+                    call.enqueue(new Callback<Preguntas>() {
+                        @Override
+                        public void onResponse(Call<Preguntas> call, Response<Preguntas> response) {
+                            if (response.isSuccessful()) {
+
+                                Preguntas preguntas = response.body();
+                                Log.d("Exito", "Contenido de preguntas" + preguntas);
+
+                                data = new ArrayList<>(Arrays.asList(preguntas.getContent()));
+
+                                totalpages = preguntas.getTotalPages();
+
+                                preguntasAdapter = new PreguntasAdapter(data);
+
+                                recyclerView3.setAdapter(preguntasAdapter);
+
+                                Toast.makeText(getContext(), "Se obtuvo la lista correctamente pagina 3", Toast.LENGTH_SHORT).show();
+
+                                viewAnimatorCuestionarioContent.showNext();
+
+                            } else {
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Preguntas> call, Throwable t) {
+                            Log.d("Error", t.getMessage());
+
+                        }
+
+                    });
+
+                }
+            });
+        }*/
+
+    private void cancelar () {
+        botonCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String token = LoginUtil.getToken(getContext());
+                ApiService service = ApiServiceGenerator.createService(ApiService.class, token);
+                Call<CuestionarioResponse> call = service.deleteCuestionario(idCuestionario);
+                call.enqueue(new Callback<CuestionarioResponse>() {
+                    @Override
+                    public void onResponse(Call<CuestionarioResponse> call, Response<CuestionarioResponse> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("Exito", response.body().toString());
+                            Toast.makeText(getContext(), "El cuestionario se elimino correctamente", Toast.LENGTH_SHORT).show();
+                        } else {
+
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<CuestionarioResponse> call, Throwable t) {
+                        Log.d("Error", t.getMessage());
+                    }
+                });
+                FragmentTransaction fr = getFragmentManager().beginTransaction();
+                fr.replace(R.id.container, new CuestionarioFragment());
+                fr.commit();
+            }
+        });
+    }
 }
 

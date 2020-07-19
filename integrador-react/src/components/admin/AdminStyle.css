@@ -5,6 +5,13 @@
   box-shadow: 14px 19px 46px -25px rgba(189, 189, 189, 1) !important;
 }
 
+.linea {
+  font-size: 19px;
+}
+
+.titulo-admin {
+  font-size: 30px !important;
+}
 .linea:hover {
   text-decoration: none !important;
 }
@@ -54,10 +61,11 @@
 .bg-grafico {
   background-color: #f7f7f7;
 }
-.contenido-admin {
+
+/* .contenido-admin {
   overflow-y: auto;
   height: 100vh;
-}
+} */
 
 @media (max-width: 960px) {
   .stat {

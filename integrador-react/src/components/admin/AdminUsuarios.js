@@ -221,7 +221,10 @@ const AdminUsuarios = () => {
                 </div>
 
                 <div className="table-responsive-xl">
-                  <table className="table table-striped table-bordered">
+                  <table
+                    className="table table-striped table-bordered"
+                    id="tablaPosiblesUsuarios"
+                  >
                     <thead className="hola table-dark bordes_cabecera">
                       <tr className="text-center">
                         <th scope="col">#</th>

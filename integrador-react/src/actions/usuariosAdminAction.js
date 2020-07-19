@@ -32,6 +32,7 @@ import {
 } from "./../types/index";
 import { clienteAxios } from "../config/axios";
 import Swal from "sweetalert2";
+import { autenticadoToken } from "./usuarioActions";
 
 export function obtenerUsuariosLibresAdmin(getPaginaUsuariosLibresAdmin) {
   return async (dispatch) => {
@@ -322,6 +323,10 @@ export function editarPerfilAdmin(idUsuario, usuarioGeneral) {
         "El usuario se editó correctamente",
         "success"
       );
+
+      const id = localStorage.getItem("id");
+      dispatch(autenticadoToken(id));
+      console.log(id);
     } catch (error) {
       console.log(error);
       dispatch(editarUsuarioGeneralError());

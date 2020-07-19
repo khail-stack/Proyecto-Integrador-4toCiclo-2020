@@ -12,7 +12,8 @@ export function noticiasCovid() {
 
     try {
       const respuesta = await axios.get(
-        "https://gnews.io/api/v3/search?q=covid&token=9f8de7fa3c3cedf7e30fe32b2fc40e9b&lang=es"
+        //"https://gnews.io/api/v3/search?q=covid&token=9f8de7fa3c3cedf7e30fe32b2fc40e9b&lang=es"
+        "https://api.breakingapi.com/news?q=coronavirus&type=headlines&locale=es-PE&api_key=7CE6E30921354F29BCD3F5C1CA862B76"
       );
       dispatch(getNoticias(respuesta.data.articles));
       //console.log(respuesta.data.articles);
