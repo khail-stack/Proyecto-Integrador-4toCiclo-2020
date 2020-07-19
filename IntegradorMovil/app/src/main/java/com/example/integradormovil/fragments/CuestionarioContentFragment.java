@@ -2,6 +2,8 @@ package com.example.integradormovil.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,10 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 import android.widget.ViewAnimator;
 
 import com.example.integradormovil.R;
+import com.example.integradormovil.adapters.PaginaPreguntasAdapter;
 import com.example.integradormovil.adapters.PreguntasAdapter;
 import com.example.integradormovil.models.ContenidoPregunta;
 import com.example.integradormovil.models.Cuestionario;
@@ -25,6 +29,8 @@ import com.example.integradormovil.models.Preguntas;
 import com.example.integradormovil.services.ApiService;
 import com.example.integradormovil.services.ApiServiceGenerator;
 import com.example.integradormovil.util.LoginUtil;
+import com.stepstone.stepper.StepperLayout;
+import com.stepstone.stepper.VerificationError;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,12 +40,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CuestionarioContentFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ID_CUESTIONARIO = "idCuestionario";
 
-    private ViewAnimator viewAnimatorCuestionarioContent;
+    private StepperLayout stepperLayout;
 
+    private ViewAnimator viewAnimatorCuestionarioContent;
 
     private Button botonSiguiente;
     private Button botonCancelar;
@@ -54,6 +60,7 @@ public class CuestionarioContentFragment extends Fragment {
 
     private PreguntasAdapter preguntasAdapter;
     private int idCuestionario;
+    private FrameLayout frlContainer;
 
     public CuestionarioContentFragment() {
         // Required empty public constructor
@@ -82,15 +89,15 @@ public class CuestionarioContentFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cuestionario_content, container, false);
 
-        viewAnimatorCuestionarioContent = (ViewAnimator) view.findViewById(R.id.viewAnimatorCuestionarioContent);
-        botonSiguiente = (Button) view.findViewById(R.id.botonSiguiente);
-        botonCancelar = (Button) view.findViewById(R.id.botonCancelar);
+        //viewAnimatorCuestionarioContent = (ViewAnimator) view.findViewById(R.id.viewAnimatorCuestionarioContent);
+        //botonSiguiente = (Button) view.findViewById(R.id.botonSiguiente);
+        //botonCancelar = (Button) view.findViewById(R.id.botonCancelar);
 
         // Permite la flexibilidad del recycler view
 
 
-        cargarVistas(view);
-        obtenerPreguntas();
+        //cargarVistas(view);
+        //obtenerPreguntas();
 
         /*if (viewAnimatorCuestionarioContent.getCurrentView().getId() == R.id.cuestionarioUno) {
             cargarSeguntaVista(view);
@@ -101,54 +108,94 @@ public class CuestionarioContentFragment extends Fragment {
         //cargarTerceraVista(view);
 
 
-        recyclerView2 = (RecyclerView) view.findViewById(R.id.recyclerView2);
-        recyclerView2.setLayoutManager(
-                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-
-        recyclerView3 = (RecyclerView) view.findViewById(R.id.recyclerView3);
-        recyclerView3.setLayoutManager(
-                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-
-        recyclerView4 = (RecyclerView) view.findViewById(R.id.recyclerView4);
-        recyclerView4.setLayoutManager(
-                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        botonPrueba();
+//        recyclerView2 = (RecyclerView) view.findViewById(R.id.recyclerView2);
+//        recyclerView2.setLayoutManager(
+//                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+//
+//        recyclerView3 = (RecyclerView) view.findViewById(R.id.recyclerView3);
+//        recyclerView3.setLayoutManager(
+//                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+//
+//        recyclerView4 = (RecyclerView) view.findViewById(R.id.recyclerView4);
+//        recyclerView4.setLayoutManager(
+//                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+//        botonPrueba();
 
 
         //SiguientePagina();
 
-        cancelar();
+        //cancelar();
 
 
-        viewAnimatorCuestionarioContent.setInAnimation(AnimationUtils.loadAnimation(getActivity().getApplicationContext(), android.R.anim.slide_in_left));
-        viewAnimatorCuestionarioContent.setOutAnimation(AnimationUtils.loadAnimation(getActivity().getApplicationContext(), android.R.anim.slide_out_right));
+        //viewAnimatorCuestionarioContent.setInAnimation(AnimationUtils.loadAnimation(getActivity().getApplicationContext(), android.R.anim.slide_in_left));
+        //viewAnimatorCuestionarioContent.setOutAnimation(AnimationUtils.loadAnimation(getActivity().getApplicationContext(), android.R.anim.slide_out_right));
 
 
 
         return view;
     }
 
-    private void cargarVistas(View view){
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(
-                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        obtenerPreguntas();
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        frlContainer = view.findViewById(R.id.frlContainer);
+
+        stepperLayout = view.findViewById(R.id.stepperLayout);
+        stepperLayout.setAdapter(
+                new PaginaPreguntasAdapter(
+                        getActivity().getSupportFragmentManager(), getActivity()));
+
+        stepperLayout.setListener(new StepperLayout.StepperListener() {
+            @Override
+            public void onCompleted(View completeButton) {
+                Toast.makeText(getActivity(), "onCompleted!", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onError(VerificationError verificationError) {
+                Toast.makeText(getActivity(), "onError! -> " + verificationError.getErrorMessage(), Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onStepSelected(int newStepPosition) {
+                Toast.makeText(getActivity(), "onStepSelected! -> " + newStepPosition, Toast.LENGTH_SHORT).show();
+
+                /*Fragment fragment = new PaginaPreguntasFragment().newInstance(newStepPosition);
+
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.frlContainer, fragment)
+                        .addToBackStack(null)
+                        .commit();*/
+            }
+            @Override
+            public void onReturn() {
+                Toast.makeText(getActivity(), "onReturn!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        super.onViewCreated(view, savedInstanceState);
     }
 
-    private void cargarSeguntaVista(View view){
-        recyclerView2 = (RecyclerView) view.findViewById(R.id.recyclerView2);
-        recyclerView2.setLayoutManager(
-                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        siguientePagina();
-        //siguientePagina2();
-    }
-
-    private void cargarTerceraVista(View view){
-        recyclerView3 = (RecyclerView) view.findViewById(R.id.recyclerView3);
-        recyclerView3.setLayoutManager(
-                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        siguientePaginaDos();
-    }
+    //    private void cargarVistas(View view){
+//        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+//        recyclerView.setLayoutManager(
+//                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+//        obtenerPreguntas();
+//    }
+//
+//    private void cargarSeguntaVista(View view){
+//        recyclerView2 = (RecyclerView) view.findViewById(R.id.recyclerView2);
+//        recyclerView2.setLayoutManager(
+//                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+//        siguientePagina();
+//        //siguientePagina2();
+//    }
+//
+//    private void cargarTerceraVista(View view){
+//        recyclerView3 = (RecyclerView) view.findViewById(R.id.recyclerView3);
+//        recyclerView3.setLayoutManager(
+//                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+//        siguientePaginaDos();
+//    }
 
 
 
@@ -165,7 +212,7 @@ public class CuestionarioContentFragment extends Fragment {
             public void onResponse(Call<Preguntas> call, Response<Preguntas> response) {
                 if (response.isSuccessful()) {
 
-                    Preguntas preguntas = response.body();
+                    /*Preguntas preguntas = response.body();
                     Log.d("Exito", "Contenido de preguntas" + preguntas);
 
                     data = new ArrayList<>(Arrays.asList(preguntas.getContent()));
@@ -176,7 +223,7 @@ public class CuestionarioContentFragment extends Fragment {
 
                     recyclerView.setAdapter(preguntasAdapter);
 
-                    Toast.makeText(getContext(), "Se obtuvo la lista correctamente", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Se obtuvo la lista correctamente", Toast.LENGTH_SHORT).show();*/
                 } else {
 
                 }
@@ -295,7 +342,7 @@ public class CuestionarioContentFragment extends Fragment {
 
 
 
-    private void botonPrueba(){
+    /*private void botonPrueba(){
         botonSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -307,7 +354,7 @@ public class CuestionarioContentFragment extends Fragment {
                 //}
             }
         });
-    }
+    }*/
 
     private void mostrarDatosPaginaDos(){
         String token = LoginUtil.getToken(getContext());
@@ -468,7 +515,7 @@ public class CuestionarioContentFragment extends Fragment {
             });
         }*/
 
-    private void cancelar () {
+    /*private void cancelar () {
         botonCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -495,6 +542,6 @@ public class CuestionarioContentFragment extends Fragment {
                 fr.commit();
             }
         });
-    }
+    }*/
 }
 
