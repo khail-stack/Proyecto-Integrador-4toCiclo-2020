@@ -3,6 +3,7 @@ package com.example.integradormovil.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -12,19 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.integradormovil.R;
 import com.example.integradormovil.models.ContenidoPregunta;
 
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class PreguntasAdapter extends RecyclerView.Adapter<PreguntasAdapter.ViewHolder> {
-    private ArrayList<ContenidoPregunta> content;
+    private List<ContenidoPregunta> content;
 
-    public PreguntasAdapter(ArrayList<ContenidoPregunta> content){
+    public PreguntasAdapter(List<ContenidoPregunta> content){
         this.content = content;
     }
-
-    /*public void setPreguntas(List<Preguntas> preguntas){
-        this.preguntas = preguntas;
-    }*/
 
     @NonNull
     @Override
@@ -37,6 +33,7 @@ public class PreguntasAdapter extends RecyclerView.Adapter<PreguntasAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.txtPreguntas.setText(content.get(position).getPregunta());
+        holder.idPregunta.setText(Integer.toString(content.get(position).getIdpregunta()));
     }
 
     @Override
@@ -47,11 +44,13 @@ public class PreguntasAdapter extends RecyclerView.Adapter<PreguntasAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView txtPreguntas;
+        private EditText idPregunta;
 
         public ViewHolder(View item ){
             super(item);
 
             txtPreguntas = (TextView) item.findViewById(R.id.txtPreguntas);
+            idPregunta = (EditText) item.findViewById(R.id.idPregunta);
         }
 
     }

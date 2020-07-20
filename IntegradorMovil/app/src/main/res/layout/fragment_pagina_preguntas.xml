@@ -8,7 +8,6 @@
     android:gravity="center"
     tools:context=".fragments.PaginaPreguntasFragment">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,35 +24,14 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:paddingLeft="35dp"
-                android:paddingTop="40dp">
-
-                <TextView
-                    android:id="@+id/txtPrueba"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Holiwis" />
+                android:paddingTop="35dp">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewPreguntas"
+                    android:id="@+id/rcvPreguntas"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                </androidx.recyclerview.widget.RecyclerView>
-
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
-
-
-
-
-
         </ScrollView>
-
-
-
     </LinearLayout>
-
-
-
-
 </LinearLayout>

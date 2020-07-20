@@ -116,7 +116,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 if (response.isSuccessful()) {
                                     ResponseMessage responseMessage = response.body();
                                     Log.d(TAG, "responseMessage: " + responseMessage);
-                                    Toast.makeText(RegisterActivity.this, responseMessage.getMessage(), Toast.LENGTH_LONG).show();
                                     finish();
                                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                     startActivity(intent);
@@ -135,40 +134,6 @@ public class RegisterActivity extends AppCompatActivity {
                             Toast.makeText(RegisterActivity.this, "Ocurrió un error", Toast.LENGTH_LONG).show();
                         }
                     });
-
-                    /*Call<ResponseMessage> call = null;
-                    call = service.createUser(email, username, password, nombre, apellido, edad, dni, sexo, telefono);
-                    call.enqueue(new Callback<ResponseMessage>() {
-                        @Override
-                        public void onResponse(Call<ResponseMessage> call, Response<ResponseMessage> response) {
-                            try {
-                                int statusCode = response.code();
-                                Log.d(TAG, "HTTP status code: " + statusCode);
-
-                                if (response.isSuccessful()) {
-                                    ResponseMessage responseMessage = response.body();
-                                    Log.d(TAG, "responseMessage: " + responseMessage);
-                                    Toast.makeText(RegisterActivity.this, responseMessage.getMessage(), Toast.LENGTH_LONG).show();
-                                    finish();
-                                } else {
-                                    Log.e(TAG, "onError: " + response.errorBody().string());
-                                    throw new Exception("Error en el servicio");
-                                }
-                            } catch (Throwable t) {
-                                try {
-                                    Log.e(TAG, "onThrowable: " + t.toString(), t);
-                                    Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                                } catch (Throwable x) {
-
-                                }
-                            }
-                        }
-                        @Override
-                        public void onFailure(Call<ResponseMessage> call, Throwable t) {
-                            Log.e(TAG, "onFailure: " + t.toString());
-                            Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    });*/
                 }
             });
         } else {
