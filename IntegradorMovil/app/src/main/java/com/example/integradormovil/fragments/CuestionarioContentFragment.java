@@ -45,7 +45,6 @@ public class CuestionarioContentFragment extends Fragment {
 
     private StepperLayout stepperLayout;
 
-    private ViewAnimator viewAnimatorCuestionarioContent;
 
     private Button botonSiguiente;
     private Button botonCancelar;
@@ -60,7 +59,6 @@ public class CuestionarioContentFragment extends Fragment {
 
     private PreguntasAdapter preguntasAdapter;
     private int idCuestionario;
-    private FrameLayout frlContainer;
 
     public CuestionarioContentFragment() {
         // Required empty public constructor
@@ -81,6 +79,7 @@ public class CuestionarioContentFragment extends Fragment {
             idCuestionario = getArguments().getInt(ID_CUESTIONARIO);
             Toast.makeText(getActivity(), "idCuestionario: " + idCuestionario, Toast.LENGTH_SHORT).show();
         }
+        obtenerTotalPages();
     }
 
     @Override
@@ -88,61 +87,16 @@ public class CuestionarioContentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cuestionario_content, container, false);
-
-        //viewAnimatorCuestionarioContent = (ViewAnimator) view.findViewById(R.id.viewAnimatorCuestionarioContent);
-        //botonSiguiente = (Button) view.findViewById(R.id.botonSiguiente);
-        //botonCancelar = (Button) view.findViewById(R.id.botonCancelar);
-
-        // Permite la flexibilidad del recycler view
-
-
-        //cargarVistas(view);
-        //obtenerPreguntas();
-
-        /*if (viewAnimatorCuestionarioContent.getCurrentView().getId() == R.id.cuestionarioUno) {
-            cargarSeguntaVista(view);
-        } else if (viewAnimatorCuestionarioContent.getCurrentView().getId() == R.id.cuestionarioUno){
-
-        }*/
-        //cargarSeguntaVista(view);
-        //cargarTerceraVista(view);
-
-
-//        recyclerView2 = (RecyclerView) view.findViewById(R.id.recyclerView2);
-//        recyclerView2.setLayoutManager(
-//                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-//
-//        recyclerView3 = (RecyclerView) view.findViewById(R.id.recyclerView3);
-//        recyclerView3.setLayoutManager(
-//                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-//
-//        recyclerView4 = (RecyclerView) view.findViewById(R.id.recyclerView4);
-//        recyclerView4.setLayoutManager(
-//                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-//        botonPrueba();
-
-
-        //SiguientePagina();
-
-        //cancelar();
-
-
-        //viewAnimatorCuestionarioContent.setInAnimation(AnimationUtils.loadAnimation(getActivity().getApplicationContext(), android.R.anim.slide_in_left));
-        //viewAnimatorCuestionarioContent.setOutAnimation(AnimationUtils.loadAnimation(getActivity().getApplicationContext(), android.R.anim.slide_out_right));
-
-
-
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        frlContainer = view.findViewById(R.id.frlContainer);
 
         stepperLayout = view.findViewById(R.id.stepperLayout);
         stepperLayout.setAdapter(
                 new PaginaPreguntasAdapter(
-                        getActivity().getSupportFragmentManager(), getActivity()));
+                        getActivity().getSupportFragmentManager(), getActivity(), totalpages ));
 
         stepperLayout.setListener(new StepperLayout.StepperListener() {
             @Override
@@ -165,6 +119,7 @@ public class CuestionarioContentFragment extends Fragment {
                         .replace(R.id.frlContainer, fragment)
                         .addToBackStack(null)
                         .commit();*/
+
             }
             @Override
             public void onReturn() {
@@ -173,6 +128,32 @@ public class CuestionarioContentFragment extends Fragment {
         });
 
         super.onViewCreated(view, savedInstanceState);
+    }
+
+
+    private int obtenerTotalPages() {
+        String token = LoginUtil.getToken(getContext());
+        int page = 0;
+
+        ApiService service = ApiServiceGenerator.createService(ApiService.class, token);
+        Call<Preguntas> call = service.getPreguntas(page);
+        call.enqueue(new Callback<Preguntas>() {
+            @Override
+            public void onResponse(Call<Preguntas> call, Response<Preguntas> response) {
+                if (response.isSuccessful()) {
+                    Preguntas preguntas = response.body();
+                    Log.d("Exito", "Contenido de preguntas" + preguntas);
+                    totalpages = preguntas.getTotalPages();
+                    Toast.makeText(getContext(), "Total de paginas: " + totalpages, Toast.LENGTH_SHORT).show();
+                } else {
+                }
+            }
+            @Override
+            public void onFailure(Call<Preguntas> call, Throwable t) {
+                Log.d("Error", t.getMessage());
+            }
+        });
+        return totalpages;
     }
 
     //    private void cargarVistas(View view){
@@ -271,7 +252,6 @@ public class CuestionarioContentFragment extends Fragment {
 
                                 Toast.makeText(getContext(), "Se obtuvo la lista correctamente Pagina: 2", Toast.LENGTH_SHORT).show();
 
-                                viewAnimatorCuestionarioContent.showNext();
 
                             } else {
 
@@ -318,8 +298,6 @@ public class CuestionarioContentFragment extends Fragment {
                             recyclerView3.setAdapter(preguntasAdapter);
 
                             Toast.makeText(getContext(), "Se obtuvo la lista correctamente Pagina: 3", Toast.LENGTH_SHORT).show();
-
-                            viewAnimatorCuestionarioContent.showNext();
 
                         } else {
 

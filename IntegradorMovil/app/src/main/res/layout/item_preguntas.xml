@@ -11,7 +11,6 @@
         android:id="@+id/radioGroup6"
         android:layout_width="351dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
         android:layout_marginTop="28dp">
 
 
@@ -24,13 +23,13 @@
             android:textStyle="normal" />
 
         <RadioButton
-            android:id="@+id/radioButton18"
+            android:id="@+id/radioSi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sí" />
 
         <RadioButton
-            android:id="@+id/radioButton19"
+            android:id="@+id/radioNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="No" />
