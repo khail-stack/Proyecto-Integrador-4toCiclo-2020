@@ -26,11 +26,11 @@ import retrofit2.Response;
 public class PaginaPreguntasAdapter extends AbstractFragmentStepAdapter {
 
     private static final String CURRENT_STEP_POSITION_KEY = "param1";
-    private final int totalpages;
+    private int pages;
 
     public PaginaPreguntasAdapter(@NonNull FragmentManager fm, @NonNull Context context, int totalpages) {
         super(fm, context);
-        this.totalpages = totalpages;
+        this.pages = totalpages;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class PaginaPreguntasAdapter extends AbstractFragmentStepAdapter {
         b.putInt(CURRENT_STEP_POSITION_KEY, position);
         step.setArguments(b);
         return step;
-    }
+}
 
     @Override
     public int getCount() {

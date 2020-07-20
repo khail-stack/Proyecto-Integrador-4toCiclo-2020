@@ -79,7 +79,7 @@ public class CuestionarioContentFragment extends Fragment {
             idCuestionario = getArguments().getInt(ID_CUESTIONARIO);
             Toast.makeText(getActivity(), "idCuestionario: " + idCuestionario, Toast.LENGTH_SHORT).show();
         }
-        obtenerTotalPages();
+
     }
 
     @Override
@@ -93,10 +93,12 @@ public class CuestionarioContentFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
+        obtenerTotalPages();
+
         stepperLayout = view.findViewById(R.id.stepperLayout);
         stepperLayout.setAdapter(
                 new PaginaPreguntasAdapter(
-                        getActivity().getSupportFragmentManager(), getActivity(), totalpages ));
+                        getActivity().getSupportFragmentManager(), getActivity(), obtenerTotalPages() ));
 
         stepperLayout.setListener(new StepperLayout.StepperListener() {
             @Override
