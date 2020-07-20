@@ -12,13 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.integradormovil.R;
 import com.example.integradormovil.models.ContenidoPregunta;
 
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class PreguntasAdapter extends RecyclerView.Adapter<PreguntasAdapter.ViewHolder> {
-    private ArrayList<ContenidoPregunta> content;
+    private List<ContenidoPregunta> content;
 
-    public PreguntasAdapter(ArrayList<ContenidoPregunta> content){
+    public PreguntasAdapter(List<ContenidoPregunta> content){
         this.content = content;
     }
 

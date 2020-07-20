@@ -116,7 +116,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 if (response.isSuccessful()) {
                                     ResponseMessage responseMessage = response.body();
                                     Log.d(TAG, "responseMessage: " + responseMessage);
-                                    Toast.makeText(RegisterActivity.this, responseMessage.getMessage(), Toast.LENGTH_LONG).show();
                                     finish();
                                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                     startActivity(intent);

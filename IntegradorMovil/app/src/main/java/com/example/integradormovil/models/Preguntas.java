@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Preguntas {
 
-    private ContenidoPregunta[] content;
+    private List<ContenidoPregunta> content;
     private Pageable pageable;
     private Boolean last;
     private Integer totalElements;
@@ -16,11 +16,11 @@ public class Preguntas {
     private Boolean first;
     private Boolean empty;
 
-    public ContenidoPregunta[] getContent() {
+    public List<ContenidoPregunta> getContent() {
         return content;
     }
 
-    public void setContent(ContenidoPregunta[] content) {
+    public void setContent(List<ContenidoPregunta> content) {
         this.content = content;
     }
 

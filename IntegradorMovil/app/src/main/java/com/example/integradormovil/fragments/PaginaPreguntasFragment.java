@@ -34,37 +34,33 @@ import retrofit2.Response;
 
 public class PaginaPreguntasFragment extends Fragment implements Step {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    public static final String CURRENT_STEP_POSITION = "position";
 
-    private int mParam1;
-    private int mParam2;
-
+    // Vistas
+    private RecyclerView rcvPreguntas;
     private TextView txtPrueba;
+
+    // Variables
+    private int position;
     private ArrayList<ContenidoPregunta> data;
-    private int totalpages;
-    private RecyclerView recyclerViewPreguntas;
-    private PreguntasAdapter preguntasAdapter;
 
     public PaginaPreguntasFragment() {
         // Required empty public constructor
     }
 
-    public PaginaPreguntasFragment newInstance(int param1,int param2) {
+    /*public PaginaPreguntasFragment newInstance(int position) {
         PaginaPreguntasFragment fragment = new PaginaPreguntasFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_PARAM1, param1);
-        args.putInt(ARG_PARAM2, param2);
+        args.putInt(CURRENT_STEP_POSITION, position);
         fragment.setArguments(args);
         return fragment;
-    }
+    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getInt(ARG_PARAM1);
-            mParam2 = getArguments().getInt(ARG_PARAM2);
+            position = getArguments().getInt(CURRENT_STEP_POSITION);
         }
     }
 
@@ -77,13 +73,42 @@ public class PaginaPreguntasFragment extends Fragment implements Step {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        txtPrueba = view.findViewById(R.id.txtPrueba);
+        // Instanciamos las vistas
+        rcvPreguntas = (RecyclerView) view.findViewById(R.id.rcvPreguntas);
+        rcvPreguntas.setLayoutManager(
+                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
-        txtPrueba.setText("Yo soy la página " + mParam1);
-
-        cargarVistas(view);
+        obtenerPreguntas();
 
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    private void obtenerPreguntas() {
+        ApiService service = ApiServiceGenerator
+                .createService(
+                        ApiService.class,
+                        LoginUtil.getToken(getActivity()));
+
+        Call<Preguntas> call = service.getPreguntas(position);
+        call.enqueue(new Callback<Preguntas>() {
+            @Override
+            public void onResponse(Call<Preguntas> call, Response<Preguntas> response) {
+                if (response.isSuccessful()) {
+                    Preguntas preguntas = response.body();
+                    Log.d("Exito", "Contenido de preguntas" + preguntas);
+
+                    PreguntasAdapter preguntasAdapter = new PreguntasAdapter(preguntas.getContent());
+                    rcvPreguntas.setAdapter(preguntasAdapter);
+                } else {
+                    Toast.makeText(getActivity(), "Ocurrió un error", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Preguntas> call, Throwable t) {
+                Log.d("Error", t.getMessage());
+            }
+        });
     }
 
     @Nullable
@@ -100,50 +125,5 @@ public class PaginaPreguntasFragment extends Fragment implements Step {
     @Override
     public void onError(@NonNull VerificationError error) {
 
-    }
-
-    private void cargarVistas(View view){
-            recyclerViewPreguntas = (RecyclerView) view.findViewById(R.id.recyclerViewPreguntas);
-            recyclerViewPreguntas.setLayoutManager(
-                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-       obtenerPreguntas();
-    }
-
-
-
-    private void obtenerPreguntas() {
-
-        String token = LoginUtil.getToken(getContext());
-        int page = mParam1;
-
-        ApiService service = ApiServiceGenerator.createService(ApiService.class, token);
-        Call<Preguntas> call = service.getPreguntas(page);
-        call.enqueue(new Callback<Preguntas>() {
-            @Override
-            public void onResponse(Call<Preguntas> call, Response<Preguntas> response) {
-                if (response.isSuccessful()) {
-
-                    Preguntas preguntas = response.body();
-                    Log.d("Exito", "Contenido de preguntas" + preguntas);
-
-                    data = new ArrayList<>(Arrays.asList(preguntas.getContent()));
-
-                    totalpages = preguntas.getTotalPages();
-
-                    preguntasAdapter = new PreguntasAdapter(data);
-
-                    recyclerViewPreguntas.setAdapter(preguntasAdapter);
-
-                    Toast.makeText(getContext(), "Se obtuvo la lista correctamente", Toast.LENGTH_SHORT).show();
-                } else {
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Preguntas> call, Throwable t) {
-                Log.d("Error", t.getMessage());
-            }
-        });
     }
 }
