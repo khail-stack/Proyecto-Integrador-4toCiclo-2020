@@ -99,13 +99,6 @@ public class CuestionarioContentFragment extends Fragment implements ICheckAnswe
         stepperLayout.setListener(new StepperLayout.StepperListener() {
             @Override
             public void onCompleted(View completeButton) {
-
-
-                int userId = LoginUtil.getUserId(getActivity());
-
-
-
-
                 ApiService service = ApiServiceGenerator.createService(ApiService.class);
 
                 Call<RespuestaResponse> call = service.sendRespuestas(respuestas);
