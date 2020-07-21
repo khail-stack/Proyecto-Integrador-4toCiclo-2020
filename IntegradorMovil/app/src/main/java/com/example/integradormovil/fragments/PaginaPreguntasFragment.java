@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.integradormovil.R;
 import com.example.integradormovil.adapters.PreguntasAdapter;
+import com.example.integradormovil.interfaces.ICheckAnswer;
 import com.example.integradormovil.models.ContenidoPregunta;
 import com.example.integradormovil.models.Preguntas;
 import com.example.integradormovil.services.ApiService;
@@ -41,20 +42,19 @@ public class PaginaPreguntasFragment extends Fragment implements Step {
     // Vistas
     private RecyclerView rcvPreguntas;
     private TextView txtPrueba;
-    private RadioGroup radioGroup;
-    private RadioButton rdSi;
-    private RadioButton rdNo;
+
 
     // Variables
     private int position;
     private ArrayList<ContenidoPregunta> data;
+    private ICheckAnswer iCheckAnswer = null;
 
-    public PaginaPreguntasFragment() {
-        // Required empty public constructor
+    public PaginaPreguntasFragment(ICheckAnswer iCheckAnswer) {
+        this.iCheckAnswer = iCheckAnswer;
     }
 
     public PaginaPreguntasFragment newInstance(int position) {
-        PaginaPreguntasFragment fragment = new PaginaPreguntasFragment();
+        PaginaPreguntasFragment fragment = new PaginaPreguntasFragment(iCheckAnswer);
         Bundle args = new Bundle();
         args.putInt(CURRENT_STEP_POSITION, position);
         fragment.setArguments(args);
@@ -75,27 +75,6 @@ public class PaginaPreguntasFragment extends Fragment implements Step {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_pagina_preguntas, container, false);
 
-        /*radioGroupSalPorfa = view.findViewById(R.id.radioGroupSalPorfa);
-        radioGroupSalPorfa.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                // find which radio button is selected
-                if(i == R.id.radioSi) {
-                    Toast.makeText(getActivity(), "Elegiste Sí",
-                            Toast.LENGTH_SHORT).show();
-                } else if(i == R.id.radioNo) {
-                    Toast.makeText(getActivity(), "Elegiste No",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), "Estas Cagado :v",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        rdSi = view.findViewById(R.id.radioSi);
-        rdNo = view.findViewById(R.id.radioNo);
-*/
         return view;
     }
 
@@ -105,25 +84,6 @@ public class PaginaPreguntasFragment extends Fragment implements Step {
         rcvPreguntas = (RecyclerView) view.findViewById(R.id.rcvPreguntas);
         rcvPreguntas.setLayoutManager(
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-/*
-
-        radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
-
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
-        {
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // checkedId is the RadioButton selected
-
-                switch(checkedId) {
-                    case R.id.radioSi:
-                        Toast.makeText(getActivity(), "Marco sí", Toast.LENGTH_SHORT).show();
-                    case R.id.radioNo:
-                        Toast.makeText(getActivity(), "Marco No", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-*/
-
 
         obtenerPreguntas();
 
@@ -144,7 +104,7 @@ public class PaginaPreguntasFragment extends Fragment implements Step {
                     Preguntas preguntas = response.body();
                     Log.d("Exito", "Contenido de preguntas" + preguntas);
 
-                    PreguntasAdapter preguntasAdapter = new PreguntasAdapter(preguntas.getContent());
+                    PreguntasAdapter preguntasAdapter = new PreguntasAdapter(preguntas.getContent(), iCheckAnswer);
                     rcvPreguntas.setAdapter(preguntasAdapter);
                 } else {
                     Toast.makeText(getActivity(), "Ocurrió un error", Toast.LENGTH_SHORT).show();

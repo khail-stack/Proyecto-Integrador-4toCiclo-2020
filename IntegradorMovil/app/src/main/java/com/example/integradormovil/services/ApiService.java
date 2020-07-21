@@ -27,7 +27,7 @@ public interface ApiService {
 
     //String API_BASE_URL = "https://juntos-contra-covid-spring.herokuapp.com/";
 
-    String API_BASE_URL = "https://75bfa800b5b3.ngrok.io/";
+    String API_BASE_URL = "http://192.168.56.1:8081/";
 
     @FormUrlEncoded
     @POST("v1/users/android/register")
@@ -63,5 +63,3 @@ public interface ApiService {
     Call<RespuestaResponse> sendRespuestas(@Body List<Respuesta> respuesta);
 }
 
-//Marcocsx
-//khailmipastor

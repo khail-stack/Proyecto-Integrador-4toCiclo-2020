@@ -1,22 +1,22 @@
 package com.example.integradormovil.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.example.integradormovil.R;
 import com.example.integradormovil.adapters.PaginaPreguntasAdapter;
+import com.example.integradormovil.interfaces.ICheckAnswer;
 import com.example.integradormovil.models.Preguntas;
 import com.example.integradormovil.models.Respuesta;
 import com.example.integradormovil.models.RespuestaResponse;
@@ -26,27 +26,32 @@ import com.example.integradormovil.util.LoginUtil;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
+import java.net.ProxySelector;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CuestionarioContentFragment extends Fragment {
+public class CuestionarioContentFragment extends Fragment implements ICheckAnswer {
 
     private static final String ID_CUESTIONARIO = "idCuestionario";
 
     private LinearLayout lnlStepper;
     private StepperLayout stepperLayout;
-    /*private EditText idPregunta;
-    private RadioGroup radioGroup;
-    private RadioButton radioSi;
-    private RadioButton radioNo;*/
     private int idCuestionario;
+    private List<Respuesta> respuestas;
+    private ProxySelector CollectionUtils;
+
 
     public CuestionarioContentFragment() {
         // Required empty public constructor
+
+        this.respuestas = new ArrayList<>();
+
     }
 
     public static CuestionarioContentFragment newInstance(int idCuestionario) {
@@ -78,39 +83,16 @@ public class CuestionarioContentFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
 
-        stepperLayout = view.findViewById(R.id.stepperLayout);
-/*
-        stepperLayout.setAdapter(
-                new PaginaPreguntasAdapter(
-                        getActivity().getSupportFragmentManager(), getActivity(), obtenerTotalPages() ));
-*/
+        // Instanciamos las vistas del cuestionario xd
+
 
         // Instanciamos las vistas
+        //stepperLayout = view.findViewById(R.id.stepperLayout);
         lnlStepper = view.findViewById(R.id.lnlStepper);
         stepperLayout = view.findViewById(R.id.stepperLayout);
 
-        // Instanciamos las vistas del cuestionario xd
-        //idPregunta = view.findViewById(R.id.idPregunta);
-       /* radioGroupCuestionario = view.findViewById(R.id.radioGroupCuestionario);
-        radioGroupCuestionario.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                // find which radio button is selected
-                if(i == R.id.radioSi) {
-                    Toast.makeText(getActivity(), "Elegiste Sí",
-                            Toast.LENGTH_SHORT).show();
-                } else if(i == R.id.radioNo) {
-                    Toast.makeText(getActivity(), "Elegiste No",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getActivity(), "Estas Cagado :v",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
-        radioSi = view.findViewById(R.id.radioSi);
-        radioNo = view.findViewById(R.id.radioNo);*/
+
 
 
         // Listener para controlar cuando se completen los steps
@@ -118,28 +100,15 @@ public class CuestionarioContentFragment extends Fragment {
             @Override
             public void onCompleted(View completeButton) {
 
-                /*int idOpcion = 0;
 
-                if (radioGroupCuestionario.getCheckedRadioButtonId() == radioSi.getId()) {
-                    idOpcion = 1;
-                } else if (radioGroupCuestionario.getCheckedRadioButtonId() == radioNo.getId()) {
-                    idOpcion = 2;
-                }
-                Log.e("Oh no", "A ver : " + idOpcion);
-                System.out.println(idOpcion);*/
                 int userId = LoginUtil.getUserId(getActivity());
 
-                Respuesta rpta = new Respuesta();
 
-                rpta.setIdcuestionario(idCuestionario);
-                //rpta.setIdpregunta(Integer.parseInt(idPregunta.getText().toString()));
-                //rpta.setIdopcion(idOpcion);
-                rpta.setIdusuario(userId);
 
 
                 ApiService service = ApiServiceGenerator.createService(ApiService.class);
 
-                Call<RespuestaResponse> call = service.sendRespuestas(Collections.singletonList(rpta));
+                Call<RespuestaResponse> call = service.sendRespuestas(respuestas);
                 call.enqueue(new Callback<RespuestaResponse>() {
                     @Override
                     public void onResponse(Call<RespuestaResponse> call, Response<RespuestaResponse> response) {
@@ -160,10 +129,6 @@ public class CuestionarioContentFragment extends Fragment {
                         Toast.makeText(getActivity(), "Ocurrió un error", Toast.LENGTH_LONG).show();
                     }
                 });
-
-
-
-
             }
             @Override
             public void onError(VerificationError verificationError) {
@@ -193,10 +158,7 @@ public class CuestionarioContentFragment extends Fragment {
             public void onResponse(Call<Preguntas> call, Response<Preguntas> response) {
                 if (response.isSuccessful()) {
                     stepperLayout.setAdapter(
-                            new PaginaPreguntasAdapter(
-                                    getActivity().getSupportFragmentManager(),
-                                    getActivity(),
-                                    response.body().getTotalPages()));
+                            cualquiera(response));
 
                     // Ocultamos el progress y mostramos el stepper
                     lnlStepper.setVisibility(View.GONE);
@@ -213,5 +175,31 @@ public class CuestionarioContentFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    private PaginaPreguntasAdapter cualquiera (Response<Preguntas> response) {
+        return new PaginaPreguntasAdapter(
+                getActivity().getSupportFragmentManager(),
+                getActivity(),
+                response.body().getTotalPages(), this);
+    }
+
+    @Override
+    public void onCheckAnswer(final int idpregunta, int idopcion) {
+
+        boolean estaRegistrado = false;
+
+        int userId = LoginUtil.getUserId(getContext());
+
+        for (Respuesta respuesta : respuestas) {
+            if (respuesta.getIdpregunta().equals(idpregunta)){
+                estaRegistrado = true;
+                /*respuestas.remove(respuesta);
+                respuestas.add(new Respuesta(userId,idCuestionario, idpregunta, idopcion));*/
+                respuesta.setIdopcion(idopcion);
+            }
+        }
+        if (!estaRegistrado){
+            respuestas.add(new Respuesta(idpregunta, idCuestionario, userId, idopcion ));
+        }
+    }
 }
 

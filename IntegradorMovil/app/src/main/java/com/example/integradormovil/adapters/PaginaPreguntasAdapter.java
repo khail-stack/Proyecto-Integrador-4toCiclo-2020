@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.integradormovil.fragments.PaginaPreguntasFragment;
+import com.example.integradormovil.interfaces.ICheckAnswer;
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
 
@@ -17,19 +18,25 @@ public class PaginaPreguntasAdapter extends AbstractFragmentStepAdapter {
 
     private int totalPages;
 
+    private ICheckAnswer iCheckAnswer = null;
 
-    public PaginaPreguntasAdapter(@NonNull FragmentManager fm, @NonNull Context context, int totalPages) {
+
+    public PaginaPreguntasAdapter(@NonNull FragmentManager fm, @NonNull Context context, int totalPages, ICheckAnswer iCheckAnswer) {
         super(fm, context);
 
         this.pages = totalPages;
 
         this.totalPages = totalPages;
 
+        this.iCheckAnswer = iCheckAnswer;
+
+        System.out.println("Error prueba 1: "   + iCheckAnswer);
+
     }
 
     @Override
     public Step createStep(int position) {
-        final PaginaPreguntasFragment step = new PaginaPreguntasFragment();
+        final PaginaPreguntasFragment step = new PaginaPreguntasFragment(iCheckAnswer);
         Bundle bundle = new Bundle();
         bundle.putInt(PaginaPreguntasFragment.CURRENT_STEP_POSITION, position);
         step.setArguments(bundle);

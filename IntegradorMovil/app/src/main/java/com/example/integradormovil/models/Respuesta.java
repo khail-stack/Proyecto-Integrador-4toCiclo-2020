@@ -7,6 +7,14 @@ public class Respuesta {
     private Integer idopcion;
     private Integer idusuario;
 
+    public Respuesta( Integer idpregunta,Integer idcuestionario, Integer idusuario, Integer idopcion) {
+        this.idpregunta = idpregunta;
+        this.idcuestionario = idcuestionario;
+        this.idusuario = idusuario;
+        this.idopcion = idopcion;
+
+    }
+
     public Integer getIdcuestionario() {
         return idcuestionario;
     }

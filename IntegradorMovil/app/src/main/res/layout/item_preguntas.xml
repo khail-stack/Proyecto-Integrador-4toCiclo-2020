@@ -29,13 +29,13 @@
         android:layout_height="wrap_content">
 
         <RadioButton
-            android:id="@+id/radioSi"
+            android:id="@+id/rdbSi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sí" />
 
         <RadioButton
-            android:id="@+id/radioNo"
+            android:id="@+id/rdbNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="No" />
