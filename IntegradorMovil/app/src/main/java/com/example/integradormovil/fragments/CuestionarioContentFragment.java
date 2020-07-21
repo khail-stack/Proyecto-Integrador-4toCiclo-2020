@@ -193,7 +193,7 @@ public class CuestionarioContentFragment extends Fragment implements ICheckAnswe
             if (respuesta.getIdpregunta().equals(idpregunta)){
                 estaRegistrado = true;
                 /*respuestas.remove(respuesta);
-                respuestas.add(new Respuesta(userId,idCuestionario, idpregunta, idopcion));*/
+                respuestas.add(new Respuesta(idpregunta, idCuestionario, userId, idopcion));*/
                 respuesta.setIdopcion(idopcion);
             }
         }
