@@ -20,7 +20,7 @@ import com.example.integradormovil.models.ContenidoPregunta;
 
 import java.util.List;
 
-public class PreguntasAdapter extends RecyclerView.Adapter<PreguntasAdapter.ViewHolder> {
+public class  PreguntasAdapter extends RecyclerView.Adapter<PreguntasAdapter.ViewHolder> {
 
     private List<ContenidoPregunta> content;
     private ICheckAnswer icheckAnswer = null;

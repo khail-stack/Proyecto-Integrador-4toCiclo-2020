@@ -133,12 +133,4 @@ public class CuestionarioFragment extends Fragment {
             }
         });
     }
-
-
-
-
-
-
-
-
 }

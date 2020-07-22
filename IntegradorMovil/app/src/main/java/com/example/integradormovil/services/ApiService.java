@@ -6,9 +6,12 @@ import com.example.integradormovil.models.CuestionarioResponse;
 import com.example.integradormovil.models.Preguntas;
 import com.example.integradormovil.models.ResponseMessage;
 import com.example.integradormovil.models.Respuesta;
+import com.example.integradormovil.models.RespuestaCuestionario;
 import com.example.integradormovil.models.RespuestaResponse;
+import com.example.integradormovil.models.ResultadoCuestionario;
 import com.example.integradormovil.models.User;
 import com.example.integradormovil.models.response.LoginResponse;
+import com.example.integradormovil.models.response.RespuestaCuestionarioResponse;
 
 
 import java.util.List;
@@ -27,7 +30,7 @@ public interface ApiService {
 
     //String API_BASE_URL = "https://juntos-contra-covid-spring.herokuapp.com/";
 
-    String API_BASE_URL = "http://192.168.56.1:8081/";
+    String API_BASE_URL = "https://3c02ca9d9f28.ngrok.io/";
 
     @FormUrlEncoded
     @POST("v1/users/android/register")
@@ -62,8 +65,11 @@ public interface ApiService {
     @POST("v1/resources/respuesta")
     Call<RespuestaResponse> sendRespuestas(@Body List<Respuesta> respuesta);
 
-    
+    @GET("v1/resources/respuestas/{idCuestionario}")
+    Call<List<RespuestaCuestionario>> getRespuestas (@Path("idCuestionario") int idCuestionario);
 
+    @GET("v1/resources/respuesta/resultado/{idCuestionario}")
+    Call<ResultadoCuestionario> getResultados (@Path("idCuestionario") int idCuestionario);
 
 }
 

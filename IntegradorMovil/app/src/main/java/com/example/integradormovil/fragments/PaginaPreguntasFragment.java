@@ -46,7 +46,7 @@ public class PaginaPreguntasFragment extends Fragment implements Step {
 
     // Variables
     private int position;
-    private ArrayList<ContenidoPregunta> data;
+    //private ArrayList<ContenidoPregunta> data;
     private ICheckAnswer iCheckAnswer = null;
 
     public PaginaPreguntasFragment(ICheckAnswer iCheckAnswer) {

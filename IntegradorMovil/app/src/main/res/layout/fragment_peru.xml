@@ -93,9 +93,9 @@
                         android:id="@+id/barrasPeru"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_marginLeft="6dp"
+                        android:layout_marginLeft="2dp"
                         android:layout_marginTop="15dp"
-                        android:layout_marginRight="6dp"
+                        android:layout_marginRight="2dp"
                         android:layout_weight="3" />
 
 
@@ -272,9 +272,10 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
-            android:layout_width="174dp"
+            android:layout_width="150dp"
             android:layout_height="100dp"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
@@ -315,18 +316,14 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView5"
-            android:layout_width="0dp"
+            android:layout_width="150dp"
             android:layout_height="100dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             app:cardBackgroundColor="#4CAF50"
             app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/cardView2"
             app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <LinearLayout
@@ -359,7 +356,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView4"
-            android:layout_width="174dp"
+            android:layout_width="150dp"
             android:layout_height="100dp"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
@@ -398,17 +395,15 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
+            android:id="@+id/cardView6"
+            android:layout_width="150dp"
             android:layout_height="100dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             app:cardBackgroundColor="#FF5722"
             app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cardView4"
             app:layout_constraintTop_toBottomOf="@+id/cardView5">
 
             <LinearLayout

@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.integradormovil.R;
 import com.example.integradormovil.adapters.PaginaPreguntasAdapter;
@@ -44,7 +45,6 @@ public class CuestionarioContentFragment extends Fragment implements ICheckAnswe
     private StepperLayout stepperLayout;
     private int idCuestionario;
     private List<Respuesta> respuestas;
-    private ProxySelector CollectionUtils;
 
 
     public CuestionarioContentFragment() {
@@ -108,20 +108,30 @@ public class CuestionarioContentFragment extends Fragment implements ICheckAnswe
                         try {
                             if (response.isSuccessful()) {
                                 RespuestaResponse responseMessage = response.body();
+
+
+
+
                             } else {
                                 Log.e("Oh no", "onError: " + response.errorBody().toString());
                             }
                         } catch (Exception e) {
                             Log.e("Oh no", "onError: " + e.getMessage());
-                            Toast.makeText(getActivity(), "Ocurrió un error", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Mal Mal Mal", Toast.LENGTH_LONG).show();
                         }
                     }
                     @Override
                     public void onFailure(Call<RespuestaResponse> call, Throwable t) {
                         Log.e("Error", "onError: " + t.getMessage());
                         Toast.makeText(getActivity(), "Ocurrió un error", Toast.LENGTH_LONG).show();
+
+                        FragmentTransaction fr = getFragmentManager().beginTransaction();
+                        fr.replace(R.id.container, CuestionarioRespuestaFragment.newInstance(idCuestionario));
+                        fr.commit();
                     }
                 });
+
+
             }
             @Override
             public void onError(VerificationError verificationError) {

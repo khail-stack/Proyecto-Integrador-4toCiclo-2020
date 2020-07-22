@@ -1,11 +1,34 @@
-package com.example.integradormovil.models.response;
+package com.example.integradormovil.models;
 
-public class RespuestaCuestionarioResponse {
+public class RespuestaCuestionario {
 
     private Integer idCuestionario;
     private Pregunta pregunta;
     private Opcion opcion;
 
+    public Integer idCuestionario() {
+        return idCuestionario;
+    }
+
+    public void setidCuestionario(Integer idCuestionario) {
+        this.idCuestionario = idCuestionario;
+    }
+
+    public Pregunta getPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(Pregunta pregunta) {
+        this.pregunta = pregunta;
+    }
+
+    public Opcion getOpcion() {
+        return opcion;
+    }
+
+    public void setOpcion(Opcion opcion) {
+        this.opcion = opcion;
+    }
 
     public class Pregunta {
         private int idpregunta;
@@ -42,7 +65,8 @@ public class RespuestaCuestionarioResponse {
         private int idopcion;
         private String opcion;
 
-       public int getIdopcion() {
+
+        public int getIdopcion() {
             return idopcion;
         }
 
